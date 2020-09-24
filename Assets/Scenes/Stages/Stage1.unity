@@ -3734,10 +3734,7 @@ MonoBehaviour:
   closedDoors:
   - {fileID: -146661714075243356, guid: d3d1e1f02b3b8fc4aa5436e8d3bd8340, type: 3}
   - {fileID: 1748734303467088272, guid: d3d1e1f02b3b8fc4aa5436e8d3bd8340, type: 3}
-  groundTileMaps:
-  - {fileID: 1407240203}
-  wallTileMaps:
-  - {fileID: 2131331966}
+  wallTileMap: {fileID: 2131331966}
 --- !u!1 &1699039064
 GameObject:
   m_ObjectHideFlags: 0
