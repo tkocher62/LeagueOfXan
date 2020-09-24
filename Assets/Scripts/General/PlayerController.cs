@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private object curCharacterScript;
 
-    private const float charChangeDelay = 3f;
+    private const float charChangeDelay = 0f;
     private float charChangeTimer;
     private bool areButtonsEnabled;
 

@@ -15,9 +15,9 @@ TagManager:
   - UI
   - 
   - 
-  - Entities
-  - Projectiles
-  - Effects
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -40,6 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3302162593
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Entities
+    uniqueID: 753924775
+    locked: 0
+  - name: Projectiles
+    uniqueID: 65015657
+    locked: 0
+  - name: Effects
+    uniqueID: 4076622215
     locked: 0

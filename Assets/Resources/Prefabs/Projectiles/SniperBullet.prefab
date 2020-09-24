@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1405574217875943910}
   - component: {fileID: 3896861111648106782}
   - component: {fileID: 3754648244484139269}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: SniperBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 65015657
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dfbcb605813d1ac419099d4de7f4bf67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
