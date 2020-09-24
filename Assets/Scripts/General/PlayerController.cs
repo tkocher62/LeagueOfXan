@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     internal float runSpeed;
 
     private float playerWidth, playerHeight;
-    private float health;
+    private static float health;
 
     private int frameIndx;
 
@@ -142,8 +142,6 @@ public class PlayerController : MonoBehaviour
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + playerWidth, screenBounds.x - playerWidth);
         viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
         transform.position = viewPos;
-
-        //transform.up = body.velocity.normalized;
     }
 
     private void SetButtons(bool enabled)
