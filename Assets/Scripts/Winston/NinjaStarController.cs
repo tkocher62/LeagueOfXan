@@ -16,6 +16,8 @@ public class NinjaStarController : MonoBehaviour
         {
             Physics2D.IgnoreCollision(GetComponent<EdgeCollider2D>(), obj.GetComponent<BoxCollider2D>(), true);
         }
+
+        Physics2D.IgnoreCollision(GetComponent<EdgeCollider2D>(), PlayerController.singleton.playerCollider, true);
     }
 
     void Update()

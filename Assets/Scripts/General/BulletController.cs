@@ -16,6 +16,8 @@ public class BulletController : MonoBehaviour
         {
             Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), obj.GetComponent<BoxCollider2D>(), true);
         }
+
+        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), PlayerController.singleton.playerCollider, true);
     }
 
     void Update()

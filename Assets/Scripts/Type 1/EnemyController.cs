@@ -55,7 +55,7 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
-        player.GetComponent<PlayerController>().AdjustHealth(-damage);
+        PlayerController.singleton.health -= damage;
     }
 
     public void Damage(float amount)

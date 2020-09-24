@@ -13,7 +13,20 @@ public class PlayerController : MonoBehaviour
     internal float runSpeed;
 
     private float playerWidth, playerHeight;
-    private float health;
+    internal float health
+    {
+        get
+        {
+            return _health;
+        }
+        set
+        {
+            _health = value;
+            healthBar.SetHealthBar(value);
+        }
+    }
+    // todo: Health doesn't persist through scenes
+    private static float _health = 100f;
 
     private int frameIndx;
 
@@ -31,6 +44,7 @@ public class PlayerController : MonoBehaviour
     private Character curCharacter;
 
     private Rigidbody2D body;
+    internal BoxCollider2D playerCollider;
     private SpriteRenderer render;
 
     private object curCharacterScript;
@@ -62,8 +76,6 @@ public class PlayerController : MonoBehaviour
 
         runSpeed = 6f;
 
-        health = 100f;
-
         areButtonsEnabled = true;
 
         body = GetComponent<Rigidbody2D>();
@@ -76,6 +88,8 @@ public class PlayerController : MonoBehaviour
         SpriteRenderer renderer = transform.GetComponent<SpriteRenderer>();
         playerWidth = renderer.bounds.extents.x;
         playerHeight = renderer.bounds.extents.y;
+
+        playerCollider = GetComponent<BoxCollider2D>();
 
         pFrames = new Dictionary<Character, List<Sprite>>();
         foreach (AnimationData data in frames)
@@ -173,12 +187,6 @@ public class PlayerController : MonoBehaviour
             render.sprite = GetNextFrame();
             yield return Timing.WaitForSeconds(0.4f);
         }
-    }
-
-    internal void AdjustHealth(float amount)
-    {
-        health += amount;
-        healthBar.SetHealthBar(health);
     }
 
     public void ChangeCharacter(int character)

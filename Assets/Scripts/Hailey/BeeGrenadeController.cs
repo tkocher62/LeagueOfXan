@@ -21,7 +21,7 @@ public class BeeGrenadeController : MonoBehaviour
         body = gameObject.GetComponent<Rigidbody2D>();
         render = gameObject.GetComponent<SpriteRenderer>();
 
-        Debug.Log(explosionPrefab == null);
+        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), PlayerController.singleton.playerCollider, true);
     }
 
     private void Update()
