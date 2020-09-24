@@ -8,10 +8,12 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    internal static PlayerController singleton;
+
     internal float runSpeed;
 
     private float playerWidth, playerHeight;
-    private static float health;
+    private float health;
 
     private int frameIndx;
 
@@ -23,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private Dictionary<Character, List<Sprite>> pFrames;
 
     private Vector2 screenBounds;
-
+    internal Vector2 startPos;
     private Vector2 movement;
 
     private Character curCharacter;
@@ -56,6 +58,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        singleton = this;
+
         runSpeed = 6f;
 
         health = 100f;
@@ -66,6 +70,8 @@ public class PlayerController : MonoBehaviour
         render = gameObject.GetComponent<SpriteRenderer>();
 
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
+        startPos = gameObject.transform.position;
 
         SpriteRenderer renderer = transform.GetComponent<SpriteRenderer>();
         playerWidth = renderer.bounds.extents.x;
@@ -122,6 +128,11 @@ public class PlayerController : MonoBehaviour
                 ((XanPlayerScript)curCharacterScript).Attack();
                 break;
         }
+    }
+
+    internal void Spawn()
+    {
+        gameObject.transform.position = startPos;
     }
 
     private Sprite GetNextFrame()

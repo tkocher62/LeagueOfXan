@@ -3729,9 +3729,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a708882740e28243bb4e34297739f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 2131331966}
   openDoor: {fileID: 6825925822093428387, guid: d3d1e1f02b3b8fc4aa5436e8d3bd8340,
     type: 3}
+  closedDoors:
+  - {fileID: -146661714075243356, guid: d3d1e1f02b3b8fc4aa5436e8d3bd8340, type: 3}
+  - {fileID: 1748734303467088272, guid: d3d1e1f02b3b8fc4aa5436e8d3bd8340, type: 3}
+  groundTileMaps:
+  - {fileID: 1407240203}
+  wallTileMaps:
+  - {fileID: 2131331966}
 --- !u!1 &1699039064
 GameObject:
   m_ObjectHideFlags: 0
