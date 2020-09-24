@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1405574217875943910}
   - component: {fileID: 3896861111648106782}
   - component: {fileID: 3754648244484139269}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SniperBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be1e028b3a9e814c90064499ea39184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borders: {fileID: 0}
   damage: 20
 --- !u!61 &3754648244484139269
 BoxCollider2D:

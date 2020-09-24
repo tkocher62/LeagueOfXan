@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1844447414307978365}
   - component: {fileID: 126389605589489000}
   - component: {fileID: 3860269888858513173}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
