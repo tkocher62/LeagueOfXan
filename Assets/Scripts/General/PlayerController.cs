@@ -148,7 +148,6 @@ public class PlayerController : MonoBehaviour
 
     private void SetButtons(bool enabled)
     {
-        Debug.Log("setting buttons: " + enabled);
         areButtonsEnabled = enabled;
         foreach (Button button in characterButtons)
         {
