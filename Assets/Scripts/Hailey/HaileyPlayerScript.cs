@@ -20,27 +20,27 @@ public class HaileyPlayerScript : MonoBehaviour
 
     void Update()
     {
-        if (!isOnCooldown)
+        if (Input.GetKeyDown("f"))
         {
-            if (Input.GetKeyDown("f"))
-            {
-                Attack();
-            }
+            Attack();
         }
     }
 
     internal void Attack()
     {
-        GameObject bee = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
-        Rigidbody2D rb = bee.AddComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
-        bee.transform.up = playerBody.velocity.normalized;
-        rb.drag = 5f;
-        rb.angularDrag = 2f;
-        rb.AddForce((playerBody.velocity.normalized != Vector2.zero ? playerBody.velocity.normalized : defaultPower) * 2200f);
-        rb.AddTorque(100f);
+        if (!isOnCooldown)
+        {
+            GameObject bee = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+            Rigidbody2D rb = bee.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 0f;
+            bee.transform.up = playerBody.velocity.normalized;
+            rb.drag = 5f;
+            rb.angularDrag = 2f;
+            rb.AddForce((playerBody.velocity.normalized != Vector2.zero ? playerBody.velocity.normalized : defaultPower) * 2200f);
+            rb.AddTorque(100f);
 
-        isOnCooldown = true;
-        Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
+            isOnCooldown = true;
+            Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
+        }
     }
 }

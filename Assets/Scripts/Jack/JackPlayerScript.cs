@@ -19,24 +19,24 @@ public class JackPlayerScript : MonoBehaviour
 
     void Update()
     {
-        if (!isOnCooldown)
+        if (Input.GetKey("f"))
         {
-            if (Input.GetKey("f"))
-            {
-                Attack();
-            }
+            Attack();
         }
     }
 
     internal void Attack()
     {
-        GameObject bullet = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
-        Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
-        bullet.transform.up = playerBody.velocity.normalized;
-        rb.AddForce(playerBody.velocity.normalized * 1000f);
+        if (!isOnCooldown)
+        {
+            GameObject bullet = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+            Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 0f;
+            bullet.transform.up = playerBody.velocity.normalized;
+            rb.AddForce(playerBody.velocity.normalized * 1000f);
 
-        isOnCooldown = true;
-        Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
+            isOnCooldown = true;
+            Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
+        }
     }
 }

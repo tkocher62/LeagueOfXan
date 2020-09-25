@@ -20,29 +20,29 @@ public class XanPlayerScript : MonoBehaviour
 
     void Update()
     {
-        if (!isOnCooldown)
+        if (Input.GetKeyDown("f"))
         {
-            if (Input.GetKeyDown("f"))
-            {
-                Attack();
-            }
+            Attack();
         }
     }
 
     internal void Attack()
     {
-        Vector3 pos = gameObject.transform.position;
-        Vector3 factor = playerBody.velocity.normalized * distMultiplier;
-        pos.x += factor.x;
-        pos.y += factor.y;
-        GameObject spray = Instantiate(prefab, pos, Quaternion.identity);
-        Rigidbody2D rb = spray.AddComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
-        spray.transform.up = -playerBody.velocity.normalized;
+        if (!isOnCooldown)
+        {
+            Vector3 pos = gameObject.transform.position;
+            Vector3 factor = playerBody.velocity.normalized * distMultiplier;
+            pos.x += factor.x;
+            pos.y += factor.y;
+            GameObject spray = Instantiate(prefab, pos, Quaternion.identity);
+            Rigidbody2D rb = spray.AddComponent<Rigidbody2D>();
+            rb.gravityScale = 0f;
+            spray.transform.up = -playerBody.velocity.normalized;
 
-        Timing.CallDelayed(0.1f, () => Destroy(spray));
+            Timing.CallDelayed(0.1f, () => Destroy(spray));
 
-        isOnCooldown = true;
-        Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
+            isOnCooldown = true;
+            Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
+        }
     }
 }

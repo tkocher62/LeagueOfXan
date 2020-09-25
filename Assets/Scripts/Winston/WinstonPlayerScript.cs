@@ -19,12 +19,9 @@ public class WinstonPlayerScript : MonoBehaviour
 
     void Update()
     {
-        if (!isOnCooldown)
+        if (Input.GetKeyDown("f"))
         {
-            if (Input.GetKeyDown("f"))
-            {
-                Attack();
-            }
+            Attack();
         }
     }
 
@@ -36,16 +33,20 @@ public class WinstonPlayerScript : MonoBehaviour
 
     internal void Attack()
     {
-        isOnCooldown = true;
-        for (int i = -1; i < 2; i++)
+        if (!isOnCooldown)
         {
-            GameObject ninjastar = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
-            Rigidbody2D rb = ninjastar.AddComponent<Rigidbody2D>();
-            rb.gravityScale = 0f;
-            ninjastar.transform.up = playerBody.velocity.normalized;
-            Vector2 dir2 = (playerBody.velocity + Vector2FromAngle(45 * i)).normalized;
-            rb.AddForce(dir2 * 1000f);
+            for (int i = -1; i < 2; i++)
+            {
+                GameObject ninjastar = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+                Rigidbody2D rb = ninjastar.AddComponent<Rigidbody2D>();
+                rb.gravityScale = 0f;
+                ninjastar.transform.up = playerBody.velocity.normalized;
+                // Doesn't work perfectly, too much velocity on ninja stars
+                Vector2 dir2 = (playerBody.velocity + Vector2FromAngle(45 * i)).normalized;
+                rb.AddForce(dir2 * 1000f);
+            }
+            isOnCooldown = true;
+            Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
         }
-        Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
     }
 }
