@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     internal Vector2 startPos;
     private Vector2 movement;
 
-    private Character curCharacter;
+    internal Character curCharacter;
 
     private Rigidbody2D body;
     internal BoxCollider2D playerCollider;
@@ -50,8 +50,8 @@ public class PlayerController : MonoBehaviour
     private object curCharacterScript;
 
     private const float charChangeDelay = 0f;
-    private float charChangeTimer;
-    private bool areButtonsEnabled;
+    internal float charChangeTimer;
+    internal bool areButtonsEnabled;
 
     [Serializable]
     public struct AnimationData
@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         singleton = this;
+
+        health = DataController.health;
 
         runSpeed = 6f;
 
@@ -99,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         Timing.RunCoroutine(AnimationLoop().CancelWith(gameObject));
 
-        ChangeCharacter(4);
+        ChangeCharacter((int)DataController.character);
     }
 
     private void Update()

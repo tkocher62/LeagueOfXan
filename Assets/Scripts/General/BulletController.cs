@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BulletController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class BulletController : MonoBehaviour
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Screen Border"))
         {
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), obj.GetComponent<BoxCollider2D>(), true);
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), obj.GetComponent<Collider2D>(), true);
         }
 
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), PlayerController.singleton.playerCollider, true);
