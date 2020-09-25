@@ -11,7 +11,7 @@ public class BeeGrenadeController : MonoBehaviour
 
     private bool isExploding = false;
 
-    private float damageScale = 74f;
+    private float damageScale = 40f;
 
     private Vector3 lastFrameVelocity;
 
@@ -49,7 +49,7 @@ public class BeeGrenadeController : MonoBehaviour
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             float dist = Vector2.Distance(gameObject.transform.position, obj.transform.position);
-            if (dist < 4.5f)
+            if (dist < 3.5f)
             {
                 EnemyController controller = obj.GetComponent<EnemyController>();
                 if (controller != null)
