@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
         singleton = this;
 
-        health = DataController.health;
+        health = 100f;
 
         runSpeed = 6f;
 
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
         Timing.RunCoroutine(AnimationLoop().CancelWith(gameObject));
 
-        ChangeCharacter((int)DataController.character);
+        ChangeCharacter(4);
     }
 
     private void Update()

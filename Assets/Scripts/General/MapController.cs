@@ -50,10 +50,6 @@ public class MapController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && isDoorOpen)
         {
-            // Save data
-            DataController.character = PlayerController.singleton.curCharacter;
-            DataController.health = PlayerController.singleton.health;
-
             // Load next scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             PlayerController.singleton.Spawn();
