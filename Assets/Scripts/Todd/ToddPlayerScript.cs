@@ -32,8 +32,17 @@ public class ToddPlayerScript : MonoBehaviour
             GameObject bullet = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
             Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
-            bullet.transform.up = playerBody.velocity.normalized;
-            rb.AddForce(playerBody.velocity.normalized * 2000f);
+            if (playerBody.velocity.normalized != Vector2.zero)
+            {
+                bullet.transform.up = playerBody.velocity.normalized;
+                rb.AddForce(playerBody.velocity.normalized * 2000f);
+            }
+            else
+            {
+                Vector2 velocity = new Vector2(PlayerController.singleton.render.flipX ? -1 : 1, 0);
+                bullet.transform.up = velocity;
+                rb.AddForce(velocity * 2000f);
+            }
 
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);

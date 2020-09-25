@@ -37,7 +37,14 @@ public class XanPlayerScript : MonoBehaviour
             GameObject spray = Instantiate(prefab, pos, Quaternion.identity);
             Rigidbody2D rb = spray.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
-            spray.transform.up = -playerBody.velocity.normalized;
+            if (playerBody.velocity.normalized != Vector2.zero)
+            {
+                spray.transform.up = -playerBody.velocity.normalized;
+            }
+            else
+            {
+                spray.transform.up = new Vector2(PlayerController.singleton.render.flipX ? 1 : -1, 0);
+            }
 
             Timing.CallDelayed(0.1f, () => Destroy(spray));
 

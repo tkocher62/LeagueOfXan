@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D body;
     internal BoxCollider2D playerCollider;
-    private SpriteRenderer render;
+    internal SpriteRenderer render;
 
     private object curCharacterScript;
 
