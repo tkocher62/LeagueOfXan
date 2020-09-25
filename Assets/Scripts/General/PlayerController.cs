@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
+
         singleton = this;
 
         health = DataController.health;

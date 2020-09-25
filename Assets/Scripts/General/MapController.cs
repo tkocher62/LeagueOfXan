@@ -18,7 +18,6 @@ public class MapController : MonoBehaviour
 
     private bool isDoorOpen;
     private int _enemies;
-    private int stage;
 
     internal int enemies {
         get
@@ -57,6 +56,7 @@ public class MapController : MonoBehaviour
 
             // Load next scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            PlayerController.singleton.Spawn();
         }
     }
 
