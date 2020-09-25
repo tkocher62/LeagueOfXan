@@ -112,45 +112,50 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        movement.x = joystick.Horizontal;
-        movement.y = joystick.Vertical;
+        if (_health > 0f)
+        {
+            movement.x = joystick.Horizontal;
+            movement.y = joystick.Vertical;
 
-        if (movement != Vector2.zero)
-        {
-            render.flipX = movement.x < 0f;
-        }
+            if (movement != Vector2.zero)
+            {
+                render.flipX = movement.x < 0f;
+            }
 
-        if (charChangeTimer != 0f)
-        {
-            charChangeTimer = Mathf.Clamp(charChangeTimer - Time.deltaTime, 0f, charChangeDelay);
-        }
-        else if (!areButtonsEnabled)
-        {
-            SetButtons(true);
+            if (charChangeTimer != 0f)
+            {
+                charChangeTimer = Mathf.Clamp(charChangeTimer - Time.deltaTime, 0f, charChangeDelay);
+            }
+            else if (!areButtonsEnabled)
+            {
+                SetButtons(true);
+            }
         }
     }
 
     public void Attack()
     {
-        switch (curCharacter)
+        if (_health > 0f)
         {
-            case Character.Hailey:
-                ((HaileyPlayerScript)curCharacterScript).Attack();
-                break;
-            case Character.Jack:
-                ((JackPlayerScript)curCharacterScript).Attack();
-                break;
-            case Character.Todd:
-                ((ToddPlayerScript)curCharacterScript).Attack();
-                break;
-            case Character.Winston:
-                ((WinstonPlayerScript)curCharacterScript).Attack();
-                break;
-            case Character.Xan:
-                ((XanPlayerScript)curCharacterScript).Attack();
-                break;
+            switch (curCharacter)
+            {
+                case Character.Hailey:
+                    ((HaileyPlayerScript)curCharacterScript).Attack();
+                    break;
+                case Character.Jack:
+                    ((JackPlayerScript)curCharacterScript).Attack();
+                    break;
+                case Character.Todd:
+                    ((ToddPlayerScript)curCharacterScript).Attack();
+                    break;
+                case Character.Winston:
+                    ((WinstonPlayerScript)curCharacterScript).Attack();
+                    break;
+                case Character.Xan:
+                    ((XanPlayerScript)curCharacterScript).Attack();
+                    break;
+            }
         }
-
     }
 
     internal void Spawn()
@@ -177,13 +182,15 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        body.velocity = new Vector2(movement.x * runSpeed, movement.y * runSpeed);
+        if (_health > 0f)
+        {
+            body.velocity = new Vector2(movement.x * runSpeed, movement.y * runSpeed);
 
-        Vector3 viewPos = transform.position;
-        viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + playerWidth, screenBounds.x - playerWidth);
-        viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
-        transform.position = viewPos;
-
+            Vector3 viewPos = transform.position;
+            viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + playerWidth, screenBounds.x - playerWidth);
+            viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
+            transform.position = viewPos;
+        }
     }
 
     private void SetButtons(bool enabled)
@@ -199,7 +206,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator<float> AnimationLoop()
     {
-        while (true)
+        while (_health > 0f)
         {
             render.sprite = GetNextFrame();
             yield return Timing.WaitForSeconds(0.4f);

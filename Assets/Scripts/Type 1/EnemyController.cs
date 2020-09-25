@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour
 
     private float health = 20f;
     private float detectionRange = 5f;
-    //private float step = 0.006f;
+    private float step = 0.006f;
     private float attackRange = 1.3f;
     private float attackCooldown = 1.5f;
 
@@ -43,7 +43,7 @@ public class EnemyController : MonoBehaviour
 
         if (isAgro && !isOnCooldown)
         {
-            //transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
             if (dist < attackRange)
             {
                 Attack();
