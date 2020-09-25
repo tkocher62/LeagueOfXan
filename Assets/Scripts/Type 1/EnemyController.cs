@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     private float attackRange = 1.3f;
     private float attackCooldown = 1.5f;
 
-    private float damage = 10f;
+    private float damage = 50f;
 
     private bool isAgro = false;
     private bool isOnCooldown = false;

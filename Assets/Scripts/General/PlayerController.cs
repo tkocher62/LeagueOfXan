@@ -21,8 +21,12 @@ public class PlayerController : MonoBehaviour
         }
         set
         {
-            _health = value;
+            _health = Mathf.Clamp(value, 0f, 100f);
             healthBar.SetHealthBar(value);
+            if (_health == 0f)
+            {
+                KillPlayer();
+            }
         }
     }
     // todo: Health doesn't persist through scenes
@@ -146,11 +150,19 @@ public class PlayerController : MonoBehaviour
                 ((XanPlayerScript)curCharacterScript).Attack();
                 break;
         }
+
     }
 
     internal void Spawn()
     {
         gameObject.transform.position = startPos;
+    }
+
+    private void KillPlayer()
+    {
+        render.sprite = pFrames[curCharacter][0];
+        body.rotation = 90f;
+        render.color = Color.red;
     }
 
     private Sprite GetNextFrame()
@@ -171,6 +183,7 @@ public class PlayerController : MonoBehaviour
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + playerWidth, screenBounds.x - playerWidth);
         viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
         transform.position = viewPos;
+
     }
 
     private void SetButtons(bool enabled)
