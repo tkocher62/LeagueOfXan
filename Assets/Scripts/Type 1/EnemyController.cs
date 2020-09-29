@@ -5,14 +5,16 @@ using MEC;
 
 public class EnemyController : MonoBehaviour
 {
-    private GameObject player;
+    public Animator animator;
+
     private SpriteRenderer render;
+    private Rigidbody2D rb;
 
     //public GameObject healthBar;
 
     private float health = 20f;
     private float detectionRange = 5f;
-    private float step = 0.006f;
+    private float movementSpeed = 1f;
     private float attackRange = 1.3f;
     private float attackCooldown = 1.5f;
 
@@ -21,29 +23,36 @@ public class EnemyController : MonoBehaviour
     private bool isAgro = false;
     private bool isOnCooldown = false;
 
+    private Vector2 movement;
+
     private Color defaultColor;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         render = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
 
         defaultColor = render.color;
-
-        //Instantiate(healthBar, transform.position, transform.rotation);
     }
 
     void Update()
     {
-        float dist = Vector3.Distance(transform.position, player.transform.position);
+        movement = (PlayerController.singleton.gameObject.transform.position - transform.position).normalized;
+
+        float dist = Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position);
         if (dist < detectionRange)
         {
             isAgro = true;
+            if (animator != null) animator.SetBool("IsMoving", true);
+        }
+
+        if (movement != Vector2.zero)
+        {
+            render.flipX = movement.x < 0;
         }
 
         if (isAgro && !isOnCooldown)
         {
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, step);
             if (dist < attackRange)
             {
                 Attack();
@@ -51,6 +60,19 @@ public class EnemyController : MonoBehaviour
                 Timing.CallDelayed(attackCooldown, () => isOnCooldown = false);
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (PlayerController.singleton.health > 0)
+        {
+            Move(movement);
+        }
+    }
+
+    private void Move(Vector2 direction)
+    {
+        rb.MovePosition((Vector2)transform.position + (direction * movementSpeed * Time.deltaTime));
     }
 
     void Attack()

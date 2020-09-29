@@ -12,7 +12,7 @@ public class MapController : MonoBehaviour
 
     public Sprite openDoor;
     public List<Sprite> closedDoors;
-    public Tilemap wallTileMap;
+    public Tilemap targetTileMap;
 
     private Tile openDoorTile;
 
@@ -58,11 +58,12 @@ public class MapController : MonoBehaviour
 
     private void OpenDoor()
     {
-        foreach (Vector3Int pos in wallTileMap.cellBounds.allPositionsWithin)
+        Debug.Log("opening door");
+        foreach (Vector3Int pos in targetTileMap.cellBounds.allPositionsWithin)
         {
-            if (closedDoors.Contains(wallTileMap.GetSprite(pos)))
+            if (closedDoors.Contains(targetTileMap.GetSprite(pos)))
             {
-                wallTileMap.SetTile(pos, openDoorTile);
+                targetTileMap.SetTile(pos, openDoorTile);
             }
         }
 
