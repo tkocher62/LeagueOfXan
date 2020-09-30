@@ -6,20 +6,20 @@ using UnityEngine;
 
 public class BleedController : MonoBehaviour
 {
-    private float bleedAmount = 2f;
-    internal const int totalBleedTicks = 3;
-    private float bleedInterval = 1.5f;
+    internal float bleedAmount = 2f;
+    internal int totalBleedTicks = 3;
+    internal float bleedInterval = 1.5f;
 
     internal int curBleedTicks;
 
-    void Start()
+    private void Start()
     {
         curBleedTicks = totalBleedTicks;
 
         Timing.RunCoroutine(Bleed().CancelWith(gameObject));
     }
 
-    IEnumerator<float> Bleed()
+    private IEnumerator<float> Bleed()
     {
         Enemy controller = gameObject.GetComponent<Enemy>();
         for (int i = 0; i < curBleedTicks; i++)

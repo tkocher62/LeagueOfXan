@@ -166,3 +166,4 @@ MonoBehaviour:
   movementSpeed: 2
   safeDistance: 10
   attackInterval: 2
+  health: 20

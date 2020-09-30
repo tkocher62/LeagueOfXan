@@ -41,7 +41,7 @@ public class NinjaStarController : MonoBehaviour
                 }
                 else
                 {
-                    bleedController.curBleedTicks = BleedController.totalBleedTicks;
+                    bleedController.curBleedTicks = bleedController.totalBleedTicks;
                 }
                 Destroy(gameObject);
             }

@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Enemies;
+using MEC;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MEC;
-using Assets.Scripts.Enemies;
 
-public class NecromancerController : Enemy
+public class SwampyController : Enemy
 {
     public float movementSpeed;
     public float safeDistance;
@@ -18,9 +18,9 @@ public class NecromancerController : Enemy
 
     private Vector2 movement;
 
-    private void Start()
+    void Start()
     {
-        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/MagicBall");
+        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/PoisonBall");
 
         render = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -67,18 +67,17 @@ public class NecromancerController : Enemy
         }
     }
 
+    private void Attack()
+    {
+        Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+    }
+
     private void Move(Vector2 direction)
     {
         Vector3 viewPos = transform.position;
         viewPos.x = Mathf.Clamp(viewPos.x, ScreenBorderController.screenBounds.x * -1 + playerWidth, ScreenBorderController.screenBounds.x - playerWidth);
         viewPos.y = Mathf.Clamp(viewPos.y, ScreenBorderController.screenBounds.y * -1 + playerHeight, ScreenBorderController.screenBounds.y - playerHeight);
         rb.MovePosition((Vector2)viewPos + (direction * movementSpeed * Time.deltaTime));
-
-    }
-
-    private void Attack()
-    {
-        Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
     }
 
     public override void Damage(float damage)

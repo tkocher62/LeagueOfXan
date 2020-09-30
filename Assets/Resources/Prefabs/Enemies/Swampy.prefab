@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5090552308816543592}
   - component: {fileID: 5090552308816543594}
   - component: {fileID: 5090552308816543509}
-  - component: {fileID: 5090552308816543511}
   - component: {fileID: 5090552308816543508}
+  - component: {fileID: 804894169}
   m_Layer: 0
   m_Name: Swampy
   m_TagString: Enemy
@@ -132,21 +132,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5090552308816543511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090552308816543593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8d5baefe9e2a047bee9aa554cf5724, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 5090552308816543508}
-  detectionRange: 5
-  movementSpeed: 0.8
 --- !u!95 &5090552308816543508
 Animator:
   serializedVersion: 3
@@ -166,3 +151,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &804894169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090552308816543593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e1cd83d4e386a243a27969ce4876f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 0.8
+  safeDistance: 6
+  attackInterval: 4
+  health: 35
