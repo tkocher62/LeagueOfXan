@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Enemies;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class NinjaStarController : MonoBehaviour
 
     public float damage = 4f;
 
-    void Start()
+    private void Start()
     {
         render = gameObject.GetComponent<Renderer>();
 
@@ -20,23 +21,23 @@ public class NinjaStarController : MonoBehaviour
         Physics2D.IgnoreCollision(GetComponent<EdgeCollider2D>(), PlayerController.singleton.playerCollider, true);
     }
 
-    void Update()
+    private void Update()
     {
         if (!render.isVisible) Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            EnemyController controller = collision.gameObject.GetComponent<EnemyController>();
+            Enemy controller = collision.gameObject.GetComponent<Enemy>();
             if (controller != null)
             {
-                controller.Damage(damage);
                 BleedController bleedController = collision.gameObject.GetComponent<BleedController>();
                 if (bleedController == null)
                 {
                     collision.gameObject.AddComponent<BleedController>();
+                    controller.Damage(damage);
                 }
                 else
                 {

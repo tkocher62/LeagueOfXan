@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Enemies;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,23 +7,28 @@ public class SprayController : MonoBehaviour
 {
     public float damage = 10f;
 
-    private Color color;
-
-    private void Awake()
+    private void Start()
     {
-        //color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.2f, 1f);
-        //GetComponent<SpriteRenderer>().color = color;
+        Vector2 moveDirection = PlayerController.singleton.body.velocity;
+        if (moveDirection != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+            gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            if (moveDirection.x < 0f)
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipY = true;
+            }
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            EnemyController controller = collision.gameObject.GetComponent<EnemyController>();
+            Enemy controller = collision.gameObject.GetComponent<Enemy>();
             if (controller != null)
             {
                 controller.Damage(damage);
-                //controller.GetComponent<SpriteRenderer>().color = color;
             }
         }
     }

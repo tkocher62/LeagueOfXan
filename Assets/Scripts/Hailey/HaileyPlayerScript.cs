@@ -14,7 +14,7 @@ public class HaileyPlayerScript : MonoBehaviour
 
     void Start()
     {
-        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Bee Grenade");
+        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/BeeGrenade");
         playerBody = gameObject.GetComponent<Rigidbody2D>();
     }
 

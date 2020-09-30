@@ -1,4 +1,5 @@
-﻿using MEC;
+﻿using Assets.Scripts;
+using MEC;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,31 +7,14 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     internal static PlayerController singleton;
 
     internal float runSpeed;
 
     private float playerWidth, playerHeight;
-    internal float health
-    {
-        get
-        {
-            return _health;
-        }
-        set
-        {
-            _health = Mathf.Clamp(value, 0f, 100f);
-            healthBar.SetHealthBar(value);
-            if (_health == 0f)
-            {
-                KillPlayer();
-            }
-        }
-    }
-    // todo: Health doesn't persist through scenes
-    private static float _health = 100f;
+    internal float health;
 
     private int frameIndx;
 
@@ -41,13 +25,12 @@ public class PlayerController : MonoBehaviour
 
     private Dictionary<Character, List<Sprite>> pFrames;
 
-    private Vector2 screenBounds;
     internal Vector2 startPos;
     private Vector2 movement;
 
     internal Character curCharacter;
 
-    private Rigidbody2D body;
+    internal Rigidbody2D body;
     internal BoxCollider2D playerCollider;
     internal SpriteRenderer render;
 
@@ -90,8 +73,6 @@ public class PlayerController : MonoBehaviour
         render = gameObject.GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<BoxCollider2D>();
 
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-
         startPos = gameObject.transform.position;
 
         SpriteRenderer renderer = transform.GetComponent<SpriteRenderer>();
@@ -111,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_health > 0f)
+        if (health > 0f)
         {
             movement.x = joystick.Horizontal;
             movement.y = joystick.Vertical;
@@ -134,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        if (_health > 0f)
+        if (health > 0f)
         {
             switch (curCharacter)
             {
@@ -181,13 +162,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_health > 0f)
+        if (health > 0f)
         {
             body.velocity = new Vector2(movement.x * runSpeed, movement.y * runSpeed);
 
             Vector3 viewPos = transform.position;
-            viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + playerWidth, screenBounds.x - playerWidth);
-            viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + playerHeight, screenBounds.y - playerHeight);
+            viewPos.x = Mathf.Clamp(viewPos.x, ScreenBorderController.screenBounds.x * -1 + playerWidth, ScreenBorderController.screenBounds.x - playerWidth);
+            viewPos.y = Mathf.Clamp(viewPos.y, ScreenBorderController.screenBounds.y * -1 + playerHeight, ScreenBorderController.screenBounds.y - playerHeight);
             transform.position = viewPos;
         }
     }
@@ -205,10 +186,10 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator<float> AnimationLoop()
     {
-        while (_health > 0f)
+        while (health > 0f)
         {
             render.sprite = GetNextFrame();
-            yield return Timing.WaitForSeconds(0.4f);
+            yield return Timing.WaitForSeconds(0.35f);
         }
     }
 
@@ -249,5 +230,17 @@ public class PlayerController : MonoBehaviour
         curCharacter = c;
         render.sprite = pFrames[c][0];
         SetButtons(false);
+    }
+
+    internal void Damage(float damage)
+    {
+        FlashRed();
+        float value = health - damage;
+        health = Mathf.Clamp(value, 0f, 100f);
+        healthBar.SetHealthBar(value);
+        if (health == 0f)
+        {
+            KillPlayer();
+        }
     }
 }

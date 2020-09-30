@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Enemies;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -12,13 +13,6 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         render = gameObject.GetComponent<Renderer>();
-
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Screen Border"))
-        {
-            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), obj.GetComponent<Collider2D>(), true);
-        }
-
-        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), PlayerController.singleton.playerCollider, true);
     }
 
     void Update()
@@ -26,11 +20,11 @@ public class BulletController : MonoBehaviour
         if (!render.isVisible) Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            EnemyController controller = collision.gameObject.GetComponent<EnemyController>();
+            Enemy controller = collision.gameObject.GetComponent<Enemy>();
             if (controller != null)
             {
                 controller.Damage(damage);

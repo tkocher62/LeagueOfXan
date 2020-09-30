@@ -1,4 +1,5 @@
-﻿using MEC;
+﻿using Assets.Scripts.Enemies;
+using MEC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -51,7 +52,7 @@ public class BeeGrenadeController : MonoBehaviour
             float dist = Vector2.Distance(gameObject.transform.position, obj.transform.position);
             if (dist < 3.5f)
             {
-                EnemyController controller = obj.GetComponent<EnemyController>();
+                Enemy controller = obj.GetComponent<Enemy>();
                 if (controller != null)
                 {
                     Debug.Log("distance: " + dist);

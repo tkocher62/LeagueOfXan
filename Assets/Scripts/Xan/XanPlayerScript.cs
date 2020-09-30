@@ -32,17 +32,6 @@ public class XanPlayerScript : MonoBehaviour
         {
             GameObject spray = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
 
-            Vector2 moveDirection = playerBody.velocity;
-            if (moveDirection != Vector2.zero)
-            {
-                float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-                spray.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                if (moveDirection.x < 0f)
-                {
-                    spray.GetComponent<SpriteRenderer>().flipY = true;
-                }
-            }
-
             Timing.CallDelayed(0.1f, () => Destroy(spray));
 
             isOnCooldown = true;
