@@ -64,7 +64,7 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PlayerController.singleton.health > 0)
+        if (PlayerController.singleton.health > 0 && isAgro)
         {
             Move(movement);
         }
