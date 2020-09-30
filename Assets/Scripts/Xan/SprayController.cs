@@ -10,13 +10,8 @@ public class SprayController : MonoBehaviour
 
     private void Awake()
     {
-        color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.2f, 1f);
-        GetComponent<SpriteRenderer>().color = color;
-    }
-
-    private void Start()
-    {
-        Physics2D.IgnoreCollision(GetComponent<EdgeCollider2D>(), PlayerController.singleton.playerCollider, true);
+        //color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.2f, 1f);
+        //GetComponent<SpriteRenderer>().color = color;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,7 +22,7 @@ public class SprayController : MonoBehaviour
             if (controller != null)
             {
                 controller.Damage(damage);
-                controller.GetComponent<SpriteRenderer>().color = color;
+                //controller.GetComponent<SpriteRenderer>().color = color;
             }
         }
     }

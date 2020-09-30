@@ -8,7 +8,7 @@ public class XanPlayerScript : MonoBehaviour
     private GameObject prefab;
     private Rigidbody2D playerBody;
 
-    private const float distMultiplier = 1.75f;
+    private const float distFactor = 1.35f;
     private float shootDelay = 1f;
     private bool isOnCooldown = false;
 
@@ -30,20 +30,17 @@ public class XanPlayerScript : MonoBehaviour
     {
         if (!isOnCooldown)
         {
-            Vector3 pos = gameObject.transform.position;
-            Vector3 factor = playerBody.velocity.normalized * distMultiplier;
-            pos.x += factor.x;
-            pos.y += factor.y;
-            GameObject spray = Instantiate(prefab, pos, Quaternion.identity);
-            Rigidbody2D rb = spray.AddComponent<Rigidbody2D>();
-            rb.gravityScale = 0f;
-            if (playerBody.velocity.normalized != Vector2.zero)
+            GameObject spray = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+
+            Vector2 moveDirection = playerBody.velocity;
+            if (moveDirection != Vector2.zero)
             {
-                spray.transform.up = -playerBody.velocity.normalized;
-            }
-            else
-            {
-                spray.transform.up = new Vector2(PlayerController.singleton.render.flipX ? 1 : -1, 0);
+                float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+                spray.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                if (moveDirection.x < 0f)
+                {
+                    spray.GetComponent<SpriteRenderer>().flipY = true;
+                }
             }
 
             Timing.CallDelayed(0.1f, () => Destroy(spray));

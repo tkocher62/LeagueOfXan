@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
         body = GetComponent<Rigidbody2D>();
         render = gameObject.GetComponent<SpriteRenderer>();
+        playerCollider = GetComponent<BoxCollider2D>();
 
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
@@ -96,8 +97,6 @@ public class PlayerController : MonoBehaviour
         SpriteRenderer renderer = transform.GetComponent<SpriteRenderer>();
         playerWidth = renderer.bounds.extents.x;
         playerHeight = renderer.bounds.extents.y;
-
-        playerCollider = GetComponent<BoxCollider2D>();
 
         pFrames = new Dictionary<Character, List<Sprite>>();
         foreach (AnimationData data in frames)
