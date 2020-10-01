@@ -1176,7 +1176,7 @@ GameObject:
   - component: {fileID: 878066729}
   - component: {fileID: 878066728}
   - component: {fileID: 878066727}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3491,11 +3491,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon
       objectReference: {fileID: 0}
-    - target: {fileID: 5723355540638320616, guid: 40aac833025747c448d4ce5f077fcde8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5723355540638320618, guid: 40aac833025747c448d4ce5f077fcde8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5135,7 +5130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efc4face106cbf4a8281cf22c4ddc32, type: 3}
---- !u!1001 &3445739532160635813
+--- !u!1001 &4186811583206590520
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5201,11 +5196,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chort
-      objectReference: {fileID: 0}
-    - target: {fileID: 7088384896355398582, guid: 3583acac2fc043c4b8405e9de612dd66,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3583acac2fc043c4b8405e9de612dd66, type: 3}
@@ -5289,11 +5279,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton
-      objectReference: {fileID: 0}
-    - target: {fileID: 5588607978303142581, guid: 545f32a173424404797d13a8d08e65a9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5588607978303142583, guid: 545f32a173424404797d13a8d08e65a9,
         type: 3}
@@ -5418,11 +5403,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Zombie
-      objectReference: {fileID: 0}
-    - target: {fileID: 7032815667003496410, guid: 2bad14494ec30c24a9f50ed12d029342,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bad14494ec30c24a9f50ed12d029342, type: 3}

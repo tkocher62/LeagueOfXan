@@ -8,6 +8,7 @@ public class NecromancerController : Enemy
 {
     public float movementSpeed;
     public float safeDistance;
+    public float graceDistance;
     public float attackInterval;
     public float health;
 
@@ -51,7 +52,7 @@ public class NecromancerController : Enemy
             {
                 Move(movement);
             }
-            else if (dist < safeDistance - 0.1f)
+            else if (dist < safeDistance - graceDistance)
             {
                 Move(-movement);
             }

@@ -8,6 +8,7 @@ public class SwampyController : Enemy
 {
     public float movementSpeed;
     public float safeDistance;
+    public float graceDistance;
     public float attackInterval;
     public float health;
 
@@ -20,7 +21,7 @@ public class SwampyController : Enemy
 
     void Start()
     {
-        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/PoisonBall");
+        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/SlimeBall");
 
         render = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -51,7 +52,7 @@ public class SwampyController : Enemy
             {
                 Move(movement);
             }
-            else if (dist < safeDistance - 0.1f)
+            else if (dist < safeDistance - graceDistance)
             {
                 Move(-movement);
             }

@@ -13,10 +13,12 @@ namespace Assets.Scripts
 
 		private IEnumerator<float> FlashRedCoroutine(SpriteRenderer render)
 		{
-			Color defaultColor = render.color;
-			render.color = new Color(255, 0, 0);
-			yield return Timing.WaitForSeconds(0.2f);
-			render.color = defaultColor;
+			if (render.color == Color.white)
+			{
+				render.color = Color.red;
+				yield return Timing.WaitForSeconds(0.2f);
+				render.color = Color.white;
+			}
 		}
 	}
 }

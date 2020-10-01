@@ -232,9 +232,9 @@ public class PlayerController : Entity
         SetButtons(false);
     }
 
-    internal void Damage(float damage)
+    internal void Damage(float damage, bool flashRed = true)
     {
-        FlashRed();
+        if (flashRed) FlashRed();
         float value = health - damage;
         health = Mathf.Clamp(value, 0f, 100f);
         healthBar.SetHealthBar(value);
