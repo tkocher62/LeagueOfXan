@@ -3491,6 +3491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon
       objectReference: {fileID: 0}
+    - target: {fileID: 5723355540638320616, guid: 40aac833025747c448d4ce5f077fcde8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5723355540638320618, guid: 40aac833025747c448d4ce5f077fcde8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5128,6 +5133,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Necromancer
       objectReference: {fileID: 0}
+    - target: {fileID: 8515334326864342786, guid: 8efc4face106cbf4a8281cf22c4ddc32,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efc4face106cbf4a8281cf22c4ddc32, type: 3}
 --- !u!1001 &4186811583206590520
@@ -5197,6 +5207,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chort
       objectReference: {fileID: 0}
+    - target: {fileID: 7088384896355398582, guid: 3583acac2fc043c4b8405e9de612dd66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3583acac2fc043c4b8405e9de612dd66, type: 3}
 --- !u!1001 &5090552310082017237
@@ -5210,6 +5225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swampy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5090552308816543593, guid: 7e3433e268f5aff44a9461d8476af113,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5090552308816543595, guid: 7e3433e268f5aff44a9461d8476af113,
         type: 3}
@@ -5279,6 +5299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588607978303142581, guid: 545f32a173424404797d13a8d08e65a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5588607978303142583, guid: 545f32a173424404797d13a8d08e65a9,
         type: 3}
