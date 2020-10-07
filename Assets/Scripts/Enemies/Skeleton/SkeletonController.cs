@@ -11,7 +11,6 @@ public class SkeletonController : Enemy
     public float boneRange;
     public float meeleeInterval;
     public float rangedInterval;
-    public float health;
 
     private GameObject prefab;
     private Animator animator;
@@ -90,16 +89,5 @@ public class SkeletonController : Enemy
         PlayerController.singleton.Damage(damage);
         isMeeleeCooldown = true;
         Timing.CallDelayed(meeleeInterval, () => isMeeleeCooldown = false);
-    }
-
-    public override void Damage(float damage)
-    {
-        health -= damage;
-        FlashRed();
-        if (health <= 0f)
-        {
-            Destroy(gameObject);
-            Kill();
-        }
     }
 }

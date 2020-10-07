@@ -6,6 +6,8 @@ namespace Assets.Scripts.Enemies
 {
 	public abstract class Enemy : Entity
 	{
+        public float health;
+
         protected void Move(Rigidbody2D rb, Vector2 direction, float playerWidth, float playerHeight, float movementSpeed)
         {
             Vector3 viewPos = transform.position;
@@ -14,8 +16,18 @@ namespace Assets.Scripts.Enemies
             rb.MovePosition((Vector2)viewPos + (direction * movementSpeed * Time.deltaTime));
         }
 
-        public abstract void Damage(float damage);
-
         protected void Kill() => MapController.singleton.enemies--;
-	}
+
+        public void Damage(float damage)
+        {
+            Debug.Log("ouch");
+            health -= damage;
+            FlashRed();
+            if (health <= 0f)
+            {
+                Destroy(gameObject);
+                Kill();
+            }
+        }
+    }
 }

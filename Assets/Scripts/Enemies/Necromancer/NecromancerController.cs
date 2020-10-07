@@ -10,7 +10,6 @@ public class NecromancerController : Enemy
     public float safeDistance;
     public float graceDistance;
     public float attackInterval;
-    public float health;
 
     private GameObject prefab;
     private SpriteRenderer render;
@@ -71,16 +70,5 @@ public class NecromancerController : Enemy
     private void Attack()
     {
         Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
-    }
-
-    public override void Damage(float damage)
-    {
-        health -= damage;
-        FlashRed();
-        if (health <= 0f)
-        {
-            Destroy(gameObject);
-            Kill();
-        }
     }
 }

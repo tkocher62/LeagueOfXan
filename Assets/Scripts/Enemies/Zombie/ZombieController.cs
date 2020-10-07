@@ -8,7 +8,6 @@ public class ZombieController : Enemy
 {
     public float movementSpeed;
     public float attackInterval;
-    public float health;
     public float damage;
 
     private SpriteRenderer render;
@@ -56,17 +55,6 @@ public class ZombieController : Enemy
             {
                 Move(rb, movement, playerWidth, playerHeight, movementSpeed);
             }
-        }
-    }
-
-    public override void Damage(float damage)
-    {
-        health -= damage;
-        FlashRed();
-        if (health <= 0f)
-        {
-            Destroy(gameObject);
-            Kill();
         }
     }
 

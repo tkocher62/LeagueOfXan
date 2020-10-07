@@ -9,7 +9,6 @@ public class ChortController : Enemy
     public float movementSpeed;
     public float detectionRange;
     public float attackInterval;
-    public float health;
     public float damage;
 
     private Animator animator;
@@ -78,17 +77,6 @@ public class ChortController : Enemy
             {
                 Move(rb, movement, playerWidth, playerHeight, movementSpeed);
             }
-        }
-    }
-
-    public override void Damage(float damage)
-    {
-        health -= damage;
-        FlashRed();
-        if (health <= 0f)
-        {
-            Destroy(gameObject);
-            Kill();
         }
     }
 
