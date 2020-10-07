@@ -78,6 +78,7 @@ public class SkeletonController : Enemy
     private void RangedAttack()
     {
         Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        Debug.Log("attack");
         isRangedCooldown = true;
         Timing.CallDelayed(rangedInterval, () => isRangedCooldown = false);
     }

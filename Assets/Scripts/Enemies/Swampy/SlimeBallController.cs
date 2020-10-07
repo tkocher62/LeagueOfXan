@@ -6,21 +6,17 @@ public class SlimeBallController : MonoBehaviour
 {
     public float damage;
 
-    private SpriteRenderer render;
-
     void Start()
     {
-        render = gameObject.GetComponent<SpriteRenderer>();
-
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.angularDrag = 0f;
         rb.AddForce((PlayerController.singleton.gameObject.transform.position - gameObject.transform.position).normalized * 300f);
     }
 
-    private void Update()
+    private void OnBecameInvisible()
     {
-        if (!render.isVisible) Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

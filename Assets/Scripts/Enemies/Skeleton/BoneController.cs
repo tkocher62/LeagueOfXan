@@ -6,12 +6,8 @@ public class BoneController : MonoBehaviour
 {
     public float damage;
 
-    private SpriteRenderer render;
-
     private void Start()
     {
-        render = gameObject.GetComponent<SpriteRenderer>();
-
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.angularDrag = 0f;
@@ -19,9 +15,9 @@ public class BoneController : MonoBehaviour
         rb.AddForce((PlayerController.singleton.gameObject.transform.position - gameObject.transform.position).normalized * 400f);
     }
 
-    private void Update()
+    private void OnBecameInvisible()
     {
-        if (!render.isVisible) Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

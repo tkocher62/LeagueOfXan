@@ -6,21 +6,14 @@ using UnityEngine.Tilemaps;
 
 public class BulletController : MonoBehaviour
 {
-    private Renderer render;
-
     public float damage = 10f;
 
-    void Start()
+    private void OnBecameInvisible()
     {
-        render = gameObject.GetComponent<Renderer>();
+        Destroy(gameObject);
     }
 
-    void Update()
-    {
-        if (!render.isVisible) Destroy(gameObject);
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {

@@ -969,7 +969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   damage: 3
-  boneRange: 4
+  boneRange: 5
   meeleeInterval: 0.5
   rangedInterval: 1.5
   health: 8
@@ -5257,7 +5257,7 @@ PrefabInstance:
     - target: {fileID: 7088384896355398582, guid: 3583acac2fc043c4b8405e9de612dd66,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3583acac2fc043c4b8405e9de612dd66, type: 3}
@@ -5350,7 +5350,7 @@ PrefabInstance:
     - target: {fileID: 5588607978303142581, guid: 545f32a173424404797d13a8d08e65a9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5588607978303142583, guid: 545f32a173424404797d13a8d08e65a9,
         type: 3}
