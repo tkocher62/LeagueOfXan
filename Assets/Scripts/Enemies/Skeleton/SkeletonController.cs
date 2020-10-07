@@ -4,29 +4,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieController : Enemy
+public class SkeletonController : Enemy
 {
     public float movementSpeed;
-    public float attackInterval;
-    public float health;
     public float damage;
+    public float boneRange;
+    public float meeleeInterval;
+    public float rangedInterval;
+    public float health;
 
+    private GameObject prefab;
     private SpriteRenderer render;
     private Rigidbody2D rb;
     private float playerWidth, playerHeight;
-    private bool isCooldown;
+
+    private bool isMeeleeCooldown;
+    private bool isRangedCooldown;
 
     private Vector2 movement;
 
     private void Start()
     {
+        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Bone");
+
         render = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
         playerWidth = render.bounds.extents.x;
         playerHeight = render.bounds.extents.y;
 
-        isCooldown = false;
+        isMeeleeCooldown = false;
+        isRangedCooldown = false;
     }
 
     private void Update()
@@ -47,16 +55,46 @@ public class ZombieController : Enemy
         {
             if (dist <= playerWidth || dist < playerHeight)
             {
-                if (!isCooldown)
+                if (!isMeeleeCooldown)
                 {
-                    Attack();
+                    MeeleeAttack();
                 }
             }
             else
             {
                 Move(movement);
+
+                if (dist > boneRange)
+                {
+                    if (!isRangedCooldown)
+                    {
+                        RangedAttack();
+                    }
+                }
             }
         }
+    }
+
+    private void RangedAttack()
+    {
+        Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        isRangedCooldown = true;
+        Timing.CallDelayed(rangedInterval, () => isRangedCooldown = false);
+    }
+
+    private void Move(Vector2 direction)
+    {
+        Vector3 viewPos = transform.position;
+        viewPos.x = Mathf.Clamp(viewPos.x, ScreenBorderController.screenBounds.x * -1 + playerWidth, ScreenBorderController.screenBounds.x - playerWidth);
+        viewPos.y = Mathf.Clamp(viewPos.y, ScreenBorderController.screenBounds.y * -1 + playerHeight, ScreenBorderController.screenBounds.y - playerHeight);
+        rb.MovePosition((Vector2)viewPos + (direction * movementSpeed * Time.deltaTime));
+    }
+
+    private void MeeleeAttack()
+    {
+        PlayerController.singleton.Damage(damage);
+        isMeeleeCooldown = true;
+        Timing.CallDelayed(meeleeInterval, () => isMeeleeCooldown = false);
     }
 
     public override void Damage(float damage)
@@ -68,20 +106,5 @@ public class ZombieController : Enemy
             Destroy(gameObject);
             Kill();
         }
-    }
-
-    private void Attack()
-    {
-        isCooldown = true;
-        PlayerController.singleton.Damage(damage);
-        Timing.CallDelayed(attackInterval, () => isCooldown = false);
-    }
-
-    private void Move(Vector2 direction)
-    {
-        Vector3 viewPos = transform.position;
-        viewPos.x = Mathf.Clamp(viewPos.x, ScreenBorderController.screenBounds.x * -1 + playerWidth, ScreenBorderController.screenBounds.x - playerWidth);
-        viewPos.y = Mathf.Clamp(viewPos.y, ScreenBorderController.screenBounds.y * -1 + playerHeight, ScreenBorderController.screenBounds.y - playerHeight);
-        rb.MovePosition((Vector2)viewPos + (direction * movementSpeed * Time.deltaTime));
     }
 }

@@ -8,6 +8,7 @@ public class DemonController : Enemy
 {
     public float movementSpeed;
     public float detectionRange;
+    public float attackInterval;
     public float health;
     public float damage;
 
@@ -81,7 +82,7 @@ public class DemonController : Enemy
     {
         isCooldown = true;
         PlayerController.singleton.Damage(damage);
-        Timing.CallDelayed(1f, () => isCooldown = false);
+        Timing.CallDelayed(attackInterval, () => isCooldown = false);
     }
 
     private void Move(Vector2 direction)
