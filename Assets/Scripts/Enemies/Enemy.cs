@@ -20,7 +20,6 @@ namespace Assets.Scripts.Enemies
 
         public void Damage(float damage)
         {
-            Debug.Log("ouch");
             health -= damage;
             FlashRed();
             if (health <= 0f)

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MEC;
+using Assets.Scripts.General;
 
-public class WinstonPlayerScript : MonoBehaviour
+public class WinstonPlayerScript : PlayerScript
 {
     private GameObject prefab;
     private Rigidbody2D playerBody;

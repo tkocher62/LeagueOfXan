@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.General;
 using MEC;
 using System;
 using System.Collections;
@@ -196,17 +197,7 @@ public class PlayerController : Entity
     public void ChangeCharacter(int character)
     {
         Character c = (Character)character;
-        HaileyPlayerScript hailey = gameObject.GetComponent<HaileyPlayerScript>();
-        JackPlayerScript jack = gameObject.GetComponent<JackPlayerScript>();
-        ToddPlayerScript todd = gameObject.GetComponent<ToddPlayerScript>();
-        WinstonPlayerScript winston = gameObject.GetComponent<WinstonPlayerScript>();
-        XanPlayerScript xan = gameObject.GetComponent<XanPlayerScript>();
-
-        if (hailey != null) Destroy(hailey);
-        else if (jack != null) Destroy(jack);
-        else if (todd != null) Destroy(todd);
-        else if (winston != null) Destroy(winston);
-        else if (xan != null) Destroy(xan);
+        Destroy(GetComponent<PlayerScript>());
 
         switch (c)
         {

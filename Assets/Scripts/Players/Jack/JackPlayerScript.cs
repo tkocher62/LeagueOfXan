@@ -1,9 +1,10 @@
-﻿using MEC;
+﻿using Assets.Scripts.General;
+using MEC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JackPlayerScript : MonoBehaviour
+public class JackPlayerScript : PlayerScript
 {
     private GameObject prefab;
     private Rigidbody2D playerBody;
