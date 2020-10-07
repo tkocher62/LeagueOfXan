@@ -12,13 +12,6 @@ public class NinjaStarController : MonoBehaviour
     private void Start()
     {
         render = gameObject.GetComponent<Renderer>();
-
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Screen Border"))
-        {
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), obj.GetComponent<Collider2D>(), true);
-        }
-
-        Physics2D.IgnoreCollision(GetComponent<EdgeCollider2D>(), PlayerController.singleton.playerCollider, true);
     }
 
     private void Update()
