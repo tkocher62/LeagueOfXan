@@ -10,8 +10,6 @@ public class BeeGrenadeController : MonoBehaviour
     private Rigidbody2D body;
     private SpriteRenderer render;
 
-    private bool isExploding = false;
-
     private float damageScale = 40f;
 
     private Vector3 lastFrameVelocity;
@@ -23,16 +21,8 @@ public class BeeGrenadeController : MonoBehaviour
         render = gameObject.GetComponent<SpriteRenderer>();
 
         Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), PlayerController.singleton.playerCollider, true);
-    }
 
-    private void Update()
-    {
-        lastFrameVelocity = body.velocity;
-        if (!isExploding && body.velocity.magnitude < 0.15f && body.velocity.magnitude != 0f)
-        {
-            Explode();
-            isExploding = true;
-        }
+        Timing.CallDelayed(1f, () => Explode());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
