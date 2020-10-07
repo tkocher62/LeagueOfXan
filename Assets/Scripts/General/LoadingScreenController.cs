@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.General;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,7 +22,8 @@ public class LoadingScreenController : MonoBehaviour
         if (timer == 0f)
         {
             foreach (GameObject obj in objToLoad) obj.SetActive(true);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log("loading scene: " + LoadingScreenInformation.sceneId);
+            SceneManager.LoadScene(LoadingScreenInformation.sceneId == -1 ? SceneManager.GetActiveScene().buildIndex + 1 : LoadingScreenInformation.sceneId);
         }
     }
 }

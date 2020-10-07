@@ -149,6 +149,8 @@ public class PlayerController : Entity
         render.sprite = pFrames[curCharacter][0];
         body.rotation = 90f;
         render.color = Color.red;
+
+        CanvasController.singleton.deathScreen.SetActive(true);
     }
 
     private Sprite GetNextFrame()
@@ -225,9 +227,9 @@ public class PlayerController : Entity
 
     internal void Damage(float damage, bool flashRed = true)
     {
-        if (flashRed) FlashRed();
         float value = health - damage;
         health = Mathf.Clamp(value, 0f, 100f);
+        if (flashRed && health > 0) FlashRed();
         healthBar.SetHealthBar(value);
         if (health == 0f)
         {
