@@ -14,6 +14,7 @@ public class SkeletonController : Enemy
     public float health;
 
     private GameObject prefab;
+    private Animator animator;
     private SpriteRenderer render;
     private Rigidbody2D rb;
     private float playerWidth, playerHeight;
@@ -26,7 +27,7 @@ public class SkeletonController : Enemy
     private void Start()
     {
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Bone");
-
+        animator = GetComponent<Animator>();
         render = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -35,6 +36,8 @@ public class SkeletonController : Enemy
 
         isMeeleeCooldown = false;
         isRangedCooldown = false;
+
+        animator.SetBool("IsMoving", true);
     }
 
     private void Update()
@@ -78,7 +81,6 @@ public class SkeletonController : Enemy
     private void RangedAttack()
     {
         Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
-        Debug.Log("attack");
         isRangedCooldown = true;
         Timing.CallDelayed(rangedInterval, () => isRangedCooldown = false);
     }
