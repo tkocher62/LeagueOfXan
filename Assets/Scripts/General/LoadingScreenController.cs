@@ -22,8 +22,8 @@ public class LoadingScreenController : MonoBehaviour
         if (timer == 0f)
         {
             foreach (GameObject obj in objToLoad) obj.SetActive(true);
-            Debug.Log("loading scene: " + LoadingScreenInformation.sceneId);
-            SceneManager.LoadScene(LoadingScreenInformation.sceneId == -1 ? SceneManager.GetActiveScene().buildIndex + 1 : LoadingScreenInformation.sceneId);
+            SceneManager.LoadScene(LoadingScreenInformation.sceneId == -1 ? 4 : LoadingScreenInformation.sceneId);
+            //SceneManager.LoadScene(LoadingScreenInformation.sceneId == -1 ? SceneManager.GetActiveScene().buildIndex + 1 : LoadingScreenInformation.sceneId);
         }
     }
 }
