@@ -76,7 +76,7 @@ public class ChortController : Enemy
             }
             else
             {
-                Move(movement);
+                Move(rb, movement, playerWidth, playerHeight, movementSpeed);
             }
         }
     }
@@ -97,13 +97,5 @@ public class ChortController : Enemy
         isCooldown = true;
         PlayerController.singleton.Damage(damage);
         Timing.CallDelayed(attackInterval, () => isCooldown = false);
-    }
-
-    private void Move(Vector2 direction)
-    {
-        Vector3 viewPos = transform.position;
-        viewPos.x = Mathf.Clamp(viewPos.x, ScreenBorderController.screenBounds.x * -1 + playerWidth, ScreenBorderController.screenBounds.x - playerWidth);
-        viewPos.y = Mathf.Clamp(viewPos.y, ScreenBorderController.screenBounds.y * -1 + playerHeight, ScreenBorderController.screenBounds.y - playerHeight);
-        rb.MovePosition((Vector2)viewPos + (direction * movementSpeed * Time.deltaTime));
     }
 }

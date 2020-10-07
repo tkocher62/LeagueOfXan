@@ -6,7 +6,7 @@ namespace Assets.Scripts
 {
 	public class Entity : MonoBehaviour
 	{
-		public void FlashRed()
+		protected void FlashRed()
 		{
 			Timing.RunCoroutine(FlashRedCoroutine(GetComponent<SpriteRenderer>()).CancelWith(gameObject));
 		}

@@ -10,8 +10,6 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer render;
     private Rigidbody2D rb;
 
-    //public GameObject healthBar;
-
     private float health = 20f;
     private float detectionRange = 5f;
     private float movementSpeed = 1f;

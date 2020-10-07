@@ -65,7 +65,7 @@ public class SkeletonController : Enemy
             }
             else
             {
-                Move(movement);
+                Move(rb, movement, playerWidth, playerHeight, movementSpeed);
 
                 if (dist > boneRange)
                 {
@@ -83,14 +83,6 @@ public class SkeletonController : Enemy
         Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
         isRangedCooldown = true;
         Timing.CallDelayed(rangedInterval, () => isRangedCooldown = false);
-    }
-
-    private void Move(Vector2 direction)
-    {
-        Vector3 viewPos = transform.position;
-        viewPos.x = Mathf.Clamp(viewPos.x, ScreenBorderController.screenBounds.x * -1 + playerWidth, ScreenBorderController.screenBounds.x - playerWidth);
-        viewPos.y = Mathf.Clamp(viewPos.y, ScreenBorderController.screenBounds.y * -1 + playerHeight, ScreenBorderController.screenBounds.y - playerHeight);
-        rb.MovePosition((Vector2)viewPos + (direction * movementSpeed * Time.deltaTime));
     }
 
     private void MeeleeAttack()
