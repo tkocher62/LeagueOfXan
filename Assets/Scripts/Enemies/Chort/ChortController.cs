@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemonController : Enemy
+public class ChortController : Enemy
 {
     public float movementSpeed;
     public float detectionRange;
