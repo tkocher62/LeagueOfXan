@@ -39,8 +39,6 @@ public class PlayerController : Entity
     private PlayerScript curCharacterScript;
 
     private const float charChangeDelay = 0f;
-    internal float charChangeTimer;
-    internal bool areButtonsEnabled;
 
     [Serializable]
     public struct AnimationData
@@ -68,8 +66,6 @@ public class PlayerController : Entity
         health = 100f;
 
         movementSpeed = 6f;
-
-        areButtonsEnabled = true;
 
         body = GetComponent<Rigidbody2D>();
         render = gameObject.GetComponent<SpriteRenderer>();
@@ -102,15 +98,6 @@ public class PlayerController : Entity
             if (movement != Vector2.zero)
             {
                 render.flipX = movement.x < 0f;
-            }
-
-            if (charChangeTimer != 0f)
-            {
-                charChangeTimer = Mathf.Clamp(charChangeTimer - Time.deltaTime, 0f, charChangeDelay);
-            }
-            else if (!areButtonsEnabled)
-            {
-                SetButtons(true);
             }
         }
     }
@@ -158,13 +145,12 @@ public class PlayerController : Entity
 
     private void SetButtons(bool enabled)
     {
-        areButtonsEnabled = enabled;
         foreach (Button button in characterButtons)
         {
             button.interactable = enabled;
         }
 
-        if (!enabled) charChangeTimer = charChangeDelay;
+        if (!enabled) Timing.CallDelayed(charChangeDelay, () => SetButtons(true));
     }
 
     private IEnumerator<float> AnimationLoop()
