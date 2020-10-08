@@ -3,6 +3,7 @@ using MEC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class SkeletonController : Enemy
 {
@@ -19,7 +20,7 @@ public class SkeletonController : Enemy
 
     private void Start()
     {
-        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>());
+        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>(), GetComponent<AIDestinationSetter>());
 
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Bone");
         animator = GetComponent<Animator>();
@@ -45,7 +46,7 @@ public class SkeletonController : Enemy
             }
             else
             {
-                Move(movement);
+                //Move(movement);
 
                 if (dist > boneRange)
                 {

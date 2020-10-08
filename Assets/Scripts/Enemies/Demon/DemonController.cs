@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Enemies;
 using MEC;
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class DemonController : Enemy
 
     private void Start()
     {
-        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>());
+        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>(), GetComponent<AIDestinationSetter>());
 
         animator = GetComponent<Animator>();
 
@@ -45,19 +46,9 @@ public class DemonController : Enemy
             isAgro = true;
         }
 
-        if (PlayerController.singleton.health > 0 && isAgro)
+        if (PlayerController.singleton.health > 0 && isAgro && (dist <= playerWidth || dist < playerHeight) && !isCooldown)
         {
-            if (dist <= playerWidth || dist < playerHeight)
-            {
-                if (!isCooldown)
-                {
-                    Attack();
-                }
-            }
-            else
-            {
-                Move(movement);
-            }
+            Attack();
         }
     }
 

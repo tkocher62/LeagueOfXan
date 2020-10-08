@@ -57,7 +57,7 @@ public class PlayerController : Entity
         Xan = 4
     }
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 

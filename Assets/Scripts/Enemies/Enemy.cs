@@ -1,4 +1,5 @@
 ﻿using MEC;
+using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,15 +15,22 @@ namespace Assets.Scripts.Enemies
 
         private SpriteRenderer render;
         private Rigidbody2D rb;
+        private AIDestinationSetter ai;
         private bool isInit = false;
 
-        protected void Init(SpriteRenderer render, Rigidbody2D rb)
+        protected void Init(SpriteRenderer render, Rigidbody2D rb, AIDestinationSetter ai = null)
         {
             this.render = render;
             this.rb = rb;
+            this.ai = ai;
 
             playerWidth = render.bounds.extents.x;
             playerHeight = render.bounds.extents.y;
+
+            if (this.ai != null)
+            {
+                this.ai.target = PlayerController.singleton.transform;
+            }
 
             isInit = true;
         }

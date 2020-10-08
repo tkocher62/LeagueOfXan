@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Enemies;
 using MEC;
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class ZombieController : Enemy
 
     private void Start()
     {
-        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>());
+        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>(), GetComponent<AIDestinationSetter>());
 
         isCooldown = false;
     }
@@ -24,16 +25,9 @@ public class ZombieController : Enemy
 
         if (PlayerController.singleton.health > 0)
         {
-            if (dist <= playerWidth || dist < playerHeight)
+            if ((dist <= playerWidth || dist < playerHeight) && !isCooldown)
             {
-                if (!isCooldown)
-                {
-                    Attack();
-                }
-            }
-            else
-            {
-                Move(movement);
+                Attack();
             }
         }
     }

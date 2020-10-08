@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Enemies;
 using MEC;
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class ChortController : Enemy
     public float damage;
 
     private Animator animator;
+    private AIDestinationSetter ai;
     private bool isCooldown;
     private bool _isAgro;
     private bool isAgro
@@ -23,6 +25,7 @@ public class ChortController : Enemy
         {
             if (animator != null) animator.SetBool("IsMoving", value);
             _isAgro = value;
+            ai.target = value ? PlayerController.singleton.transform : null;
         }
     }
 
@@ -31,6 +34,7 @@ public class ChortController : Enemy
         Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>());
 
         animator = GetComponent<Animator>();
+        ai = GetComponent<AIDestinationSetter>();
 
         isAgro = false;
         isCooldown = false;
@@ -53,10 +57,6 @@ public class ChortController : Enemy
                 {
                     Attack();
                 }
-            }
-            else
-            {
-                Move(movement);
             }
         }
     }
