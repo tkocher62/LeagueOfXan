@@ -25,7 +25,10 @@ namespace Assets.Scripts
 			{
 				render.color = Color.red;
 				yield return Timing.WaitForSeconds(0.2f);
-				render.color = Color.white;
+				if (render != null)
+				{
+					render.color = Color.white;
+				}
 			}
 		}
 	}

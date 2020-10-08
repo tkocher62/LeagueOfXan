@@ -9,7 +9,8 @@ public class SprayController : MonoBehaviour
 
     private void Start()
     {
-        Vector2 moveDirection = PlayerController.singleton.body.velocity;
+        Vector2 moveDirection = PlayerController.singleton.movement;
+
         if (moveDirection != Vector2.zero)
         {
             float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;

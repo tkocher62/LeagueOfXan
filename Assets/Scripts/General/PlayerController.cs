@@ -28,7 +28,7 @@ public class PlayerController : Entity
     private Dictionary<Character, List<Sprite>> pFrames;
 
     internal Vector2 startPos;
-    private Vector2 movement;
+    internal Vector2 movement;
 
     internal Character curCharacter;
 
