@@ -60,7 +60,7 @@ public class NecromancerController : Enemy
 
     private IEnumerator<float> AttackCoroutine()
     {
-        while (health > 0)
+        while (health > 0 && this)
         {
             Attack();
             yield return Timing.WaitForSeconds(attackInterval);

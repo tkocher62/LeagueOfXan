@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.Enemies;
 using Assets.Scripts.General;
 using MEC;
 using System;
@@ -12,7 +13,7 @@ public class PlayerController : Entity
 {
     internal static PlayerController singleton;
 
-    internal float runSpeed;
+    internal float movementSpeed;
 
     private float playerWidth, playerHeight;
     internal float health;
@@ -66,7 +67,7 @@ public class PlayerController : Entity
 
         health = 100f;
 
-        runSpeed = 6f;
+        movementSpeed = 6f;
 
         areButtonsEnabled = true;
 
@@ -114,12 +115,14 @@ public class PlayerController : Entity
         }
     }
 
+    private void FixedUpdate()
+    {
+        Move(body, movement, playerWidth, playerHeight, movementSpeed);
+    }
+
     public void Attack()
     {
-        if (health > 0f)
-        {
-            curCharacterScript.Attack();
-        }
+        curCharacterScript.Attack();
     }
 
     internal void Spawn()
@@ -132,9 +135,15 @@ public class PlayerController : Entity
         render.sprite = pFrames[curCharacter][0];
         body.rotation = render.flipX ? -90f : 90f;
         render.color = Color.red;
-        movement = Vector2.zero;
 
         CanvasController.singleton.deathScreen.SetActive(true);
+
+        foreach (Enemy obj in GameObject.FindObjectsOfType<Enemy>())
+        {
+            Destroy(obj);
+        }
+        movement = Vector2.zero;
+        Destroy(this);
     }
 
     private Sprite GetNextFrame()
@@ -145,19 +154,6 @@ public class PlayerController : Entity
             frameIndx = 0;
         }
         return pFrames[curCharacter][frameIndx];
-    }
-
-    private void FixedUpdate()
-    {
-        if (health > 0f)
-        {
-            body.velocity = new Vector2(movement.x * runSpeed, movement.y * runSpeed);
-
-            Vector3 viewPos = transform.position;
-            viewPos.x = Mathf.Clamp(viewPos.x, ScreenBorderController.screenBounds.x * -1 + playerWidth, ScreenBorderController.screenBounds.x - playerWidth);
-            viewPos.y = Mathf.Clamp(viewPos.y, ScreenBorderController.screenBounds.y * -1 + playerHeight, ScreenBorderController.screenBounds.y - playerHeight);
-            transform.position = viewPos;
-        }
     }
 
     private void SetButtons(bool enabled)
@@ -173,7 +169,7 @@ public class PlayerController : Entity
 
     private IEnumerator<float> AnimationLoop()
     {
-        while (health > 0f)
+        while (this)
         {
             render.sprite = GetNextFrame();
             yield return Timing.WaitForSeconds(0.35f);
