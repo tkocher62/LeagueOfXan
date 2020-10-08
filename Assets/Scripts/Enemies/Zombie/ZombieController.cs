@@ -6,36 +6,16 @@ using UnityEngine;
 
 public class ZombieController : Enemy
 {
-    public float movementSpeed;
     public float attackInterval;
     public float damage;
 
-    private SpriteRenderer render;
-    private Rigidbody2D rb;
-    private float playerWidth, playerHeight;
     private bool isCooldown;
-
-    private Vector2 movement;
 
     private void Start()
     {
-        render = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-
-        playerWidth = render.bounds.extents.x;
-        playerHeight = render.bounds.extents.y;
+        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>());
 
         isCooldown = false;
-    }
-
-    private void Update()
-    {
-        movement = (PlayerController.singleton.gameObject.transform.position - transform.position).normalized;
-
-        if (movement != Vector2.zero)
-        {
-            render.flipX = movement.x < 0;
-        }
     }
 
     private void FixedUpdate()
@@ -53,7 +33,7 @@ public class ZombieController : Enemy
             }
             else
             {
-                Move(rb, movement, playerWidth, playerHeight, movementSpeed);
+                Move(movement);
             }
         }
     }

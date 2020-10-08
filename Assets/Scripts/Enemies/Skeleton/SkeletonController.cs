@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class SkeletonController : Enemy
 {
-    public float movementSpeed;
     public float damage;
     public float boneRange;
     public float meeleeInterval;
@@ -14,39 +13,21 @@ public class SkeletonController : Enemy
 
     private GameObject prefab;
     private Animator animator;
-    private SpriteRenderer render;
-    private Rigidbody2D rb;
-    private float playerWidth, playerHeight;
 
     private bool isMeeleeCooldown;
     private bool isRangedCooldown;
 
-    private Vector2 movement;
-
     private void Start()
     {
+        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>());
+
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Bone");
         animator = GetComponent<Animator>();
-        render = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-
-        playerWidth = render.bounds.extents.x;
-        playerHeight = render.bounds.extents.y;
 
         isMeeleeCooldown = false;
         isRangedCooldown = false;
 
         animator.SetBool("IsMoving", true);
-    }
-
-    private void Update()
-    {
-        movement = (PlayerController.singleton.gameObject.transform.position - transform.position).normalized;
-
-        if (movement != Vector2.zero)
-        {
-            render.flipX = movement.x < 0;
-        }
     }
 
     private void FixedUpdate()
@@ -64,7 +45,7 @@ public class SkeletonController : Enemy
             }
             else
             {
-                Move(rb, movement, playerWidth, playerHeight, movementSpeed);
+                Move(movement);
 
                 if (dist > boneRange)
                 {

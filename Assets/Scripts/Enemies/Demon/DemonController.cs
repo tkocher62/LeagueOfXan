@@ -6,15 +6,11 @@ using UnityEngine;
 
 public class DemonController : Enemy
 {
-    public float movementSpeed;
     public float detectionRange;
     public float attackInterval;
     public float damage;
 
     private Animator animator;
-    private SpriteRenderer render;
-    private Rigidbody2D rb;
-    private float playerWidth, playerHeight;
     private bool isCooldown;
     private bool _isAgro;
     private bool isAgro
@@ -30,29 +26,14 @@ public class DemonController : Enemy
         }
     }
 
-    private Vector2 movement;
-
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        render = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>());
 
-        playerWidth = render.bounds.extents.x;
-        playerHeight = render.bounds.extents.y;
+        animator = GetComponent<Animator>();
 
         isAgro = false;
         isCooldown = false;
-    }
-
-    private void Update()
-    {
-        movement = (PlayerController.singleton.gameObject.transform.position - transform.position).normalized;
-
-        if (movement != Vector2.zero)
-        {
-            render.flipX = movement.x < 0;
-        }
     }
 
     private void FixedUpdate()
@@ -75,7 +56,7 @@ public class DemonController : Enemy
             }
             else
             {
-                Move(rb, movement, playerWidth, playerHeight, movementSpeed);
+                Move(movement);
             }
         }
     }

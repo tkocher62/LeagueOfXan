@@ -7,6 +7,30 @@ namespace Assets.Scripts.Enemies
 	public abstract class Enemy : Entity
 	{
         public float health;
+        public float movementSpeed;
+
+        protected Vector2 movement;
+        protected float playerWidth, playerHeight;
+
+        private SpriteRenderer render;
+        private Rigidbody2D rb;
+        private bool isInit = false;
+
+        protected void Init(SpriteRenderer render, Rigidbody2D rb)
+        {
+            this.render = render;
+            this.rb = rb;
+
+            playerWidth = render.bounds.extents.x;
+            playerHeight = render.bounds.extents.y;
+
+            isInit = true;
+        }
+
+        protected void Move(Vector2 movement)
+        {
+            Move(rb, movement, playerWidth, playerHeight, movementSpeed);
+        }
 
         protected void Kill() => MapController.singleton.enemies--;
 
@@ -18,6 +42,19 @@ namespace Assets.Scripts.Enemies
             {
                 Destroy(gameObject);
                 Kill();
+            }
+        }
+
+        private void Update()
+        {
+            if (isInit)
+            {
+                movement = (PlayerController.singleton.gameObject.transform.position - transform.position).normalized;
+
+                if (movement != Vector2.zero)
+                {
+                    render.flipX = movement.x < 0;
+                }
             }
         }
     }
