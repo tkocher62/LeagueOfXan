@@ -34,10 +34,10 @@ public class HaileyPlayerScript : PlayerScript
             GameObject bee = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
             Rigidbody2D rb = bee.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
-            bee.transform.up = playerBody.velocity.normalized;
+            bee.transform.up = PlayerController.singleton.movement.normalized;
             rb.drag = 5f;
             rb.angularDrag = 2f;
-            rb.AddForce((playerBody.velocity.normalized != Vector2.zero ? playerBody.velocity.normalized : defaultPower) * 2200f);
+            rb.AddForce((PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : defaultPower) * 2200f);
             rb.AddTorque(100f);
 
             isOnCooldown = true;

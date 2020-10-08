@@ -33,10 +33,10 @@ public class ToddPlayerScript : PlayerScript
             GameObject bullet = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
             Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
-            if (playerBody.velocity.normalized != Vector2.zero)
+            if (PlayerController.singleton.movement.normalized != Vector2.zero)
             {
-                bullet.transform.up = playerBody.velocity.normalized;
-                rb.AddForce(playerBody.velocity.normalized * 2000f);
+                bullet.transform.up = PlayerController.singleton.movement.normalized;
+                rb.AddForce(PlayerController.singleton.movement.normalized * 2000f);
             }
             else
             {

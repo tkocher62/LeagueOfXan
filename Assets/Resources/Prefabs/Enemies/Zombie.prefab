@@ -165,5 +165,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 30
   movementSpeed: 1
-  attackInterval: 0
+  attackInterval: 2
   damage: 25

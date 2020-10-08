@@ -41,10 +41,9 @@ public class WinstonPlayerScript : PlayerScript
                 GameObject ninjastar = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
                 Rigidbody2D rb = ninjastar.AddComponent<Rigidbody2D>();
                 rb.gravityScale = 0f;
-                ninjastar.transform.up = playerBody.velocity.normalized;
-                // Doesn't work perfectly, too much velocity on ninja stars
-                Vector2 dir2 = (playerBody.velocity + Vector2FromAngle(45 * i)).normalized;
-                rb.AddForce(dir2 * 1000f);
+
+                ninjastar.transform.up = PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : (PlayerController.singleton.render.flipX ? Vector2.left : Vector2.right);
+                rb.AddForce((PlayerController.singleton.movement + (Vector2FromAngle(45 * i) * (PlayerController.singleton.render.flipX ? -1 : 1))).normalized * 800f);
             }
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
