@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7088384896355398581}
   - component: {fileID: 7088384896355398474}
   - component: {fileID: 3445739533003245837}
+  - component: {fileID: 789622180}
   m_Layer: 8
   m_Name: Chort
   m_TagString: Enemy
@@ -150,3 +151,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &789622180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7088384896355398582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8164414a40f75b74ba511a931b69b41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 8
+  movementSpeed: 3
+  detectionRange: 8
+  attackInterval: 1.5
+  damage: 8

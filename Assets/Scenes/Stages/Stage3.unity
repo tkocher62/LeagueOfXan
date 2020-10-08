@@ -249,76 +249,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &789622179 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7088384896355398582, guid: 3583acac2fc043c4b8405e9de612dd66,
-    type: 3}
-  m_PrefabInstance: {fileID: 4186811583206590520}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &789622180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789622179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8164414a40f75b74ba511a931b69b41d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 8
-  movementSpeed: 3
-  detectionRange: 8
-  attackInterval: 1.5
-  damage: 8
---- !u!1 &800865514 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5588607978303142581, guid: 545f32a173424404797d13a8d08e65a9,
-    type: 3}
-  m_PrefabInstance: {fileID: 5588607978290327753}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &800865515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 800865514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5434978cd2557c84fa1264a46658981f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 8
-  movementSpeed: 3
-  damage: 3
-  boneRange: 5
-  meeleeInterval: 0.5
-  rangedInterval: 1.5
---- !u!1 &1080788661 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5723355540638320616, guid: 40aac833025747c448d4ce5f077fcde8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1588001125}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1080788667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1080788661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8006e537104f03e4c94f524f8480e287, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 20
-  movementSpeed: 2
-  detectionRange: 8
-  attackInterval: 0
-  damage: 20
 --- !u!1 &1407240200
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,11 +1783,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon
       objectReference: {fileID: 0}
-    - target: {fileID: 5723355540638320616, guid: 40aac833025747c448d4ce5f077fcde8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5723355540638320618, guid: 40aac833025747c448d4ce5f077fcde8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2747,11 +2672,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Necromancer
       objectReference: {fileID: 0}
-    - target: {fileID: 8515334326864342786, guid: 8efc4face106cbf4a8281cf22c4ddc32,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efc4face106cbf4a8281cf22c4ddc32, type: 3}
 --- !u!1001 &4186811583206590520
@@ -2820,11 +2740,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Chort
-      objectReference: {fileID: 0}
-    - target: {fileID: 7088384896355398582, guid: 3583acac2fc043c4b8405e9de612dd66,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3583acac2fc043c4b8405e9de612dd66, type: 3}

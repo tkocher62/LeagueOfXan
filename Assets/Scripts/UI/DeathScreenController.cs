@@ -11,7 +11,7 @@ public class DeathScreenController : MonoBehaviour
         DestroyAllDontDestroyOnLoad();
 
         LoadingScreenInformation.sceneId = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     public void MainMenu()

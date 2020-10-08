@@ -147,8 +147,9 @@ public class PlayerController : Entity
     private void KillPlayer()
     {
         render.sprite = pFrames[curCharacter][0];
-        body.rotation = 90f;
+        body.rotation = render.flipX ? -90f : 90f;
         render.color = Color.red;
+        movement = Vector2.zero;
 
         CanvasController.singleton.deathScreen.SetActive(true);
     }

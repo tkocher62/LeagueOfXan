@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5723355540638320619}
   - component: {fileID: 2102592242}
   - component: {fileID: -6465838293984624766}
+  - component: {fileID: 1080788667}
   m_Layer: 8
   m_Name: Demon
   m_TagString: Enemy
@@ -150,3 +151,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.23230949, y: 0.29294264}
   m_EdgeRadius: 0
+--- !u!114 &1080788667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5723355540638320616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8006e537104f03e4c94f524f8480e287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 20
+  movementSpeed: 2
+  detectionRange: 8
+  attackInterval: 1
+  damage: 20
