@@ -12,13 +12,13 @@ public class JackPlayerScript : PlayerScript
     private float shootDelay = 0.2f;
     private bool isOnCooldown = false;
 
-    void Start()
+    private void Start()
     {
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
         playerBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKey("f"))
         {
@@ -26,7 +26,7 @@ public class JackPlayerScript : PlayerScript
         }
     }
 
-    internal void Attack()
+    public override void Attack()
     {
         if (!isOnCooldown)
         {

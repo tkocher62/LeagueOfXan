@@ -27,7 +27,7 @@ public class XanPlayerScript : PlayerScript
         }
     }
 
-    internal void Attack()
+    public override void Attack()
     {
         if (!isOnCooldown)
         {

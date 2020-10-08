@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.General
 {
-	public class PlayerScript : MonoBehaviour
+	public abstract class PlayerScript : MonoBehaviour
 	{
+		public abstract void Attack();
 	}
 }

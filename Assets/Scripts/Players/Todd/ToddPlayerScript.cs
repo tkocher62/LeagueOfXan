@@ -12,13 +12,13 @@ public class ToddPlayerScript : PlayerScript
     private float shootDelay = 1f;
     private bool isOnCooldown = false;
 
-    void Start()
+    private void Start()
     {
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/SniperBullet");
         playerBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown("f"))
         {
@@ -26,7 +26,7 @@ public class ToddPlayerScript : PlayerScript
         }
     }
 
-    internal void Attack()
+    public override void Attack()
     {
         if (!isOnCooldown)
         {

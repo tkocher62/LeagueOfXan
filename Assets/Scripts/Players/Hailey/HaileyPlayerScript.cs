@@ -13,13 +13,13 @@ public class HaileyPlayerScript : PlayerScript
     private bool isOnCooldown = false;
     private Vector2 defaultPower = new Vector2(1, 0);
 
-    void Start()
+    private void Start()
     {
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/BeeGrenade");
         playerBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown("f"))
         {
@@ -27,7 +27,7 @@ public class HaileyPlayerScript : PlayerScript
         }
     }
 
-    internal void Attack()
+    public override void Attack()
     {
         if (!isOnCooldown)
         {

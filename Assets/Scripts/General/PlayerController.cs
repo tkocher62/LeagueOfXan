@@ -35,7 +35,7 @@ public class PlayerController : Entity
     internal BoxCollider2D playerCollider;
     internal SpriteRenderer render;
 
-    private object curCharacterScript;
+    private PlayerScript curCharacterScript;
 
     private const float charChangeDelay = 0f;
     internal float charChangeTimer;
@@ -88,7 +88,7 @@ public class PlayerController : Entity
 
         Timing.RunCoroutine(AnimationLoop().CancelWith(gameObject));
 
-        ChangeCharacter(4);
+        ChangeCharacter((int)Character.Xan);
     }
 
     private void Update()
@@ -118,24 +118,7 @@ public class PlayerController : Entity
     {
         if (health > 0f)
         {
-            switch (curCharacter)
-            {
-                case Character.Hailey:
-                    ((HaileyPlayerScript)curCharacterScript).Attack();
-                    break;
-                case Character.Jack:
-                    ((JackPlayerScript)curCharacterScript).Attack();
-                    break;
-                case Character.Todd:
-                    ((ToddPlayerScript)curCharacterScript).Attack();
-                    break;
-                case Character.Winston:
-                    ((WinstonPlayerScript)curCharacterScript).Attack();
-                    break;
-                case Character.Xan:
-                    ((XanPlayerScript)curCharacterScript).Attack();
-                    break;
-            }
+            curCharacterScript.Attack();
         }
     }
 
