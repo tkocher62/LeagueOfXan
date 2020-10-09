@@ -35,8 +35,7 @@ public class BeeGrenadeController : MonoBehaviour
 
     void Explode()
     {
-        render.enabled = false;
-        GameObject explosion = Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
+        Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             float dist = Vector2.Distance(gameObject.transform.position, obj.transform.position);
@@ -51,10 +50,6 @@ public class BeeGrenadeController : MonoBehaviour
                 }
             }
         }
-        Timing.CallDelayed(0.3f, () =>
-        {
-            Destroy(explosion);
-            Destroy(gameObject);
-        });
+        Destroy(gameObject);
     }
 }
