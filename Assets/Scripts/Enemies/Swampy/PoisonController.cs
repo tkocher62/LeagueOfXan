@@ -17,8 +17,6 @@ public class PoisonController : MonoBehaviour
     {
         curPoisonTicks = totalPoisonTicks;
 
-        PlayerController.singleton.render.color = color;
-
         Timing.RunCoroutine(Poison().CancelWith(gameObject));
     }
 
@@ -26,6 +24,7 @@ public class PoisonController : MonoBehaviour
     {
         for (int i = 0; i < totalPoisonTicks; i++)
         {
+            PlayerController.singleton.render.color = color;
             PlayerController.singleton.Damage(poisonAmount, false);
             yield return Timing.WaitForSeconds(poisonInterval);
         }

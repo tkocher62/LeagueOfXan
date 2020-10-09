@@ -20,7 +20,7 @@ public class BeeGrenadeController : MonoBehaviour
         body = gameObject.GetComponent<Rigidbody2D>();
         render = gameObject.GetComponent<SpriteRenderer>();
 
-        Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), PlayerController.singleton.playerCollider, true);
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), PlayerController.singleton.playerCollider, true);
 
         Timing.CallDelayed(1f, () => Explode());
     }

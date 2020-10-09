@@ -7,7 +7,6 @@ using UnityEngine;
 public class JackPlayerScript : PlayerScript
 {
     private GameObject prefab;
-    private Rigidbody2D playerBody;
 
     private float shootDelay = 0.2f;
     private bool isOnCooldown = false;
@@ -15,7 +14,6 @@ public class JackPlayerScript : PlayerScript
     private void Start()
     {
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Laser");
-        playerBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
     private void Update()
