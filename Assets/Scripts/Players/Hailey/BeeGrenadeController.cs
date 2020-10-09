@@ -8,7 +8,6 @@ public class BeeGrenadeController : MonoBehaviour
 {
     private GameObject explosionPrefab;
     private Rigidbody2D body;
-    private SpriteRenderer render;
 
     private float damageScale = 40f;
 
@@ -18,7 +17,6 @@ public class BeeGrenadeController : MonoBehaviour
     {
         explosionPrefab = Resources.Load<GameObject>("Prefabs/Effects/Explosion");
         body = gameObject.GetComponent<Rigidbody2D>();
-        render = gameObject.GetComponent<SpriteRenderer>();
 
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), PlayerController.singleton.playerCollider, true);
 

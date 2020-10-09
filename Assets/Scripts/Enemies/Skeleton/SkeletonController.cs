@@ -46,8 +46,6 @@ public class SkeletonController : Enemy
             }
             else
             {
-                //Move(movement);
-
                 if (dist > boneRange)
                 {
                     if (!isRangedCooldown)
