@@ -188,6 +188,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chort
       objectReference: {fileID: 0}
+    - target: {fileID: 7088384896355398582, guid: 3583acac2fc043c4b8405e9de612dd66,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3583acac2fc043c4b8405e9de612dd66, type: 3}
 --- !u!1 &514904608
@@ -398,7 +403,7 @@ PrefabInstance:
     - target: {fileID: 7032815667003496410, guid: 2bad14494ec30c24a9f50ed12d029342,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bad14494ec30c24a9f50ed12d029342, type: 3}
@@ -417,7 +422,7 @@ PrefabInstance:
     - target: {fileID: 5588607978303142581, guid: 545f32a173424404797d13a8d08e65a9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5588607978303142583, guid: 545f32a173424404797d13a8d08e65a9,
         type: 3}
@@ -2387,7 +2392,7 @@ GameObject:
   - component: {fileID: 2131331964}
   m_Layer: 11
   m_Name: Tilemap_Walls
-  m_TagString: Screen Border
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

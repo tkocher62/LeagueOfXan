@@ -14,6 +14,7 @@ public class ChortController : Enemy
     private Animator animator;
     private AIDestinationSetter ai;
     private bool isCooldown;
+    private int wallMask;
     private bool _isAgro;
     private bool isAgro
     {
@@ -25,6 +26,7 @@ public class ChortController : Enemy
         {
             if (animator != null) animator.SetBool("IsMoving", value);
             _isAgro = value;
+            if (value) Debug.Log("HE ANGRY");
             ai.target = value ? PlayerController.singleton.transform : null;
         }
     }
@@ -36,6 +38,8 @@ public class ChortController : Enemy
         animator = GetComponent<Animator>();
         ai = GetComponent<AIDestinationSetter>();
 
+        wallMask = LayerMask.NameToLayer("Obstacle");
+
         isAgro = false;
         isCooldown = false;
     }
@@ -44,7 +48,7 @@ public class ChortController : Enemy
     {
         float dist = Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position);
 
-        if (dist < detectionRange && Physics2D.Linecast(transform.position, PlayerController.singleton.transform.position, wallMask))
+        if (dist < detectionRange && Physics2D.Linecast(transform.position, PlayerController.singleton.gameObject.transform.position, wallMask))
         {
             isAgro = true;
         }

@@ -12,7 +12,6 @@ namespace Assets.Scripts.Enemies
 
         protected Vector2 movement;
         protected float playerWidth, playerHeight;
-        protected const int wallMask = 11;
 
         private SpriteRenderer render;
         private Rigidbody2D rb;

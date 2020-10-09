@@ -12,7 +12,9 @@ public class DemonController : Enemy
     public float damage;
 
     private Animator animator;
+    private AIDestinationSetter ai;
     private bool isCooldown;
+    private int wallMask;
     private bool _isAgro;
     private bool isAgro
     {
@@ -24,6 +26,7 @@ public class DemonController : Enemy
         {
             if (animator != null) animator.SetBool("IsMoving", value);
             _isAgro = value;
+            ai.target = value ? PlayerController.singleton.transform : null;
         }
     }
 
@@ -32,6 +35,9 @@ public class DemonController : Enemy
         Init(GetComponent<SpriteRenderer>(), GetComponent<Rigidbody2D>(), GetComponent<AIDestinationSetter>());
 
         animator = GetComponent<Animator>();
+        ai = GetComponent<AIDestinationSetter>();
+
+        wallMask = LayerMask.NameToLayer("Obstacle");
 
         isAgro = false;
         isCooldown = false;
@@ -41,7 +47,7 @@ public class DemonController : Enemy
     {
         float dist = Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position);
 
-        if (dist < detectionRange && Physics2D.Linecast(transform.position, PlayerController.singleton.transform.position, wallMask, 0f, detectionRange))
+        if (dist < detectionRange && Physics2D.Linecast(transform.position, PlayerController.singleton.gameObject.transform.position, wallMask))
         {
             isAgro = true;
         }
