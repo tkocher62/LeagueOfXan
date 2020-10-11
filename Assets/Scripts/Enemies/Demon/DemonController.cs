@@ -47,7 +47,7 @@ public class DemonController : Enemy
     {
         float dist = Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position);
 
-        if (dist < detectionRange && Physics2D.Linecast(transform.position, PlayerController.singleton.gameObject.transform.position, wallMask))
+        if (dist < detectionRange && !isAgro && Physics2D.Linecast(gameObject.transform.position, PlayerController.singleton.transform.position, 1 << 11).collider == null)
         {
             isAgro = true;
         }
