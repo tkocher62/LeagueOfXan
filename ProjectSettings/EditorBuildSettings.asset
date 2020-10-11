@@ -16,17 +16,26 @@ EditorBuildSettings:
     guid: 4b1b28f69ecf8774d9d8da0ceb81c4e0
   - enabled: 1
     path: Assets/Scenes/Stages/Stage1.unity
-    guid: 9901fead5bda92a4d9495f98999cbb47
-  - enabled: 1
-    path: Assets/Scenes/Stages/Stage2.unity
-    guid: e6f2f2e0390a2fd448d49632e728c8b5
-  - enabled: 1
-    path: Assets/Scenes/Stages/Stage3.unity
     guid: 30d17d8fe52e7b043acb2f91e0234475
   - enabled: 1
-    path: Assets/Scenes/Stages/Stage4.unity
+    path: Assets/Scenes/Stages/Stage2.unity
     guid: 42a66731e0017884881b05f3abd4f12d
   - enabled: 1
-    path: Assets/Scenes/Stages/Stage5.unity
+    path: Assets/Scenes/Stages/Stage3.unity
     guid: ca3b2ad5fc81586468ea9d09c1b06528
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage4.unity
+    guid: 0c62e10485a632b4c8e35973cfc67b62
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage5.unity
+    guid: 58eff17b51fac834d8259d89226fea32
+  - enabled: 1
+    path: Assets/Scenes/Stages/Stage6.unity
+    guid: d417899519b3f084ab1445d912253e6e
+  - enabled: 1
+    path: Assets/Scenes/Stages/BossPrepStage.unity
+    guid: e6f2f2e0390a2fd448d49632e728c8b5
+  - enabled: 1
+    path: Assets/Scenes/Stages/BossStage.unity
+    guid: 9901fead5bda92a4d9495f98999cbb47
   m_configObjects: {}
