@@ -202,4 +202,11 @@ public class PlayerController : Entity
             KillPlayer();
         }
     }
+
+    internal void Heal(float amount)
+    {
+        float value = health + amount;
+        health = Mathf.Clamp(value, 0f, 100f);
+        healthBar.SetHealthBar(value);
+    }
 }

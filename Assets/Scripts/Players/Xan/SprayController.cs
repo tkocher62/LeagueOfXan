@@ -24,6 +24,7 @@ public class SprayController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // prevent this from hurting enemies through walls
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy controller = collision.gameObject.GetComponent<Enemy>();

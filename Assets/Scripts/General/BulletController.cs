@@ -15,6 +15,7 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy controller = collision.gameObject.GetComponent<Enemy>();
@@ -23,6 +24,10 @@ public class BulletController : MonoBehaviour
                 controller.Damage(damage);
                 Destroy(gameObject);
             }
+        }
+        else if (collision.gameObject.tag == "Screen Border")
+        {
+            Destroy(gameObject);
         }
     }
 }
