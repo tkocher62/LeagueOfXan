@@ -8,7 +8,7 @@ public class LoadingScreenController : MonoBehaviour
 {
     public List<GameObject> objToLoad;
 
-    private const float loadTime = 0.7f;
+    private const float loadTime = 1f;
     private float timer;
 
     private void Start()
