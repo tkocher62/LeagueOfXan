@@ -824,7 +824,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 599, y: 26}
+  m_AnchoredPosition: {x: 599, y: -300.2}
   m_SizeDelta: {x: 1094.0479, y: 205.13397}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1484558735
@@ -1483,7 +1483,7 @@ GameObject:
   - component: {fileID: 2009336700}
   - component: {fileID: 2009336699}
   m_Layer: 5
-  m_Name: Idea
+  m_Name: ConceptArtist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1506,7 +1506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 603, y: -300}
+  m_AnchoredPosition: {x: 603, y: 26}
   m_SizeDelta: {x: 1094.0479, y: 205.13397}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2009336699
@@ -1541,7 +1541,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Idea
+  m_Text: Concept Artist
 --- !u!222 &2009336700
 CanvasRenderer:
   m_ObjectHideFlags: 0
