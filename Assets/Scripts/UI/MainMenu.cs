@@ -5,7 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame() => SceneManager.LoadScene(3);
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(3);
+        Destroy(MusicController.instance.gameObject);
+    }
 
     public void AchievementsMenu() => SceneManager.LoadScene(2);
 

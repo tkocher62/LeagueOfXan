@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MusicController : MonoBehaviour
 {
-    private static MusicController instance;
+    internal static MusicController instance;
 
     private void Awake()
     {

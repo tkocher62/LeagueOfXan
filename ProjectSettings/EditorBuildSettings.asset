@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Achievements.unity
     guid: 6e11658a801d28d44955bb18e71ae269
   - enabled: 1
+    path: Assets/Scenes/CutScene.unity
+    guid: d070689c4d4a0514b9e4f93fd35fb4ce
+  - enabled: 1
     path: Assets/Scenes/Loading.unity
     guid: 4b1b28f69ecf8774d9d8da0ceb81c4e0
   - enabled: 1
