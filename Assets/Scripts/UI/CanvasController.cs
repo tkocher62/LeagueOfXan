@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
@@ -15,5 +16,14 @@ public class CanvasController : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(eventSystem);
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            Destroy(gameObject);
+            Destroy(eventSystem);
+        }
     }
 }

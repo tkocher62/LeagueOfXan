@@ -51,8 +51,16 @@ public class MapController : MonoBehaviour
         if (collision.gameObject.tag == "Player" && isDoorOpen)
         {
             // Load next scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            PlayerController.singleton.Spawn();
+            int id = SceneManager.GetActiveScene().buildIndex + 1;
+            SceneManager.LoadScene(id);
+            if (id != SceneManager.sceneCountInBuildSettings - 1)
+            {
+                PlayerController.singleton.Spawn();
+            }
+            else
+            {
+                Destroy(PlayerController.singleton.gameObject);
+            }
         }
     }
 
