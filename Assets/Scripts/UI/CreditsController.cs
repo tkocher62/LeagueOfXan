@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class CreditsController : MonoBehaviour
 {
+    public Text forXan;
     public Text title;
     public List<Text> children;
     public Button continueButton;
@@ -15,6 +16,11 @@ public class CreditsController : MonoBehaviour
 
     private void Start()
     {
+        SetInvisible(forXan);
+        foreach (Text t in forXan.GetComponentsInChildren<Text>())
+        {
+            SetInvisible(t);
+        }
         foreach (Text t in title.GetComponentsInChildren<Text>())
         {
             SetInvisible(t);
@@ -41,22 +47,28 @@ public class CreditsController : MonoBehaviour
 
     private IEnumerator<float> Fade()
     {
+        FadeWithChildren(forXan, 1, period, false);
+        yield return Timing.WaitForSeconds(period * 2);
+        FadeWithChildren(forXan, 0, period, false);
+        yield return Timing.WaitForSeconds(period);
         CrossFadeAlphaFixed(title, 1, period, false);
-        foreach (Text t in title.GetComponentsInChildren<Text>())
-        {
-            CrossFadeAlphaFixed(t, 1, period, false);
-        }
+        FadeWithChildren(title, 1, period, false);
         yield return Timing.WaitForSeconds(period - 0.5f);
         foreach (Text text in children)
         {
-            CrossFadeAlphaFixed(text, 1, period, false);
-            foreach (Text t in text.GetComponentsInChildren<Text>())
-            {
-                CrossFadeAlphaFixed(t, 1, period, false);
-            }
+            FadeWithChildren(text, 1, period, false);
         }
         yield return Timing.WaitForSeconds(period - 0.5f);
         CrossFadeAlphaFixed(continueButton.image, 1f, period, false);
+    }
+
+    private void FadeWithChildren(Graphic img, float alpha, float duration, bool ignoreTimeScale)
+    {
+        CrossFadeAlphaFixed(img, alpha, period, false);
+        foreach (Text t in img.GetComponentsInChildren<Text>())
+        {
+            CrossFadeAlphaFixed(t, alpha, period, false);
+        }
     }
 
     private void CrossFadeAlphaFixed(Graphic img, float alpha, float duration, bool ignoreTimeScale)
@@ -65,7 +77,7 @@ public class CreditsController : MonoBehaviour
         fixedColor.a = 1;
         img.color = fixedColor;
 
-        img.CrossFadeAlpha(0f, 0f, true);
+        img.CrossFadeAlpha(alpha == 1 ? 0f : 1f, 0f, true);
 
         img.CrossFadeAlpha(alpha, duration, ignoreTimeScale);
     }
