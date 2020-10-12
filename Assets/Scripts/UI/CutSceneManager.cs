@@ -14,8 +14,8 @@ public class CutSceneManager : MonoBehaviour
 
     private Text btnText;
 
-    private const float fadeDelay = 4f;
-    private const float period = 1.5f;
+    private const float fadeDelay = 0.5f;
+    private const float period = 2f;
 
     private void Start()
     {
