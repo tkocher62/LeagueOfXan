@@ -42,7 +42,16 @@ namespace Assets.Scripts.Enemies
             Move(rb, movement, playerWidth, playerHeight, movementSpeed);
         }
 
-        protected void Kill() => MapController.singleton.enemies--;
+        protected void Kill()
+        {
+            MapController.singleton.enemies--;
+
+            SaveManager.saveData.enemyKillCount++;
+            if (SaveManager.saveData.enemyKillCount >= 100)
+            {
+                AchievementManager.Achieve("kill_100_enemies");
+            }
+        }
 
         public void Damage(float damage)
         {
@@ -52,11 +61,6 @@ namespace Assets.Scripts.Enemies
             {
                 Destroy(gameObject);
                 Kill();
-                SaveManager.saveData.enemyKillCount++;
-                if (SaveManager.saveData.enemyKillCount >= 100)
-                {
-                    AchievementManager.Achieve("kill_100_enemies");
-                }
             }
         }
 
