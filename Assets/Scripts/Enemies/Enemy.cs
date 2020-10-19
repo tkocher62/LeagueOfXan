@@ -1,4 +1,6 @@
-﻿using MEC;
+﻿using Assets.Scripts.General;
+using Assets.Scripts.UI;
+using MEC;
 using Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,6 +52,11 @@ namespace Assets.Scripts.Enemies
             {
                 Destroy(gameObject);
                 Kill();
+                SaveManager.saveData.enemyKillCount++;
+                if (SaveManager.saveData.enemyKillCount >= 100)
+                {
+                    AchievementManager.Achieve("kill_100_enemies");
+                }
             }
         }
 

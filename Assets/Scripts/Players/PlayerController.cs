@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Enemies;
 using Assets.Scripts.General;
+using Assets.Scripts.UI;
 using MEC;
 using System;
 using System.Collections;
@@ -130,6 +131,14 @@ public class PlayerController : Entity
             Destroy(obj);
         }
         movement = Vector2.zero;
+
+        SaveManager.saveData.deathCount++;
+        if (SaveManager.saveData.deathCount >= 100)
+        {
+            AchievementManager.Achieve("die_100_times");
+        }
+        SaveManager.SaveData();
+
         Destroy(this);
     }
 

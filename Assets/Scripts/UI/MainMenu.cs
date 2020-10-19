@@ -1,13 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Assets.Scripts.General;
+using Assets.Scripts.UI;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private void Awake()
+    {
+        if (!File.Exists(SaveManager.path))
+        {
+            // Create save file
+            SaveManager.SaveData();
+        }
+    }
+
+    private void Start()
+    {
+        // Load save data
+        SaveManager.LoadData();
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(3);
+        AchievementManager.Achieve("play_the_game");
         Destroy(MusicController.instance.gameObject);
     }
 

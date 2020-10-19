@@ -17,6 +17,8 @@ public class CreditsController : MonoBehaviour
 
     private void Start()
     {
+        AchievementManager.Achieve("win_the_game");
+
         forXan.SetInvisible();
         foreach (Text t in forXan.GetComponentsInChildren<Text>())
         {
