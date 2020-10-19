@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.UI;
 using MEC;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;

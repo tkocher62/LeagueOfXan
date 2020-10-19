@@ -1,8 +1,6 @@
 ﻿using Assets.Scripts.General;
 using Assets.Scripts.UI;
-using MEC;
 using Pathfinding;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies

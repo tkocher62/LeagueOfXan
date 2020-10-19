@@ -1508,7 +1508,7 @@ MonoBehaviour:
   - id: die_100_times
     image: {fileID: 166164328}
   - id: kill_100_enemies
-    image: {fileID: 166164328}
+    image: {fileID: 490889880}
 --- !u!114 &2024777559
 MonoBehaviour:
   m_ObjectHideFlags: 0
