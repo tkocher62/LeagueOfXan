@@ -1,22 +1,19 @@
-﻿using Assets.Scripts.General;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class DeathScreenController : MonoBehaviour
 {
-    public void RetryStage()
+    public void Retry()
     {
         DestroyAllDontDestroyOnLoad();
 
-        LoadingScreenInformation.sceneId = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(4);
     }
 
     public void MainMenu()
     {
         DestroyAllDontDestroyOnLoad();
 
-        LoadingScreenInformation.sceneId = -1;
         SceneManager.LoadScene(0);
     }
 
