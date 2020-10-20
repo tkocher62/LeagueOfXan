@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+#pragma warning disable 0649
+
 namespace Assets.Scripts.UI
 {
 	class AchievementsController : MonoBehaviour

@@ -4,9 +4,7 @@ using Assets.Scripts.General;
 using Assets.Scripts.UI;
 using MEC;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
