@@ -16,11 +16,12 @@ namespace Assets.Scripts.UI
 
         internal static void Achieve(string id)
         {
-            if (achievementIDs.ContainsKey(id) && !SaveManager.saveData.achievements.Contains(id))
+            if (achievementIDs.ContainsKey(id))
             {
                 if (!SaveManager.saveData.achievements.Contains(id))
                 {
                     SaveManager.saveData.achievements.Add(id);
+                    Debug.Log("Achievement unlocked! " + id);
                 }
             }
             else
