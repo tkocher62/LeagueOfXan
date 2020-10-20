@@ -18,6 +18,8 @@ namespace Assets.Scripts.UI
 
 		public List<AchievementButton> achievements;
 
+		private Color32 gray = new Color32(40, 40, 40, 100);
+
 		private void Start()
 		{
 			foreach (AchievementButton ach in achievements)
@@ -26,7 +28,7 @@ namespace Assets.Scripts.UI
 				{
 					foreach (Image image in ach.image.gameObject.GetComponentsInChildren<Image>())
 					{
-						image.color = Color.gray;
+						image.color = gray;
 					}
 				}
 				else

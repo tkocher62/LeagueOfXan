@@ -9,7 +9,7 @@ namespace Assets.Scripts.UI
         internal static Dictionary<string, string> achievementIDs = new Dictionary<string, string>()
 		{
 			{"play_the_game", "Play the game" },
-			{"win_the_game", "Beat the game" },
+			{"beat_the_game", "Beat the game" },
 			{"die_100_times", "Die 100 times" },
 			{"kill_100_enemies", "Kill 100 enemies" }
         };
