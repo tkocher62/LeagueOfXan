@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1977031329914464307}
   - component: {fileID: 1977031329914464304}
   - component: {fileID: 1977031329914464311}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BeeGrenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

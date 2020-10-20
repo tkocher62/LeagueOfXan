@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SprayController : MonoBehaviour
 {
-    public float damage = 10f;
+    public float damage = 7f;
 
     private void Start()
     {

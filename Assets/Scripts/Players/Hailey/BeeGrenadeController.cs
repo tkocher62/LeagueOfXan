@@ -18,8 +18,6 @@ public class BeeGrenadeController : MonoBehaviour
         explosionPrefab = Resources.Load<GameObject>("Prefabs/Effects/Explosion");
         body = gameObject.GetComponent<Rigidbody2D>();
 
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), PlayerController.singleton.playerCollider, true);
-
         Timing.CallDelayed(1f, () => Explode());
     }
 
