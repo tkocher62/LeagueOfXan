@@ -131,6 +131,7 @@ public class PlayerController : Entity
         movement = Vector2.zero;
 
         SaveManager.saveData.deathCount++;
+        Debug.Log(SaveManager.saveData.deathCount);
         if (SaveManager.saveData.deathCount >= 100)
         {
             AchievementManager.Achieve("die_100_times");
