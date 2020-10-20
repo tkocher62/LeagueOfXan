@@ -201,7 +201,7 @@ MonoBehaviour:
   version: 2
   radius: 0.08
   height: 0.07
-  repathRate: 1
+  repathRate: 0.25
   canSearch: 1
   canMove: 1
   maxSpeed: 3
