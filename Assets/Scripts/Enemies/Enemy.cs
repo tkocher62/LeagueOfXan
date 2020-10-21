@@ -44,10 +44,13 @@ namespace Assets.Scripts.Enemies
         {
             MapController.singleton.enemies--;
 
-            SaveManager.saveData.enemyKillCount++;
-            if (SaveManager.saveData.enemyKillCount >= 100)
+            if (!SaveManager.saveData.isEasyMode)
             {
-                AchievementManager.Achieve("kill_100_enemies");
+                SaveManager.saveData.enemyKillCount++;
+                if (SaveManager.saveData.enemyKillCount == 100)
+                {
+                    AchievementManager.Achieve("kill_100_enemies");
+                }
             }
         }
 

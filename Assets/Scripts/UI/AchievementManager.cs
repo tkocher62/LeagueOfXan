@@ -22,13 +22,13 @@ namespace Assets.Scripts.UI
                 {
                     SaveManager.saveData.achievements.Add(id);
                     Debug.Log("Achievement unlocked! " + id);
+                    SaveManager.SaveData();
                 }
             }
             else
             {
                 Debug.LogError("Error finding achievement with id: " + id);
             }
-            SaveManager.SaveData();
         }
     }
 }

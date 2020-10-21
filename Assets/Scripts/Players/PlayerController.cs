@@ -138,12 +138,15 @@ public class PlayerController : Entity
             }
             movement = Vector2.zero;
 
-            SaveManager.saveData.deathCount++;
-            if (SaveManager.saveData.deathCount >= 100)
+            if (!SaveManager.saveData.isEasyMode)
             {
-                AchievementManager.Achieve("die_100_times");
+                SaveManager.saveData.deathCount++;
+                if (SaveManager.saveData.deathCount == 100)
+                {
+                    AchievementManager.Achieve("die_100_times");
+                }
+                SaveManager.SaveData();
             }
-            SaveManager.SaveData();
 
             TimerController.StopTimer();
 

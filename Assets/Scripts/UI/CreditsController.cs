@@ -19,16 +19,16 @@ public class CreditsController : MonoBehaviour
     {
         TimerController.StopTimer();
         long time = TimerController.GetTime();
-        Debug.Log(time + " < " + SaveManager.saveData.fastestTime);
-        if (time < SaveManager.saveData.fastestTime || SaveManager.saveData.fastestTime == -1)
+        if (!SaveManager.saveData.isEasyMode)
         {
-            Debug.Log("setting");
-            SaveManager.saveData.fastestTime = time;
-            SaveManager.SaveData();
-            Debug.Log("saving fasterst time");
-        }
+            if (time < SaveManager.saveData.fastestTime || SaveManager.saveData.fastestTime == -1)
+            {
+                SaveManager.saveData.fastestTime = time;
+                SaveManager.SaveData();
+            }
 
-        AchievementManager.Achieve("beat_the_game");
+            AchievementManager.Achieve("beat_the_game");
+        }
 
         forXan.SetInvisible();
         foreach (Text t in forXan.GetComponentsInChildren<Text>())
