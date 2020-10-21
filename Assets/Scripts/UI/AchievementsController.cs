@@ -19,6 +19,9 @@ namespace Assets.Scripts.UI
 		}
 
 		public List<AchievementButton> achievements;
+		public Text totalKillsText;
+		public Text totalDeathsText;
+		public Text fastestTimeText;
 
 		private Color32 gray = new Color32(40, 40, 40, 100);
 
@@ -39,6 +42,19 @@ namespace Assets.Scripts.UI
 					text.text = AchievementManager.achievementIDs[ach.id];
 					text.fontSize = 49;
 				}
+			}
+
+			totalKillsText.text = $"Total Enemies Killed: {SaveManager.saveData.enemyKillCount}";
+			totalDeathsText.text = $"Total Deaths: {SaveManager.saveData.deathCount}";
+
+			if (SaveManager.saveData.fastestTime != -1)
+			{
+				TimeSpan t = TimeSpan.FromMilliseconds(SaveManager.saveData.fastestTime);
+				string formatted = string.Format("{0:D2}:{1:D2}:{2:D3}",
+						t.Minutes,
+						t.Seconds,
+						t.Milliseconds);
+				fastestTimeText.text = $"Fastest Time: {formatted}";
 			}
 		}
 

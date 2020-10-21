@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.UI;
+﻿using Assets.Scripts.General;
+using Assets.Scripts.UI;
 using MEC;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,14 @@ public class CreditsController : MonoBehaviour
 
     private void Start()
     {
+        TimerController.StopTimer();
+        long time = TimerController.GetTime();
+        if (time < SaveManager.saveData.fastestTime)
+        {
+            SaveManager.saveData.fastestTime = time;
+            SaveManager.SaveData();
+        }
+
         AchievementManager.Achieve("beat_the_game");
 
         forXan.SetInvisible();

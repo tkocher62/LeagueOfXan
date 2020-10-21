@@ -8,9 +8,9 @@ namespace Assets.Scripts.General
 	[Serializable]
 	internal class SaveData
 	{
-		internal int enemyKillCount;
-		internal int deathCount;
-		internal int winCount;
+		internal int enemyKillCount = 0;
+		internal int deathCount = 0;
+		internal long fastestTime = -1;
 		internal List<string> achievements = new List<string>();
 	}
 }

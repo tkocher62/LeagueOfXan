@@ -138,6 +138,8 @@ public class PlayerController : Entity
         }
         SaveManager.SaveData();
 
+        TimerController.StopTimer();
+
         Destroy(this);
     }
 
