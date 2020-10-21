@@ -55,7 +55,6 @@ public class OptionsController : MonoBehaviour
         {
             SaveManager.saveData.isEasyMode = easyModeToggle.isOn;
             SaveManager.SaveData();
-            Debug.Log("set easy mode " + easyModeToggle.isOn);
         }
     }
 }
