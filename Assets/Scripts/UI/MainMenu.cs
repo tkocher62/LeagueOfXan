@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
     {
         // Load save data
         SaveManager.LoadData();
+        print(SaveManager.saveData.fastestTime);
     }
 
     public void PlayGame()

@@ -39,6 +39,8 @@ public class PlayerController : Entity
 
     private const float charChangeDelay = 0f;
 
+    private bool isDead;
+
     [Serializable]
     public struct AnimationData
     {
@@ -82,6 +84,8 @@ public class PlayerController : Entity
             pFrames[data.character] = data.frames;
         }
 
+        isDead = false;
+
         Timing.RunCoroutine(AnimationLoop().CancelWith(gameObject));
 
         ChangeCharacter((int)Character.Xan);
@@ -118,29 +122,33 @@ public class PlayerController : Entity
 
     private void KillPlayer()
     {
-        render.sprite = pFrames[curCharacter][0];
-        body.rotation = render.flipX ? -90f : 90f;
-        render.color = Color.red;
-
-        CanvasController.singleton.deathScreen.SetActive(true);
-
-        foreach (Enemy obj in GameObject.FindObjectsOfType<Enemy>())
+        if (!isDead)
         {
-            Destroy(obj);
+            isDead = true;
+
+            render.sprite = pFrames[curCharacter][0];
+            body.rotation = render.flipX ? -90f : 90f;
+            render.color = Color.red;
+
+            CanvasController.singleton.deathScreen.SetActive(true);
+
+            foreach (Enemy obj in GameObject.FindObjectsOfType<Enemy>())
+            {
+                Destroy(obj);
+            }
+            movement = Vector2.zero;
+
+            SaveManager.saveData.deathCount++;
+            if (SaveManager.saveData.deathCount >= 100)
+            {
+                AchievementManager.Achieve("die_100_times");
+            }
+            SaveManager.SaveData();
+
+            TimerController.StopTimer();
+
+            Destroy(this);
         }
-        movement = Vector2.zero;
-
-        SaveManager.saveData.deathCount++;
-        Debug.Log(SaveManager.saveData.deathCount);
-        if (SaveManager.saveData.deathCount >= 100)
-        {
-            AchievementManager.Achieve("die_100_times");
-        }
-        SaveManager.SaveData();
-
-        TimerController.StopTimer();
-
-        Destroy(this);
     }
 
     private Sprite GetNextFrame()

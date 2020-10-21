@@ -19,10 +19,13 @@ public class CreditsController : MonoBehaviour
     {
         TimerController.StopTimer();
         long time = TimerController.GetTime();
-        if (time < SaveManager.saveData.fastestTime)
+        Debug.Log(time + " < " + SaveManager.saveData.fastestTime);
+        if (time < SaveManager.saveData.fastestTime || SaveManager.saveData.fastestTime == -1)
         {
+            Debug.Log("setting");
             SaveManager.saveData.fastestTime = time;
             SaveManager.SaveData();
+            Debug.Log("saving fasterst time");
         }
 
         AchievementManager.Achieve("beat_the_game");
