@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
         if (!File.Exists(SaveManager.path))
         {
             // Create save file
+            SaveManager.InitData();
             SaveManager.SaveData();
         }
     }
