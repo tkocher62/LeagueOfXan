@@ -10,7 +10,14 @@ namespace Assets.Scripts.General
 	{
 		internal int enemyKillCount = 0;
 		internal int deathCount = 0;
+
+		internal bool isEasyMode = false;
+
+		internal float musicVolume = 1f;
+		internal float sfxVolume = 1f;
+
 		internal long fastestTime = -1;
+
 		internal List<string> achievements = new List<string>();
 	}
 }

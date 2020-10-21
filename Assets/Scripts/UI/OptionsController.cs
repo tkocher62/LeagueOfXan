@@ -9,9 +9,11 @@ public class OptionsController : MonoBehaviour
 {
     public GameObject musicSlider;
     public GameObject deleteDataConfirmPopup;
+    public GameObject easyModeCheckbox;
 
     private Slider slider;
     private AudioSource musicController;
+    private Toggle easyModeToggle;
 
     private void Start()
     {
@@ -19,7 +21,11 @@ public class OptionsController : MonoBehaviour
 
         musicController = GameObject.Find("MusicController").GetComponent<AudioSource>();
 
+        easyModeToggle = easyModeCheckbox.GetComponent<Toggle>();
+
         slider.value = musicController.volume;
+
+        easyModeToggle.isOn = SaveManager.saveData.isEasyMode;
     }
 
     public void ChangeVolume()
@@ -41,5 +47,15 @@ public class OptionsController : MonoBehaviour
     {
         SaveManager.DeleteSaveData();
         ClearSaveDataPopup(false);
+    }
+
+    public void SetEasyMode()
+    {
+        if (SaveManager.saveData.isEasyMode != easyModeToggle.isOn)
+        {
+            SaveManager.saveData.isEasyMode = easyModeToggle.isOn;
+            SaveManager.SaveData();
+            Debug.Log("set easy mode " + easyModeToggle.isOn);
+        }
     }
 }

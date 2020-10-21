@@ -211,7 +211,7 @@ public class PlayerController : Entity
 
     internal void Damage(float damage, bool flashRed = true)
     {
-        float value = health - damage;
+        float value = health - damage * (!SaveManager.saveData.isEasyMode ? 1f : 0.5f);
         health = Mathf.Clamp(value, 0f, 100f);
         if (flashRed && health > 0) FlashRed();
         healthBar.SetHealthBar(value);
