@@ -3986,7 +3986,7 @@ GameObject:
   - component: {fileID: 2131331964}
   - component: {fileID: 2131331968}
   - component: {fileID: 2131331967}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tilemap_Walls
   m_TagString: Screen Border
   m_Icon: {fileID: 0}
