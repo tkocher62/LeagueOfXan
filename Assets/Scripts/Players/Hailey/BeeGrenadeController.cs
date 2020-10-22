@@ -27,7 +27,7 @@ public class BeeGrenadeController : MonoBehaviour
         RaycastHit2D raycast = Physics2D.Raycast(gameObject.transform.position, PlayerController.singleton.movement.normalized, 1f, 1 << 11);
         if (raycast.collider == null || raycast.collider.tag != "Screen Border")
         {
-            body.AddForce((PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : defaultPower) * 2200f);
+            body.AddForce((PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : defaultPower * (PlayerController.singleton.render.flipX ? -1 : 1)) * 2200f);
         }
 
         Timing.CallDelayed(1f, () => Explode());

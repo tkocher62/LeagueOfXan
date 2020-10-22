@@ -5,8 +5,12 @@ public class SprayController : MonoBehaviour
 {
     public float damage = 7f;
 
+    private SpriteRenderer render;
+
     private void Start()
     {
+        render = gameObject.GetComponent<SpriteRenderer>();
+
         Vector2 moveDirection = PlayerController.singleton.movement;
 
         if (moveDirection != Vector2.zero)
@@ -15,8 +19,12 @@ public class SprayController : MonoBehaviour
             gameObject.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
             if (moveDirection.x < 0f)
             {
-                gameObject.GetComponent<SpriteRenderer>().flipY = true;
+                render.flipY = true;
             }
+        }
+        else
+        {
+            render.flipX = PlayerController.singleton.render.flipX;
         }
     }
 
