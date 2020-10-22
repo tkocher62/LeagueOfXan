@@ -12,19 +12,14 @@ public class PlayerController : Entity
 {
     internal static PlayerController singleton;
 
-    internal float movementSpeed;
-
-    private float playerWidth, playerHeight;
-    internal float health;
-
-    private int frameIndx;
-
     public HealthBar healthBar;
     public Joystick joystick;
+    public SpriteRenderer aimArrow;
     public List<Button> characterButtons;
     public List<AnimationData> frames;
 
-    private Dictionary<Character, List<Sprite>> pFrames;
+    internal float movementSpeed;
+    internal float health;
 
     internal Vector2 startPos;
     internal Vector2 movement;
@@ -35,8 +30,13 @@ public class PlayerController : Entity
     internal BoxCollider2D playerCollider;
     internal SpriteRenderer render;
 
+    private Dictionary<Character, List<Sprite>> pFrames;
+
+    private int frameIndx;
+
     private PlayerScript curCharacterScript;
 
+    private float playerWidth, playerHeight;
     private const float charChangeDelay = 0f;
 
     private bool isDead;
@@ -103,6 +103,8 @@ public class PlayerController : Entity
                 render.flipX = movement.x < 0f;
             }
         }
+
+        aimArrow.transform.rotation = Quaternion.AngleAxis(movement != Vector2.zero ? Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90f : render.flipX ? 90f : -90f, Vector3.forward);
     }
 
     private void FixedUpdate()
