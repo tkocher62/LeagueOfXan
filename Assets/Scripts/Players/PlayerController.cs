@@ -186,6 +186,7 @@ public class PlayerController : Entity
     public void ChangeCharacter(int character)
     {
         Character c = (Character)character;
+        if (curCharacter == c) return;
         Destroy(GetComponent<PlayerScript>());
 
         switch (c)
