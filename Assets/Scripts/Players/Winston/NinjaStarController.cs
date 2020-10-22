@@ -26,11 +26,11 @@ public class NinjaStarController : MonoBehaviour
             Enemy controller = collision.gameObject.GetComponent<Enemy>();
             if (controller != null)
             {
+                controller.Damage(damage);
                 BleedController bleedController = collision.gameObject.GetComponent<BleedController>();
                 if (bleedController == null)
                 {
                     collision.gameObject.AddComponent<BleedController>();
-                    controller.Damage(damage);
                 }
                 else
                 {
