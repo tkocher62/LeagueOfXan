@@ -8,6 +8,7 @@ public class BeeGrenadeController : MonoBehaviour
     private Rigidbody2D body;
 
     private float damageScale = 40f;
+    private float maxDamage = 25f;
 
     private Vector3 lastFrameVelocity = Vector3.zero;
     private Vector2 defaultPower = new Vector2(1, 0);
@@ -32,11 +33,6 @@ public class BeeGrenadeController : MonoBehaviour
         Timing.CallDelayed(1f, () => Explode());
     }
 
-    private void Setup()
-    {
-
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Screen Border")
@@ -58,7 +54,8 @@ public class BeeGrenadeController : MonoBehaviour
                 {
                     Debug.Log("distance: " + dist);
                     Debug.Log("damage: " + (1 / (transform.position - obj.transform.position).sqrMagnitude * damageScale));
-                    controller.Damage(1 / (transform.position - obj.transform.position).sqrMagnitude * damageScale);
+                    float damage = 1 / (transform.position - obj.transform.position).sqrMagnitude * damageScale;
+                    controller.Damage(Mathf.Clamp(damage, 0f, maxDamage));
                 }
             }
         }
