@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.General;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,5 +19,10 @@ public class MusicController : MonoBehaviour
         }
     }
 
-    void Start() => DontDestroyOnLoad(gameObject);
+    void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+
+        gameObject.GetComponent<AudioSource>().volume = SaveManager.saveData.musicVolume;
+    }
 }

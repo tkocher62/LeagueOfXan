@@ -2733,7 +2733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f6efd75202914740b33b848c78cd0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSlider: {fileID: 3712016}
+  musicSliderObject: {fileID: 3712016}
   deleteDataConfirmPopup: {fileID: 1087054330}
   easyModeCheckbox: {fileID: 1110136515}
 --- !u!114 &2024777559

@@ -7,34 +7,39 @@ using UnityEngine.UI;
 
 public class OptionsController : MonoBehaviour
 {
-    public GameObject musicSlider;
+    public GameObject musicSliderObject;
     public GameObject deleteDataConfirmPopup;
     public GameObject easyModeCheckbox;
 
-    private Slider slider;
+    private Slider musicSlider;
     private AudioSource musicController;
     private Toggle easyModeToggle;
 
     private void Start()
     {
-        slider = musicSlider.GetComponent<Slider>();
+        musicSlider = musicSliderObject.GetComponent<Slider>();
 
         musicController = GameObject.Find("MusicController").GetComponent<AudioSource>();
 
         easyModeToggle = easyModeCheckbox.GetComponent<Toggle>();
 
-        slider.value = musicController.volume;
+        musicSlider.value = SaveManager.saveData.musicVolume;
 
         easyModeToggle.isOn = SaveManager.saveData.isEasyMode;
     }
 
     public void ChangeVolume()
     {
-        musicController.volume = slider.value;
+        musicController.volume = musicSlider.value;
     }
 
     public void BackButton()
     {
+        SaveManager.saveData.musicVolume = musicSlider.value;
+        // save SFX volume when implemented
+
+        SaveManager.SaveData();
+
         SceneManager.LoadScene(0);
     }
 
