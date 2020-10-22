@@ -9,14 +9,32 @@ public class BeeGrenadeController : MonoBehaviour
 
     private float damageScale = 40f;
 
-    private Vector3 lastFrameVelocity;
+    private Vector3 lastFrameVelocity = Vector3.zero;
+    private Vector2 defaultPower = new Vector2(1, 0);
 
     void Start()
     {
         explosionPrefab = Resources.Load<GameObject>("Prefabs/Effects/Explosion");
-        body = gameObject.GetComponent<Rigidbody2D>();
+
+        body = gameObject.AddComponent<Rigidbody2D>();
+        body.gravityScale = 0f;
+        gameObject.transform.up = PlayerController.singleton.movement.normalized;
+        body.drag = 5f;
+        body.angularDrag = 2f;
+        body.AddTorque(100f);
+
+        RaycastHit2D raycast = Physics2D.Raycast(gameObject.transform.position, PlayerController.singleton.movement.normalized, 1f, 1 << 11);
+        if (raycast.collider == null || raycast.collider.tag != "Screen Border")
+        {
+            body.AddForce((PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : defaultPower) * 2200f);
+        }
 
         Timing.CallDelayed(1f, () => Explode());
+    }
+
+    private void Setup()
+    {
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

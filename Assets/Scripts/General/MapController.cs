@@ -66,7 +66,6 @@ public class MapController : MonoBehaviour
 
     private void OpenDoor()
     {
-        Debug.Log("opening door");
         foreach (Vector3Int pos in targetTileMap.cellBounds.allPositionsWithin)
         {
             if (closedDoors.Contains(targetTileMap.GetSprite(pos)))

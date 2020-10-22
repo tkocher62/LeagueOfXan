@@ -11,7 +11,6 @@ public class HaileyPlayerScript : PlayerScript
 
     private float shootDelay = 3f;
     private bool isOnCooldown = false;
-    private Vector2 defaultPower = new Vector2(1, 0);
 
     private void Start()
     {
@@ -29,16 +28,10 @@ public class HaileyPlayerScript : PlayerScript
 
     public override void Attack()
     {
+        RaycastHit2D raycast = Physics2D.Raycast(gameObject.transform.position, PlayerController.singleton.movement.normalized, 1f, 1 << 11);
         if (!isOnCooldown)
         {
             GameObject bee = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
-            Rigidbody2D rb = bee.AddComponent<Rigidbody2D>();
-            rb.gravityScale = 0f;
-            bee.transform.up = PlayerController.singleton.movement.normalized;
-            rb.drag = 5f;
-            rb.angularDrag = 2f;
-            rb.AddForce((PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : defaultPower) * 2200f);
-            rb.AddTorque(100f);
 
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
