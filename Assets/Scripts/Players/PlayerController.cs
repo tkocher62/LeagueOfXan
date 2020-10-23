@@ -93,7 +93,7 @@ public class PlayerController : Entity
 
     private void Update()
     {
-        if (health > 0f)
+        if (health > 0f && !PauseController.isPaused)
         {
             movement.x = joystick.Horizontal;
             movement.y = joystick.Vertical;
@@ -109,12 +109,18 @@ public class PlayerController : Entity
 
     private void FixedUpdate()
     {
-        Move(body, movement, playerWidth, playerHeight, movementSpeed);
+        if (!PauseController.isPaused)
+        {
+            Move(body, movement, playerWidth, playerHeight, movementSpeed);
+        }
     }
 
     public void Attack()
     {
-        curCharacterScript.Attack();
+        if (!PauseController.isPaused)
+        {
+            curCharacterScript.Attack();
+        }
     }
 
     internal void Spawn()
@@ -188,7 +194,7 @@ public class PlayerController : Entity
     public void ChangeCharacter(int character)
     {
         Character c = (Character)character;
-        if (curCharacter == c) return;
+        if (curCharacter == c || PauseController.isPaused) return;
         Destroy(GetComponent<PlayerScript>());
 
         switch (c)
