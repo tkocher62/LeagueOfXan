@@ -1334,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &645148133
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2844,7 +2844,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -18.664307, y: -1.8326416}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3198,7 +3198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joystick: {fileID: 1943903680}
-  confirmWindow: {fileID: 0}
+  confirmWindow: {fileID: 907629217}
 --- !u!1 &1394430350
 GameObject:
   m_ObjectHideFlags: 0
