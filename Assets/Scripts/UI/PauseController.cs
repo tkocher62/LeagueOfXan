@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PauseController : MonoBehaviour
 {
 	public Joystick joystick;
+	public GameObject confirmWindow;
 
 	internal static bool isPaused = false;
 
@@ -30,7 +31,7 @@ public class PauseController : MonoBehaviour
 		}
 	}
 
-	public void MainMenu()
+	public void ConfirmExit()
 	{
 		if (isPaused)
 		{
@@ -40,6 +41,16 @@ public class PauseController : MonoBehaviour
 			UnPause();
 			SceneManager.LoadScene(0);
 		}
+	}
+
+	public void RejectExit()
+	{
+		confirmWindow.SetActive(false);
+	}
+
+	public void MainMenu()
+	{
+		confirmWindow.SetActive(true);
 	}
 
 	private void TogglePause()
