@@ -11,11 +11,24 @@ public class PauseController : MonoBehaviour
 
 	internal static bool isPaused = false;
 
-	public void SetPauseStatus(bool paused)
+	public void Pause()
 	{
-		gameObject.SetActive(paused);
-		TogglePause();
-		joystick.HandleRange = paused ? 0f : 1f;
+		if (!isPaused)
+		{
+			gameObject.SetActive(true);
+			TogglePause();
+			joystick.HandleRange = 0f;
+		}
+	}
+
+	public void UnPause()
+	{
+		if (isPaused)
+		{
+			gameObject.SetActive(false);
+			TogglePause();
+			joystick.HandleRange = 1f;
+		}
 	}
 
 	public void ConfirmExit()
@@ -25,7 +38,7 @@ public class PauseController : MonoBehaviour
 			Destroy(CanvasController.singleton.gameObject);
 			Destroy(CanvasController.singleton.eventSystem);
 			Destroy(PlayerController.singleton.gameObject);
-			SetPauseStatus(false);
+			UnPause();
 			SceneManager.LoadScene(0);
 		}
 	}
