@@ -21,6 +21,8 @@ public class LeagueOfLegendController : Enemy
     private Transform[] _waypoints;
 
     // Privates
+    private GameObject prefab;
+
     private bool isAttackInProgress;
 
     private Transform currentWaypoint;
@@ -49,6 +51,8 @@ public class LeagueOfLegendController : Enemy
         SaveManager.LoadData();
 
         singleton = this;
+
+        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball");
 
         Slider slider = healthBar.GetComponent<Slider>();
         slider.maxValue = health;
@@ -85,6 +89,7 @@ public class LeagueOfLegendController : Enemy
         }
 
         if (Input.GetKeyDown(KeyCode.H)) Timing.RunCoroutine(Spawn().CancelWith(gameObject));
+        else if (Input.GetKeyDown(KeyCode.J)) Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
     }
 
     private void FixedUpdate()
@@ -234,6 +239,7 @@ public class LeagueOfLegendController : Enemy
     private void Fireball()
     {
         // explode when it hits last logged player position
+        Instantiate(prefab, transform.position, Quaternion.identity);
     }
 
     private void Laser()

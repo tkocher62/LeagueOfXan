@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
 
 public class MapController : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class MapController : MonoBehaviour
             if (_enemies == 0)
             {
                 // If on boss stage
-                if (LeagueOfLegendController.singleton.health > 0f && SceneManager.GetActiveScene().buildIndex == 12)
+                if (SceneManager.GetActiveScene().buildIndex == 12 && LeagueOfLegendController.singleton.health > 0f)
                 {
                     Timing.RunCoroutine(LeagueOfLegendController.singleton.FadeBoss(false).CancelWith(LeagueOfLegendController.singleton.gameObject));
                 }
