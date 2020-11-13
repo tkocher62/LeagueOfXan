@@ -26,6 +26,7 @@ public class MapController : MonoBehaviour
         }
         set
         {
+            Debug.Log("ENEMIES: " + value);
             _enemies = value;
 
             if (_enemies == 0)

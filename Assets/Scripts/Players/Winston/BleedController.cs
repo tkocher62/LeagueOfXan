@@ -25,7 +25,11 @@ public class BleedController : MonoBehaviour
         for (int i = 0; i < curBleedTicks; i++)
         {
             yield return Timing.WaitForSeconds(bleedInterval);
-            controller.Damage(bleedAmount);
+            if (controller != null)
+            {
+                controller.Damage(bleedAmount);
+            }
+            else yield break;
         }
         Destroy(this);
     }
