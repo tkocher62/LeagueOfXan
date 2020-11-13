@@ -4168,8 +4168,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664962325}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.49, y: 4.23, z: -2.1198275}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 7.21, y: 4.47, z: -2.1198275}
+  m_LocalScale: {x: 0.7125, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -4397,7 +4397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d8781c0448a5243bce2454bb9569c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 5
   movementSpeed: 15
   waypoints: {fileID: 1139416057}
   healthBar: {fileID: 802523844}
@@ -5102,8 +5102,8 @@ Tilemap:
   - first: {x: 19, y: 11, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileIndex: 3
+      m_TileSpriteIndex: 3
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -5134,9 +5134,9 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 52
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 305045eea6a022644944f58f5893c87a, type: 2}
+  - m_RefCount: 51
     m_Data: {fileID: 11400000, guid: e1445b0440b91f947a813009a8048604, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -5145,9 +5145,10 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 52
+  - m_RefCount: 1
+    m_Data: {fileID: -146661714075243356, guid: d3d1e1f02b3b8fc4aa5436e8d3bd8340,
+      type: 3}
+  - m_RefCount: 51
     m_Data: {fileID: 6032309456066071290, guid: d3d1e1f02b3b8fc4aa5436e8d3bd8340,
       type: 3}
   m_TileMatrixArray:
