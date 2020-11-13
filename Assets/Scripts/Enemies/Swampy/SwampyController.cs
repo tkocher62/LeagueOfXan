@@ -49,6 +49,6 @@ public class SwampyController : Enemy
 
     private void Attack()
     {
-        Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        Assets.Scripts.General.Utils.Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
     }
 }

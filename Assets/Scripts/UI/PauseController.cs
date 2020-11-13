@@ -33,8 +33,8 @@ public class PauseController : MonoBehaviour
 	{
 		if (isPaused)
 		{
-			Destroy(CanvasController.singleton.gameObject);
-			Destroy(CanvasController.singleton.eventSystem);
+			Destroy(CentralUIController.singleton.gameObject);
+			Destroy(CentralUIController.singleton.eventSystem);
 			Destroy(PlayerController.singleton.gameObject);
 			UnPause();
 			SceneManager.LoadScene(0);

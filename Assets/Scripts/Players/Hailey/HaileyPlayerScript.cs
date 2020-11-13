@@ -28,7 +28,7 @@ public class HaileyPlayerScript : PlayerScript
     {
         if (!isOnCooldown)
         {
-            GameObject bee = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+            GameObject bee = Utils.Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
 
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);

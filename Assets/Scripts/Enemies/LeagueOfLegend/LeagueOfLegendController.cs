@@ -38,7 +38,7 @@ public class LeagueOfLegendController : Enemy
     private const float movementIntervalEnd = 8f;
 
     // Values
-    private const int enemySpawnAmount = 1;
+    private const int enemySpawnAmount = 4;
 
     // Damages
     private const float slamDamage = 40;
@@ -163,7 +163,7 @@ public class LeagueOfLegendController : Enemy
     internal IEnumerator<float> FadeBoss(bool faded)
     {
         yield return Timing.WaitUntilDone(Timing.RunCoroutine(Fade(render, 0.05f, faded)));
-        collide.enabled = false;
+        collide.enabled = !faded;
     }
 
     private IEnumerator<float> Fade(SpriteRenderer render, float speed, bool fadeOut)
@@ -199,7 +199,7 @@ public class LeagueOfLegendController : Enemy
         for (int i = 0; i < enemySpawnAmount; i++)
         {
             GameObject enemy = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
-            Instantiate(enemy, new Vector2(Random.Range(-8, 8), Random.Range(-4, 4)), Quaternion.identity);
+            Utils.Instantiate(enemy, new Vector2(Random.Range(-8, 8), Random.Range(-4, 4)), Quaternion.identity);
             yield return Timing.WaitForSeconds(0.3f);
         }
     }

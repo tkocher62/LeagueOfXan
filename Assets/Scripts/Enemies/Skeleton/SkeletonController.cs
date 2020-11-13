@@ -59,7 +59,7 @@ public class SkeletonController : Enemy
 
     private void RangedAttack()
     {
-        Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        Assets.Scripts.General.Utils.Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
         isRangedCooldown = true;
         Timing.CallDelayed(rangedInterval, () => isRangedCooldown = false);
     }

@@ -27,7 +27,7 @@ public class XanPlayerScript : PlayerScript
     {
         if (!isOnCooldown)
         {
-            GameObject spray = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+            GameObject spray = Utils.Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
 
             Timing.CallDelayed(0.1f, () => Destroy(spray));
 

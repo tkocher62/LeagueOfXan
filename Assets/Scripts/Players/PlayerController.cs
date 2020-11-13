@@ -138,7 +138,7 @@ public class PlayerController : Entity
             body.rotation = render.flipX ? -90f : 90f;
             render.color = Color.red;
 
-            CanvasController.singleton.deathScreen.SetActive(true);
+            CentralUIController.singleton.deathScreen.SetActive(true);
 
             foreach (Enemy obj in GameObject.FindObjectsOfType<Enemy>())
             {

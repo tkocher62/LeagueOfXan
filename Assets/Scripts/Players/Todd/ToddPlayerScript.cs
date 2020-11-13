@@ -30,7 +30,7 @@ public class ToddPlayerScript : PlayerScript
     {
         if (!isOnCooldown)
         {
-            GameObject bullet = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+            GameObject bullet = Utils.Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
             Rigidbody2D rb = bullet.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
             if (PlayerController.singleton.movement.normalized != Vector2.zero)

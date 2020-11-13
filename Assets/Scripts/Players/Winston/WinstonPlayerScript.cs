@@ -38,7 +38,7 @@ public class WinstonPlayerScript : PlayerScript
         {
             for (int i = -1; i < 2; i++)
             {
-                GameObject ninjastar = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+                GameObject ninjastar = Utils.Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
                 Rigidbody2D rb = ninjastar.AddComponent<Rigidbody2D>();
                 rb.gravityScale = 0f;
 

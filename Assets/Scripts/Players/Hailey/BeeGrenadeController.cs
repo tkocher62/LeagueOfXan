@@ -43,7 +43,7 @@ public class BeeGrenadeController : MonoBehaviour
 
     void Explode()
     {
-        Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
+        Assets.Scripts.General.Utils.Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             float dist = Vector2.Distance(gameObject.transform.position, obj.transform.position);

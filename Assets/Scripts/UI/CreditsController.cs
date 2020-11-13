@@ -54,19 +54,19 @@ public class CreditsController : MonoBehaviour
 
     private IEnumerator<float> Fade()
     {
-        Utils.FadeWithChildren(forXan, 1, period, false);
+        Assets.Scripts.UI.Utils.FadeWithChildren(forXan, 1, period, false);
         yield return Timing.WaitForSeconds(period * 2);
-        Utils.FadeWithChildren(forXan, 0, period, false);
+        Assets.Scripts.UI.Utils.FadeWithChildren(forXan, 0, period, false);
         yield return Timing.WaitForSeconds(period);
-        Utils.CrossFadeAlphaFixed(title, 1, period, false);
-        Utils.FadeWithChildren(title, 1, period, false);
+        Assets.Scripts.UI.Utils.CrossFadeAlphaFixed(title, 1, period, false);
+        Assets.Scripts.UI.Utils.FadeWithChildren(title, 1, period, false);
         yield return Timing.WaitForSeconds(period - 0.5f);
         foreach (Text text in children)
         {
-            Utils.FadeWithChildren(text, 1, period, false);
+            Assets.Scripts.UI.Utils.FadeWithChildren(text, 1, period, false);
         }
         yield return Timing.WaitForSeconds(period - 0.5f);
-        Utils.CrossFadeAlphaFixed(continueButton.image, 1f, period, false);
+        Assets.Scripts.UI.Utils.CrossFadeAlphaFixed(continueButton.image, 1f, period, false);
     }
 
     public void Continue() => SceneManager.LoadScene(0);

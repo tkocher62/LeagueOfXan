@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.General;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CanvasController : MonoBehaviour
+public class CentralUIController : MonoBehaviour
 {
-    internal static CanvasController singleton;
+    internal static CentralUIController singleton;
 
     public GameObject eventSystem;
     public GameObject deathScreen;
@@ -24,6 +25,11 @@ public class CanvasController : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(eventSystem);
+        }
+
+        if (level == 12)
+        {
+            PlayerController.singleton.transform.localScale *= Utils.scale;
         }
     }
 }
