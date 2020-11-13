@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeagueOfLegendController : Enemy
 {
@@ -48,6 +49,10 @@ public class LeagueOfLegendController : Enemy
         SaveManager.LoadData();
 
         singleton = this;
+
+        Slider slider = healthBar.GetComponent<Slider>();
+        slider.maxValue = health;
+        slider.value = health;
 
         _waypoints = waypoints.GetComponentsInChildren<Transform>().Where(t => t.gameObject.name != "Waypoints").ToArray();
         currentWaypoint = null;
@@ -202,7 +207,7 @@ public class LeagueOfLegendController : Enemy
     private IEnumerator<float> Slam()
     {
         // visually show prep now
-        Debug.Log("prep");
+
         yield return Timing.WaitForSeconds(0.75f);
 
         switch (Random.Range(0, 3))
@@ -220,10 +225,10 @@ public class LeagueOfLegendController : Enemy
 
         if (Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position) < slamDistance)
         {
-            //PlayerController.singleton.Damage(slamDamage);
-            Debug.Log("hit");
+            PlayerController.singleton.Damage(slamDamage);
         }
-        else Debug.Log("miss");
+
+        // show slam
     }
 
     private void Fireball()
