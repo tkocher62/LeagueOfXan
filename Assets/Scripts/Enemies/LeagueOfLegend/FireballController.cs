@@ -51,7 +51,6 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             float dist = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position);
 
             distanceToTravel -= Mathf.Abs(lastDist - dist);
-            Debug.Log(distanceToTravel);
             if (distanceToTravel < 0f)
             {
                 // todo: deal base damage in a radius
