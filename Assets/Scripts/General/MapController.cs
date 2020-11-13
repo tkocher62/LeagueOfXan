@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MEC;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -27,9 +28,18 @@ public class MapController : MonoBehaviour
         set
         {
             _enemies = value;
+
             if (_enemies == 0)
             {
-                OpenDoor();
+                // If on boss stage
+                if (SceneManager.GetActiveScene().buildIndex == 12)
+                {
+                    Timing.RunCoroutine(LeagueOfLegendController.singleton.FadeBoss(false).CancelWith(LeagueOfLegendController.singleton.gameObject));
+                }
+                else
+                {
+                    OpenDoor();
+                }
             }
         }
     }

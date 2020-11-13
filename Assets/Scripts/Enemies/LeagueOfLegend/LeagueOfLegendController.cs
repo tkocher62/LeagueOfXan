@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Enemies;
+using Assets.Scripts.General;
 using MEC;
 using Pathfinding;
 using System.Collections;
@@ -8,8 +9,12 @@ using UnityEngine;
 
 public class LeagueOfLegendController : Enemy
 {
+    // Singleton
+    internal static LeagueOfLegendController singleton;
+
     // Publics
     public GameObject waypoints;
+    public HealthBar healthBar;
 
     // Inits
     private Transform[] _waypoints;
@@ -21,20 +26,34 @@ public class LeagueOfLegendController : Enemy
 
     private List<GameObject> enemyPrefabs;
 
+    private SpriteRenderer render;
+
+    // Internals
+    internal Collider2D collide;
+
     // Timings
     private const float slamDistance = 4.3f;
-    private const float movementInterval = 5f;
+    private const float movementIntervalStart = 4f;
+    private const float movementIntervalEnd = 8f;
 
     // Values
-    private const int enemySpawnAmount = 3;
+    private const int enemySpawnAmount = 1;
 
     // Damages
     private const float slamDamage = 40;
 
     private void Start()
     {
+        // DELETE THIS WHEN DONE TESTING
+        SaveManager.LoadData();
+
+        singleton = this;
+
         _waypoints = waypoints.GetComponentsInChildren<Transform>().Where(t => t.gameObject.name != "Waypoints").ToArray();
         currentWaypoint = null;
+
+        render = GetComponent<SpriteRenderer>();
+        collide = GetComponent<Collider2D>();
 
         enemyPrefabs = new List<GameObject>()
         {
@@ -75,28 +94,36 @@ public class LeagueOfLegendController : Enemy
     {
         while (health > 0f)
         {
-            yield return Timing.WaitForSeconds(movementInterval);
+            yield return Timing.WaitForSeconds(Random.Range(movementIntervalStart, movementIntervalEnd));
             //SetRandomWaypoint();
         }
     }
 
     private void SetRandomWaypoint()
     {
-        int i = Random.Range(0, _waypoints.Length);
-        if (_waypoints[i] == currentWaypoint)
+        // 1 in 5 chance to move at the player
+        int a = Random.Range(0, 5);
+        if (a != 0)
         {
-            i++;
-            if (i == _waypoints.Length)
+            int i = Random.Range(0, _waypoints.Length);
+            if (_waypoints[i] == currentWaypoint)
             {
-                i = 0;
+                i++;
+                if (i == _waypoints.Length)
+                {
+                    i = 0;
+                }
             }
+            currentWaypoint = _waypoints[i];
         }
-        currentWaypoint = _waypoints[i];
+        else
+        {
+            currentWaypoint = PlayerController.singleton.transform;
+        }
     }
 
     private void Attack()
     {
-        Debug.Log("choosing attack");
         ChooseAttack();
         isAttackInProgress = true;
     }
@@ -109,37 +136,65 @@ public class LeagueOfLegendController : Enemy
         }
         else
         {
-            switch (Random.Range(0, 3))
+            switch (Random.Range(0, 7))
             {
                 case 0:
                     Spawn();
                     break;
                 case 1:
+                case 2:
+                case 3:
                     Fireball();
                     break;
-                case 2:
+                case 4:
+                case 5:
+                case 6:
                     Laser();
                     break;
             }
         }
     }
 
+    internal IEnumerator<float> FadeBoss(bool faded)
+    {
+        yield return Timing.WaitUntilDone(Timing.RunCoroutine(Fade(render, 0.05f, faded)));
+        collide.enabled = false;
+    }
+
+    private IEnumerator<float> Fade(SpriteRenderer render, float speed, bool fadeOut)
+    {
+        Color c = render.color;
+        if (fadeOut)
+        {
+            while (c.a > 0f)
+            {
+                c.a = Mathf.Clamp(c.a - 0.1f, 0f, 1f);
+                render.color = c;
+                yield return Timing.WaitForSeconds(speed);
+            }
+        }
+        else
+        {
+            render.color = new Color(c.r, c.g, c.b, 0f);
+            while (c.a < 1f)
+            {
+                c.a = Mathf.Clamp(c.a + 0.1f, 0f, 1f);
+                render.color = c;
+                yield return Timing.WaitForSeconds(speed);
+            }
+        }
+    }
+
     private IEnumerator<float> Spawn()
     {
-        // Spawn white orb or some sort of marker just before each enemy spawns
+        Timing.RunCoroutine(FadeBoss(true).CancelWith(gameObject));
+
+        MapController.singleton.enemies = enemySpawnAmount;
+
         for (int i = 0; i < enemySpawnAmount; i++)
         {
-            Vector2 scwp = Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
-
-            Vector2 spawnPosition = new Vector2(
-                Random.Range(scwp.y + 5, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height - 5)).y), 
-                Random.Range(scwp.x + 5, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - 5, 0)).x)
-            );
-
             GameObject enemy = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
-            Instantiate(enemy, spawnPosition, Quaternion.identity);
-
-            // Maybe remove delay, whicveer looks better with the spawn orb effect
+            Instantiate(enemy, new Vector2(Random.Range(-8, 8), Random.Range(-4, 4)), Quaternion.identity);
             yield return Timing.WaitForSeconds(0.3f);
         }
     }
@@ -179,5 +234,11 @@ public class LeagueOfLegendController : Enemy
     private void Laser()
     {
 
+    }
+
+    public override void Damage(float damage)
+    {
+        base.Damage(damage);
+        healthBar.SetHealthBar(base.health);
     }
 }

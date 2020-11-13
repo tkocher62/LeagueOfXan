@@ -54,7 +54,7 @@ namespace Assets.Scripts.Enemies
             }
         }
 
-        public void Damage(float damage)
+        public virtual void Damage(float damage)
         {
             health -= damage;
             FlashRed();
