@@ -21,8 +21,7 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             targ.x = targ.x - objectPos.x;
             targ.y = targ.y - objectPos.y;
 
-            float angle = Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg - 180;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg - 180));
 
             rb.AddForce((PlayerController.singleton.transform.position - gameObject.transform.position).normalized * 500f);
         }
