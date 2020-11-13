@@ -18,5 +18,11 @@ namespace Assets.Scripts.General
 			}
 			return obj;
 		}
+
+		internal static Vector2 Vector2FromAngle(float a)
+		{
+			a *= Mathf.Deg2Rad;
+			return new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+		}
 	}
 }

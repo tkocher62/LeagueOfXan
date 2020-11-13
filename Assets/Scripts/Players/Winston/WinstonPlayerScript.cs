@@ -26,12 +26,6 @@ public class WinstonPlayerScript : PlayerScript
         }
     }
 
-    private Vector2 Vector2FromAngle(float a)
-    {
-        a *= Mathf.Deg2Rad;
-        return new Vector2(Mathf.Cos(a), Mathf.Sin(a));
-    }
-
     public override void Attack()
     {
         if (!isOnCooldown)
@@ -43,7 +37,7 @@ public class WinstonPlayerScript : PlayerScript
                 rb.gravityScale = 0f;
 
                 ninjastar.transform.up = PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : (PlayerController.singleton.render.flipX ? Vector2.left : Vector2.right);
-                rb.AddForce((PlayerController.singleton.movement + (Vector2FromAngle(45 * i) * (PlayerController.singleton.render.flipX ? -1 : 1))).normalized * 800f);
+                rb.AddForce((PlayerController.singleton.movement + (Utils.Vector2FromAngle(45 * i) * (PlayerController.singleton.render.flipX ? -1 : 1))).normalized * 800f);
             }
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
