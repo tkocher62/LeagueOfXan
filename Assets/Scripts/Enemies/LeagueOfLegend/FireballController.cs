@@ -1,8 +1,4 @@
 ﻿using Assets.Scripts.General;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies.LeagueOfLegend
@@ -13,6 +9,8 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
 
         private float distFromPlayer;
         private float explodeDist;
+        private float lastDist;
+        private float distanceToTravel;
 
         private Transform playerLoggedPos;
 
@@ -38,10 +36,12 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
 
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(targ.y, targ.x) * Mathf.Rad2Deg - 180));
 
-            rb.AddForce((PlayerController.singleton.transform.position - gameObject.transform.position).normalized * 500f);
             playerLoggedPos = PlayerController.singleton.transform;
+            rb.AddForce((playerLoggedPos.position - gameObject.transform.position).normalized * 500f);
 
             explodeDist = Random.Range(2f, distFromPlayer * triggerDistance);
+            lastDist = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position);
+            distanceToTravel = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position) - explodeDist;
         }
 
         // todo: add damage if fireball hits player during travel time
@@ -50,13 +50,16 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
         {
             float dist = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position);
 
-            float t = dist - explodeDist;
-            if (t < 0f)
+            distanceToTravel -= Mathf.Abs(lastDist - dist);
+            Debug.Log(distanceToTravel);
+            if (distanceToTravel < 0f)
             {
                 // todo: deal base damage in a radius
                 Destroy(gameObject);
                 Explode();
             }
+
+            lastDist = dist;
         }
 
         private void Explode()
