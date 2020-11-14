@@ -15,14 +15,6 @@ public class XanPlayerScript : PlayerScript
         prefab = Resources.Load<GameObject>("Prefabs/Effects/Spray");
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown("f"))
-        {
-            Attack();
-        }
-    }
-
     public override void Attack()
     {
         if (!isOnCooldown)

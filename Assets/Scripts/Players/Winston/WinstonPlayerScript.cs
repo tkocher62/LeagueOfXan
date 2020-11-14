@@ -18,14 +18,6 @@ public class WinstonPlayerScript : PlayerScript
         playerBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Attack();
-        }
-    }
-
     public override void Attack()
     {
         if (!isOnCooldown)

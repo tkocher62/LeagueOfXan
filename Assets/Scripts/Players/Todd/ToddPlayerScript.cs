@@ -18,14 +18,6 @@ public class ToddPlayerScript : PlayerScript
         playerBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown("f"))
-        {
-            Attack();
-        }
-    }
-
     public override void Attack()
     {
         if (!isOnCooldown)

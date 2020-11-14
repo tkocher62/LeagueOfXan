@@ -16,14 +16,6 @@ public class HaileyPlayerScript : PlayerScript
         prefab = Resources.Load<GameObject>("Prefabs/Projectiles/BeeGrenade");
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Attack();
-        }
-    }
-
     public override void Attack()
     {
         if (!isOnCooldown)
