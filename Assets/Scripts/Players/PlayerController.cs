@@ -93,6 +93,11 @@ public class PlayerController : Entity
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            curCharacterScript.Attack();
+        }
+
         if (health > 0f && !PauseController.isPaused)
         {
             movement.x = joystick.Horizontal;

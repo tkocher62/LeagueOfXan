@@ -39,7 +39,9 @@ public class LeagueOfLegendController : Enemy
 
     // Values
     private const int enemySpawnAmount = 4;
+    private int attacksSinceLastSpawn = 0;
     private int minimumAttacksBeforeSpawn = 5;
+    private const int maxAttacksBeforeSpawn = 10;
 
     // Damages
     private const float slamDamage = 40;
@@ -134,40 +136,48 @@ public class LeagueOfLegendController : Enemy
         {
             Timing.RunCoroutine(Slam().CancelWith(gameObject));
         }
+
+        int min = 1;
+        if (minimumAttacksBeforeSpawn == 0)
+        {
+            minimumAttacksBeforeSpawn = 5;
+            min = 0;
+        }
         else
         {
-            //switch (Random.Range(0, 7))
-            int min = 1;
-            if (minimumAttacksBeforeSpawn == 0)
-            {
-                minimumAttacksBeforeSpawn = 5;
-                min = 0;
-            }
-            else
-            {
-                minimumAttacksBeforeSpawn--;
-            }
-            int a = Random.Range(min, 7);
-            switch (a)
-            {
-                case 0:
-                    Timing.RunCoroutine(Spawn().CancelWith(gameObject));
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                    Fireball();
-                    break;
-                case 7:
-                case 8:
-                case 9:
-                    Laser();
-                    break;
-            }
+            minimumAttacksBeforeSpawn--;
         }
+
+        int val = Random.Range(min, 7);
+
+        if (val != 0) attacksSinceLastSpawn++;
+        Debug.Log(attacksSinceLastSpawn);
+        if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
+        {
+            attacksSinceLastSpawn = 0;
+            val = 0;
+        }
+
+        switch (val)
+        {
+            case 0:
+                Timing.RunCoroutine(Spawn().CancelWith(gameObject));
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                Fireball();
+                break;
+            case 7:
+            case 8:
+            case 9:
+                Laser();
+                break;
+        }
+
     }
 
     internal IEnumerator<float> FadeBoss(bool faded)

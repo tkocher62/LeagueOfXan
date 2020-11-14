@@ -18,7 +18,7 @@ public class HaileyPlayerScript : PlayerScript
 
     private void Update()
     {
-        if (Input.GetKeyDown("f"))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Attack();
         }
