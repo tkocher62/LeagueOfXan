@@ -42,6 +42,8 @@ public class LeagueOfLegendController : Enemy
     private int attacksSinceLastSpawn = 0;
     private int minimumAttacksBeforeSpawn = 5;
     private const int maxAttacksBeforeSpawn = 10;
+    private float startingHealth = 150f;
+    private float healthLostSinceLastMove = 0f;
 
     // Damages
     private const float slamDamage = 40;
@@ -50,6 +52,7 @@ public class LeagueOfLegendController : Enemy
     {
         // DELETE THIS WHEN DONE TESTING
         SaveManager.LoadData();
+        // --
 
         singleton = this;
 
@@ -76,6 +79,8 @@ public class LeagueOfLegendController : Enemy
         };
 
         Timing.RunCoroutine(MovementTimer().CancelWith(gameObject));
+
+        startingHealth = health;
 
         Attack();
     }
@@ -136,48 +141,49 @@ public class LeagueOfLegendController : Enemy
         {
             Timing.RunCoroutine(Slam().CancelWith(gameObject));
         }
-
-        int min = 1;
-        if (minimumAttacksBeforeSpawn == 0)
-        {
-            minimumAttacksBeforeSpawn = 5;
-            min = 0;
-        }
         else
         {
-            minimumAttacksBeforeSpawn--;
+            int min = 1;
+            if (minimumAttacksBeforeSpawn == 0)
+            {
+                minimumAttacksBeforeSpawn = 5;
+                min = 0;
+            }
+            else
+            {
+                minimumAttacksBeforeSpawn--;
+            }
+
+            int val = Random.Range(min, 7);
+
+            if (val != 0) attacksSinceLastSpawn++;
+            Debug.Log(attacksSinceLastSpawn);
+            if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
+            {
+                attacksSinceLastSpawn = 0;
+                val = 0;
+            }
+
+            switch (val)
+            {
+                case 0:
+                    Timing.RunCoroutine(Spawn().CancelWith(gameObject));
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    Fireball();
+                    break;
+                case 7:
+                case 8:
+                case 9:
+                    Laser();
+                    break;
+            }
         }
-
-        int val = Random.Range(min, 7);
-
-        if (val != 0) attacksSinceLastSpawn++;
-        Debug.Log(attacksSinceLastSpawn);
-        if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
-        {
-            attacksSinceLastSpawn = 0;
-            val = 0;
-        }
-
-        switch (val)
-        {
-            case 0:
-                Timing.RunCoroutine(Spawn().CancelWith(gameObject));
-                break;
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-                Fireball();
-                break;
-            case 7:
-            case 8:
-            case 9:
-                Laser();
-                break;
-        }
-
     }
 
     internal IEnumerator<float> FadeBoss(bool faded)
@@ -260,6 +266,12 @@ public class LeagueOfLegendController : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
+        healthLostSinceLastMove += damage;
+        if (healthLostSinceLastMove > startingHealth * 0.2)
+        {
+            SetRandomWaypoint();
+            healthLostSinceLastMove = 0f;
+        }
         healthBar.SetHealthBar(base.health);
     }
 
