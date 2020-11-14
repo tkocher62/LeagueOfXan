@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicController : MonoBehaviour
+public class MenuMusicController : MonoBehaviour
 {
-    internal static MusicController instance;
+    internal static MenuMusicController instance;
 
     private void Awake()
     {

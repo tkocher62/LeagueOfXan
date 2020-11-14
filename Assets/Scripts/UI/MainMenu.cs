@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene(3);
         AchievementManager.Achieve("play_the_game");
-        Destroy(MusicController.instance.gameObject);
+        Destroy(MenuMusicController.instance.gameObject);
     }
 
     public void AchievementsMenu() => SceneManager.LoadScene(2);
