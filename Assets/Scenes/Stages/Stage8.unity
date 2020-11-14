@@ -4398,7 +4398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d8781c0448a5243bce2454bb9569c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 150
   movementSpeed: 15
   waypoints: {fileID: 1139416057}
   healthBar: {fileID: 802523844}

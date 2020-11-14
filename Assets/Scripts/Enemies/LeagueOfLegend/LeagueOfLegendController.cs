@@ -255,6 +255,6 @@ public class LeagueOfLegendController : Enemy
 
     protected override void Kill()
     {
-        // ending stuff
+        MapController.singleton.enemies = 0;
     }
 }
