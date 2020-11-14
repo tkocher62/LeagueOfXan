@@ -30,7 +30,7 @@ public class SprayController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // prevent this from hurting enemies through walls
+        // todo: prevent this from hurting enemies through walls - linecast maybe?
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy controller = collision.gameObject.GetComponent<Enemy>();

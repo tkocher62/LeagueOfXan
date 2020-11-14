@@ -2,6 +2,7 @@
 using Assets.Scripts.UI;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Enemies
 {
@@ -18,6 +19,8 @@ namespace Assets.Scripts.Enemies
         private AIDestinationSetter ai;
         private bool isInit = false;
 
+        private GameObject potion;
+
         protected void Init(SpriteRenderer render, Rigidbody2D rb, AIDestinationSetter ai = null)
         {
             this.render = render;
@@ -32,6 +35,8 @@ namespace Assets.Scripts.Enemies
                 this.ai.target = PlayerController.singleton.transform;
             }
 
+            potion = Resources.Load<GameObject>("Prefabs/Items/HealthPotion");
+
             isInit = true;
         }
 
@@ -40,7 +45,7 @@ namespace Assets.Scripts.Enemies
             Move(rb, movement, playerWidth, playerHeight, movementSpeed);
         }
 
-        protected void Kill()
+        protected virtual void Kill()
         {
             MapController.singleton.enemies--;
 
@@ -51,6 +56,12 @@ namespace Assets.Scripts.Enemies
                 {
                     AchievementManager.Achieve("kill_100_enemies");
                 }
+            }
+
+            // Boss stage
+            if (SceneManager.GetActiveScene().buildIndex == 12)
+            {
+                General.Utils.Instantiate(potion, gameObject.transform.position, Quaternion.identity);
             }
         }
 

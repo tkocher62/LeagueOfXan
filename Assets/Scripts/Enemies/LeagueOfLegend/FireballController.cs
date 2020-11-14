@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.General;
+using MEC;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemies.LeagueOfLegend
@@ -16,6 +18,9 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
 
         private const float triggerDistance = 0.7f;
         private const int fireballCount = 12;
+        private const float hitDamage = 30;
+
+        private bool isOnCooldown;
 
         private void Start()
         {
@@ -23,6 +28,8 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
 
             distFromPlayer = Vector2.Distance(gameObject.transform.position, PlayerController.singleton.gameObject.transform.position);
             explodeDist = -1f;
+
+            isOnCooldown = false;
 
             Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
             rb.gravityScale = 0f;
@@ -44,8 +51,6 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             distanceToTravel = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position) - explodeDist;
         }
 
-        // todo: add damage if fireball hits player during travel time
-
         private void Update()
         {
             float dist = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position);
@@ -53,12 +58,27 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             distanceToTravel -= Mathf.Abs(lastDist - dist);
             if (distanceToTravel < 0f)
             {
-                // todo: deal base damage in a radius
                 Destroy(gameObject);
                 Explode();
             }
 
             lastDist = dist;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Player" && !isOnCooldown)
+            {
+                PlayerController.singleton.Damage(hitDamage);
+                Timing.RunCoroutine(Cooldown().CancelWith(gameObject));
+            }
+        }
+
+        private IEnumerator<float> Cooldown()
+        {
+            isOnCooldown = true;
+            yield return Timing.WaitForSeconds(1f);
+            isOnCooldown = false;
         }
 
         private void Explode()
@@ -67,12 +87,13 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             {
                 float inc = 360 / fireballCount * i;
                 Vector2 angle = Utils.Vector2FromAngle(inc);
-                GameObject fireball = Instantiate(prefab, gameObject.transform.position, transform.rotation * Quaternion.Euler(0, 0, -180 + (inc)));
+                GameObject fireball = Instantiate(prefab, gameObject.transform.position, Quaternion.identity * Quaternion.Euler(0, 0, -180 + inc));
                 Rigidbody2D rb = fireball.AddComponent<Rigidbody2D>();
                 rb.gravityScale = 0f;
 
                 rb.AddForce(angle.normalized * 300f);
             }
+            Timing.CallDelayed(1.3f, () => LeagueOfLegendController.singleton.Attack());
         }
     }
 }

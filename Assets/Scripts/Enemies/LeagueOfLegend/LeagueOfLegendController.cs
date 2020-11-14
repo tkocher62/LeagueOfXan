@@ -23,9 +23,7 @@ public class LeagueOfLegendController : Enemy
     // Privates
     private GameObject prefab;
 
-    private bool isAttackInProgress;
-
-    private Transform currentWaypoint;
+    private Vector3 currentWaypoint;
 
     private List<GameObject> enemyPrefabs;
 
@@ -35,12 +33,13 @@ public class LeagueOfLegendController : Enemy
     internal Collider2D collide;
 
     // Timings
-    private const float slamDistance = 4.3f;
+    private const float slamDistance = 3.6f;
     private const float movementIntervalStart = 4f;
     private const float movementIntervalEnd = 8f;
 
     // Values
     private const int enemySpawnAmount = 4;
+    private int minimumAttacksBeforeSpawn = 5;
 
     // Damages
     private const float slamDamage = 40;
@@ -59,7 +58,7 @@ public class LeagueOfLegendController : Enemy
         slider.value = health;
 
         _waypoints = waypoints.GetComponentsInChildren<Transform>().Where(t => t.gameObject.name != "Waypoints").ToArray();
-        currentWaypoint = null;
+        currentWaypoint = Vector3.zero;
 
         render = GetComponent<SpriteRenderer>();
         collide = GetComponent<Collider2D>();
@@ -74,10 +73,9 @@ public class LeagueOfLegendController : Enemy
             Resources.Load<GameObject>("Prefabs/Enemies/Zombie")
         };
 
-
-        isAttackInProgress = false;
-
         Timing.RunCoroutine(MovementTimer().CancelWith(gameObject));
+
+        Attack();
     }
 
     private void Update()
@@ -85,19 +83,11 @@ public class LeagueOfLegendController : Enemy
         if (currentWaypoint != null)
         {
             float step = movementSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, currentWaypoint.position, step);
+            transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, step);
         }
 
         if (Input.GetKeyDown(KeyCode.H)) Timing.RunCoroutine(Spawn().CancelWith(gameObject));
         else if (Input.GetKeyDown(KeyCode.J)) Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
-    }
-
-    private void FixedUpdate()
-    {
-        /*if (!isAttackInProgress)
-        {
-            Attack();
-        }*/
     }
 
     private IEnumerator<float> MovementTimer()
@@ -105,7 +95,7 @@ public class LeagueOfLegendController : Enemy
         while (health > 0f)
         {
             yield return Timing.WaitForSeconds(Random.Range(movementIntervalStart, movementIntervalEnd));
-            //SetRandomWaypoint();
+            SetRandomWaypoint();
         }
     }
 
@@ -116,7 +106,7 @@ public class LeagueOfLegendController : Enemy
         if (a != 0)
         {
             int i = Random.Range(0, _waypoints.Length);
-            if (_waypoints[i] == currentWaypoint)
+            if (_waypoints[i].position == currentWaypoint)
             {
                 i++;
                 if (i == _waypoints.Length)
@@ -124,18 +114,18 @@ public class LeagueOfLegendController : Enemy
                     i = 0;
                 }
             }
-            currentWaypoint = _waypoints[i];
+            currentWaypoint = _waypoints[i].position;
         }
         else
         {
-            currentWaypoint = PlayerController.singleton.transform;
+            currentWaypoint = PlayerController.singleton.transform.position;
         }
     }
 
-    private void Attack()
+    internal void Attack()
     {
+        Debug.Log("CHOOSING BOSS ATTACK");
         ChooseAttack();
-        isAttackInProgress = true;
     }
 
     private void ChooseAttack()
@@ -146,19 +136,34 @@ public class LeagueOfLegendController : Enemy
         }
         else
         {
-            switch (Random.Range(0, 7))
+            //switch (Random.Range(0, 7))
+            int min = 1;
+            if (minimumAttacksBeforeSpawn == 0)
+            {
+                minimumAttacksBeforeSpawn = 5;
+                min = 0;
+            }
+            else
+            {
+                minimumAttacksBeforeSpawn--;
+            }
+            int a = Random.Range(min, 7);
+            switch (a)
             {
                 case 0:
-                    Spawn();
+                    Timing.RunCoroutine(Spawn().CancelWith(gameObject));
                     break;
                 case 1:
                 case 2:
                 case 3:
-                    Fireball();
-                    break;
                 case 4:
                 case 5:
                 case 6:
+                    Fireball();
+                    break;
+                case 7:
+                case 8:
+                case 9:
                     Laser();
                     break;
             }
@@ -167,8 +172,13 @@ public class LeagueOfLegendController : Enemy
 
     internal IEnumerator<float> FadeBoss(bool faded)
     {
-        yield return Timing.WaitUntilDone(Timing.RunCoroutine(Fade(render, 0.05f, faded)));
+        yield return Timing.WaitUntilDone(Timing.RunCoroutine(Fade(render, 0.05f, faded).CancelWith(gameObject)));
         collide.enabled = !faded;
+        if (!faded)
+        {
+            yield return Timing.WaitForSeconds(2f);
+            Attack();
+        }
     }
 
     private IEnumerator<float> Fade(SpriteRenderer render, float speed, bool fadeOut)
@@ -197,6 +207,7 @@ public class LeagueOfLegendController : Enemy
 
     private IEnumerator<float> Spawn()
     {
+        Debug.Log("BOSS ATTACK: SPAWN");
         Timing.RunCoroutine(FadeBoss(true).CancelWith(gameObject));
 
         MapController.singleton.enemies = enemySpawnAmount;
@@ -212,21 +223,8 @@ public class LeagueOfLegendController : Enemy
     private IEnumerator<float> Slam()
     {
         // visually show prep now
-
+        Debug.Log("BOSS ATTACK: SLAM");
         yield return Timing.WaitForSeconds(0.75f);
-
-        switch (Random.Range(0, 3))
-        {
-            case 0:
-                Spawn();
-                break;
-            case 1:
-                Fireball();
-                break;
-            case 2:
-                Laser();
-                break;
-        }
 
         if (Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position) < slamDistance)
         {
@@ -234,22 +232,29 @@ public class LeagueOfLegendController : Enemy
         }
 
         // show slam
+        Timing.CallDelayed(1f, () => Attack());
     }
 
     private void Fireball()
     {
-        // explode when it hits last logged player position
+        Debug.Log("BOSS ATTACK: FIREBALL");
         Instantiate(prefab, transform.position, Quaternion.identity);
     }
 
     private void Laser()
     {
-
+        Debug.Log("BOSS ATTACK: LASER");
+        Timing.CallDelayed(1f, () => Attack());
     }
 
     public override void Damage(float damage)
     {
         base.Damage(damage);
         healthBar.SetHealthBar(base.health);
+    }
+
+    protected override void Kill()
+    {
+        // ending stuff
     }
 }
