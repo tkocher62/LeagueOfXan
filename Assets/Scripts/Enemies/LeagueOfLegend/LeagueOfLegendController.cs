@@ -33,6 +33,8 @@ public class LeagueOfLegendController : Enemy
     // Internals
     internal Collider2D collide;
 
+    internal bool isUsingLaser = false;
+
     // Timings
     private const float slamDistance = 3.6f;
     private const float movementIntervalStart = 4f;
@@ -65,7 +67,7 @@ public class LeagueOfLegendController : Enemy
         slider.value = health;
 
         _waypoints = waypoints.GetComponentsInChildren<Transform>().Where(t => t.gameObject.name != "Waypoints").ToArray();
-        currentWaypoint = Vector3.zero;
+        currentWaypoint = gameObject.transform.position;
 
         render = GetComponent<SpriteRenderer>();
         collide = GetComponent<Collider2D>();
@@ -84,7 +86,7 @@ public class LeagueOfLegendController : Enemy
 
         startingHealth = health;
 
-        //Attack();
+        Attack();
     }
 
     private void Update()
@@ -105,7 +107,7 @@ public class LeagueOfLegendController : Enemy
         while (health > 0f)
         {
             yield return Timing.WaitForSeconds(Random.Range(movementIntervalStart, movementIntervalEnd));
-            //SetRandomWaypoint();
+            if (!isUsingLaser) SetRandomWaypoint();
         }
     }
 
@@ -144,48 +146,46 @@ public class LeagueOfLegendController : Enemy
         {
             Timing.RunCoroutine(Slam().CancelWith(gameObject));
         }
+
+        int min = 1;
+        if (minimumAttacksBeforeSpawn == 0)
+        {
+            minimumAttacksBeforeSpawn = 5;
+            min = 0;
+        }
         else
         {
-            int min = 1;
-            if (minimumAttacksBeforeSpawn == 0)
-            {
-                minimumAttacksBeforeSpawn = 5;
-                min = 0;
-            }
-            else
-            {
-                minimumAttacksBeforeSpawn--;
-            }
+            minimumAttacksBeforeSpawn--;
+        }
 
-            int val = Random.Range(min, 7);
+        int val = Random.Range(min, 10);
 
-            if (val != 0) attacksSinceLastSpawn++;
-            Debug.Log(attacksSinceLastSpawn);
-            if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
-            {
-                attacksSinceLastSpawn = 0;
-                val = 0;
-            }
+        if (val != 0) attacksSinceLastSpawn++;
+        Debug.Log(attacksSinceLastSpawn);
+        if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
+        {
+            attacksSinceLastSpawn = 0;
+            val = 0;
+        }
 
-            switch (val)
-            {
-                case 0:
-                    Timing.RunCoroutine(Spawn().CancelWith(gameObject));
-                    break;
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                    Fireball();
-                    break;
-                case 7:
-                case 8:
-                case 9:
-                    Laser();
-                    break;
-            }
+        switch (val)
+        {
+            case 0:
+                Timing.RunCoroutine(Spawn().CancelWith(gameObject));
+                break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                Fireball();
+                break;
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+                Laser();
+                break;
         }
     }
 
@@ -251,7 +251,6 @@ public class LeagueOfLegendController : Enemy
         }
 
         // show slam
-        Timing.CallDelayed(1f, () => Attack());
     }
 
     private void Fireball()
@@ -262,8 +261,10 @@ public class LeagueOfLegendController : Enemy
 
     private void Laser()
     {
+        isUsingLaser = true;
         Debug.Log("BOSS ATTACK: LASER");
-        Timing.CallDelayed(1f, () => Attack());
+        Instantiate(laser, transform.position, Quaternion.identity);
+        Timing.CallDelayed(1.3f, () => Attack());
     }
 
     public override void Damage(float damage)

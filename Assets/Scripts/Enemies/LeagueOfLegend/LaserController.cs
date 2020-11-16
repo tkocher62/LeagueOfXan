@@ -32,6 +32,8 @@ public class LaserController : MonoBehaviour
     private void OnDestroy()
     {
         Timing.KillCoroutines(coroutine);
+
+        LeagueOfLegendController.singleton.isUsingLaser = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
