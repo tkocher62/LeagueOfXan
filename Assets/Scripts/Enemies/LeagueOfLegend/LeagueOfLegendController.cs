@@ -11,7 +11,7 @@ public class LeagueOfLegendController : Enemy
     // Singleton
     internal static LeagueOfLegendController singleton;
 
-    // Publics
+    // Prefabs
     public GameObject waypoints;
     public HealthBar healthBar;
 
@@ -53,10 +53,17 @@ public class LeagueOfLegendController : Enemy
     // Damages
     private const float slamDamage = 40;
 
+    // Frames
+    public Sprite s_Neutral;
+    public Sprite s_Fireball;
+    public Sprite s_SlamCharge;
+    public Sprite s_Slam;
+    public Sprite s_Laser;
+
     private void Start()
     {
         // DELETE THIS WHEN DONE TESTING
-        //SaveManager.LoadData();
+        SaveManager.LoadData();
         // --
 
         singleton = this;
@@ -93,6 +100,8 @@ public class LeagueOfLegendController : Enemy
         startingHealth = health;
 
         HealthPotionController.amount = 6f;
+
+        render.sprite = s_Neutral;
 
         Attack();
     }
@@ -160,45 +169,48 @@ public class LeagueOfLegendController : Enemy
         {
             Timing.RunCoroutine(Slam().CancelWith(gameObject));
         }
-
-        int min = 1;
-        if (minimumAttacksBeforeSpawn == 0)
-        {
-            minimumAttacksBeforeSpawn = 5;
-            min = 0;
-        }
         else
         {
-            minimumAttacksBeforeSpawn--;
-        }
 
-        int val = Random.Range(min, 9);
+            int min = 1;
+            if (minimumAttacksBeforeSpawn == 0)
+            {
+                minimumAttacksBeforeSpawn = 5;
+                min = 0;
+            }
+            else
+            {
+                minimumAttacksBeforeSpawn--;
+            }
 
-        if (val != 0) attacksSinceLastSpawn++;
-        Debug.Log(attacksSinceLastSpawn);
-        if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
-        {
-            attacksSinceLastSpawn = 0;
-            val = 0;
-        }
+            int val = Random.Range(min, 9);
 
-        switch (val)
-        {
-            case 0:
-                Timing.RunCoroutine(Spawn().CancelWith(gameObject));
-                break;
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                Fireball();
-                break;
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-                Laser();
-                break;
+            if (val != 0) attacksSinceLastSpawn++;
+            Debug.Log(attacksSinceLastSpawn);
+            if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
+            {
+                attacksSinceLastSpawn = 0;
+                val = 0;
+            }
+
+            switch (val)
+            {
+                case 0:
+                    Timing.RunCoroutine(Spawn().CancelWith(gameObject));
+                    break;
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    Fireball();
+                    break;
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                    Laser();
+                    break;
+            }
         }
     }
 
@@ -261,7 +273,7 @@ public class LeagueOfLegendController : Enemy
 
     private IEnumerator<float> Slam()
     {
-        // visually show prep now
+        render.sprite = s_SlamCharge;
         Debug.Log("BOSS ATTACK: SLAM");
         yield return Timing.WaitForSeconds(0.75f);
 
@@ -270,11 +282,14 @@ public class LeagueOfLegendController : Enemy
             PlayerController.singleton.Damage(slamDamage);
         }
 
-        // show slam
+        render.sprite = s_Slam;
+
+        Timing.CallDelayed(0.5f, () => Attack());
     }
 
     private void Fireball()
     {
+        render.sprite = s_Fireball;
         Debug.Log("BOSS ATTACK: FIREBALL");
         Instantiate(fireball, transform.position, Quaternion.identity);
     }
@@ -283,6 +298,7 @@ public class LeagueOfLegendController : Enemy
     {
         if (lastPos == transform.position)
         {
+            render.sprite = s_Laser;
             isUsingLaser = true;
             Debug.Log("BOSS ATTACK: LASER");
             Instantiate(laser, transform.position, Quaternion.identity);
