@@ -135,7 +135,7 @@ public class LeagueOfLegendController : Enemy
 
     private void SetRandomWaypoint()
     {
-        // 1 in 5 chance to move at the player
+        // 1 in 4 chance to move at the player
         int a = Random.Range(0, 4);
         if (a != 0)
         {
@@ -306,6 +306,7 @@ public class LeagueOfLegendController : Enemy
             isUsingLaser = true;
             Debug.Log("BOSS ATTACK: LASER");
             Vector3 pos = transform.position;
+            // Set coordinates to move laser to the boss's head
             pos.x += 0.241f;
             pos.y += 1.345f;
             projectiles.Add(Instantiate(laser, pos, Quaternion.identity));
