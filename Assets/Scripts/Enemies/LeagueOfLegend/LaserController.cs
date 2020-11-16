@@ -55,15 +55,12 @@ public class LaserController : MonoBehaviour
 
     public void StopTracking() => isTracking = false;
 
-    public void SetActive()
-    {
-        isActive = true;
-        Debug.Log("set active");
-    }
+    public void SetActive() => isActive = true;
+
     public void SetDeactive()
     {
         isActive = false;
-        Debug.Log("set deactive");
+        LeagueOfLegendController.singleton.render.sprite = LeagueOfLegendController.singleton.s_Neutral;
     }
 
     public void Destroy() => Destroy(gameObject);

@@ -7924,7 +7924,6 @@ GameObject:
   - component: {fileID: 2056593196}
   - component: {fileID: 2056593199}
   - component: {fileID: 2056593195}
-  - component: {fileID: 2056593200}
   - component: {fileID: 2056593198}
   m_Layer: 13
   m_Name: League Of Legend
@@ -8595,25 +8594,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!95 &2056593200
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056593194}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 95394e55638539f408f6e367ea64b97e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2064433639
 PrefabInstance:
   m_ObjectHideFlags: 0
