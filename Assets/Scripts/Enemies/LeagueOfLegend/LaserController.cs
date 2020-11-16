@@ -38,7 +38,6 @@ public class LaserController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log(isActive);
         if (isActive && !isCooldown && collision.gameObject.tag == "Player")
         {
             PlayerController.singleton.Damage(damage);

@@ -34,6 +34,8 @@ public class LeagueOfLegendController : Enemy
 
     internal SpriteRenderer render;
 
+    internal List<GameObject> projectiles;
+
     internal bool isUsingLaser = false;
 
     // Timings
@@ -84,6 +86,8 @@ public class LeagueOfLegendController : Enemy
         collide = GetComponent<Collider2D>();
 
         potions = new List<GameObject>();
+
+        projectiles = new List<GameObject>();
 
         enemyPrefabs = new List<GameObject>()
         {
@@ -277,21 +281,21 @@ public class LeagueOfLegendController : Enemy
         Debug.Log("BOSS ATTACK: SLAM");
         yield return Timing.WaitForSeconds(0.75f);
 
-        if (Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position) < slamDistance)
+        if (Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position) < slamDistance && health > 0f)
         {
             PlayerController.singleton.Damage(slamDamage);
         }
 
         render.sprite = s_Slam;
 
-        Timing.CallDelayed(0.5f, () => Attack());
+        Timing.RunCoroutine(Utils.CallDelayed(0.5f, () => Attack()).CancelWith(gameObject));
     }
 
     private void Fireball()
     {
         render.sprite = s_Fireball;
         Debug.Log("BOSS ATTACK: FIREBALL");
-        Instantiate(fireball, transform.position, Quaternion.identity);
+        projectiles.Add(Instantiate(fireball, transform.position, Quaternion.identity));
     }
 
     private void Laser()
@@ -304,9 +308,9 @@ public class LeagueOfLegendController : Enemy
             Vector3 pos = transform.position;
             pos.x += 0.241f;
             pos.y += 1.345f;
-            Instantiate(laser, pos, Quaternion.identity);
+            projectiles.Add(Instantiate(laser, pos, Quaternion.identity));
         }
-        Timing.CallDelayed(1.3f, () => Attack());
+        Timing.RunCoroutine(Utils.CallDelayed(1.3f, () => Attack()).CancelWith(gameObject));
     }
 
     public override void Damage(float damage)
@@ -324,5 +328,10 @@ public class LeagueOfLegendController : Enemy
     protected override void Kill()
     {
         MapController.singleton.enemies = 0;
+        foreach (GameObject obj in projectiles)
+        {
+            Destroy(obj);
+        }
+        projectiles.Clear();
     }
 }

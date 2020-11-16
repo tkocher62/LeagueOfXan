@@ -65,6 +65,14 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             lastDist = dist;
         }
 
+        private void OnDestroy()
+        {
+            if (LeagueOfLegendController.singleton.projectiles.Contains(gameObject))
+            {
+                LeagueOfLegendController.singleton.projectiles.Remove(gameObject);
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.tag == "Player" && !isOnCooldown)
@@ -94,7 +102,7 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
                 rb.AddForce(angle.normalized * 300f);
             }
             LeagueOfLegendController.singleton.render.sprite = LeagueOfLegendController.singleton.s_Neutral;
-            Timing.CallDelayed(1.3f, () => LeagueOfLegendController.singleton.Attack());
+            Timing.RunCoroutine(Utils.CallDelayed(1.3f, () => LeagueOfLegendController.singleton.Attack()).CancelWith(LeagueOfLegendController.singleton.gameObject));
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using MEC;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.General
@@ -23,6 +26,12 @@ namespace Assets.Scripts.General
 		{
 			a *= Mathf.Deg2Rad;
 			return new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+		}
+
+		internal static IEnumerator<float> CallDelayed(float delay, Action x)
+		{
+			yield return Timing.WaitForSeconds(delay);
+			x();
 		}
 	}
 }

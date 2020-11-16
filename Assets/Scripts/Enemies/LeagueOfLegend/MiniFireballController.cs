@@ -8,15 +8,20 @@ public class MiniFireballController : MonoBehaviour
 
     private void Start()
     {
-        /*Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
-        rb.gravityScale = 0f;
-
-        rb.AddForce(gameObject.transform.position.normalized * 750f);*/
+        LeagueOfLegendController.singleton.projectiles.Add(gameObject);
     }
 
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        if (LeagueOfLegendController.singleton.projectiles.Contains(gameObject))
+        {
+            LeagueOfLegendController.singleton.projectiles.Remove(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
