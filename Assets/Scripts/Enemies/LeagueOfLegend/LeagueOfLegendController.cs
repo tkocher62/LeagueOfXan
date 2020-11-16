@@ -47,6 +47,7 @@ public class LeagueOfLegendController : Enemy
     private const int maxAttacksBeforeSpawn = 10;
     private float startingHealth = 150f;
     private float healthLostSinceLastMove = 0f;
+    private Vector3 lastPos;
 
     // Damages
     private const float slamDamage = 40;
@@ -68,6 +69,7 @@ public class LeagueOfLegendController : Enemy
 
         _waypoints = waypoints.GetComponentsInChildren<Transform>().Where(t => t.gameObject.name != "Waypoints").ToArray();
         currentWaypoint = gameObject.transform.position;
+        lastPos = gameObject.transform.position;
 
         render = GetComponent<SpriteRenderer>();
         collide = GetComponent<Collider2D>();
@@ -93,6 +95,7 @@ public class LeagueOfLegendController : Enemy
     {
         if (currentWaypoint != null)
         {
+            lastPos = transform.position;
             float step = movementSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, step);
         }
@@ -261,10 +264,13 @@ public class LeagueOfLegendController : Enemy
 
     private void Laser()
     {
-        isUsingLaser = true;
-        Debug.Log("BOSS ATTACK: LASER");
-        Instantiate(laser, transform.position, Quaternion.identity);
-        Timing.CallDelayed(1.3f, () => Attack());
+        if (lastPos == transform.position)
+        {
+            isUsingLaser = true;
+            Debug.Log("BOSS ATTACK: LASER");
+            Instantiate(laser, transform.position, Quaternion.identity);
+            Timing.CallDelayed(1.3f, () => Attack());
+        }
     }
 
     public override void Damage(float damage)
