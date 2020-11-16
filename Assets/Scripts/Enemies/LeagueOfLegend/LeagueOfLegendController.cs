@@ -1,8 +1,6 @@
 ﻿using Assets.Scripts.Enemies;
 using Assets.Scripts.General;
 using MEC;
-using Pathfinding;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -55,7 +53,7 @@ public class LeagueOfLegendController : Enemy
     private void Start()
     {
         // DELETE THIS WHEN DONE TESTING
-        //SaveManager.LoadData();
+        SaveManager.LoadData();
         // --
 
         singleton = this;
@@ -88,7 +86,9 @@ public class LeagueOfLegendController : Enemy
 
         startingHealth = health;
 
-        //Attack();
+        HealthPotionController.amount = 6f;
+
+        Attack();
     }
 
     private void Update()
@@ -110,7 +110,7 @@ public class LeagueOfLegendController : Enemy
         while (health > 0f)
         {
             yield return Timing.WaitForSeconds(Random.Range(movementIntervalStart, movementIntervalEnd));
-            //if (!isUsingLaser) SetRandomWaypoint();
+            if (!isUsingLaser) SetRandomWaypoint();
         }
     }
 
@@ -161,7 +161,7 @@ public class LeagueOfLegendController : Enemy
             minimumAttacksBeforeSpawn--;
         }
 
-        int val = Random.Range(min, 10);
+        int val = Random.Range(min, 9);
 
         if (val != 0) attacksSinceLastSpawn++;
         Debug.Log(attacksSinceLastSpawn);
@@ -180,13 +180,12 @@ public class LeagueOfLegendController : Enemy
             case 2:
             case 3:
             case 4:
-            case 5:
                 Fireball();
                 break;
+            case 5:
             case 6:
             case 7:
             case 8:
-            case 9:
                 Laser();
                 break;
         }
