@@ -27,12 +27,12 @@ public class LeagueOfLegendController : Enemy
 
     private List<GameObject> enemyPrefabs;
 
-    private SpriteRenderer render;
-
     private List<GameObject> potions;
 
     // Internals
     internal Collider2D collide;
+
+    internal SpriteRenderer render;
 
     internal bool isUsingLaser = false;
 
