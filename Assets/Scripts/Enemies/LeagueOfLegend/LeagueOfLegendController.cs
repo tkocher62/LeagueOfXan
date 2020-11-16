@@ -37,8 +37,8 @@ public class LeagueOfLegendController : Enemy
 
     // Timings
     private const float slamDistance = 3.6f;
-    private const float movementIntervalStart = 4f;
-    private const float movementIntervalEnd = 8f;
+    private const float movementIntervalStart = 3f;
+    private const float movementIntervalEnd = 7f;
 
     // Values
     private const int enemySpawnAmount = 4;
@@ -117,7 +117,7 @@ public class LeagueOfLegendController : Enemy
     private void SetRandomWaypoint()
     {
         // 1 in 5 chance to move at the player
-        int a = Random.Range(0, 5);
+        int a = Random.Range(0, 4);
         if (a != 0)
         {
             int i = Random.Range(0, _waypoints.Length);
