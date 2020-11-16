@@ -21,12 +21,15 @@ public class LeagueOfLegendController : Enemy
     // Privates
     private GameObject fireball;
     private GameObject laser;
+    private GameObject potion;
 
     private Vector3 currentWaypoint;
 
     private List<GameObject> enemyPrefabs;
 
     private SpriteRenderer render;
+
+    private List<GameObject> potions;
 
     // Internals
     internal Collider2D collide;
@@ -53,13 +56,14 @@ public class LeagueOfLegendController : Enemy
     private void Start()
     {
         // DELETE THIS WHEN DONE TESTING
-        SaveManager.LoadData();
+        //SaveManager.LoadData();
         // --
 
         singleton = this;
 
         fireball = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball");
         laser = Resources.Load<GameObject>("Prefabs/Effects/Laser");
+        potion = Resources.Load<GameObject>("Prefabs/Items/HealthPotion");
 
         Slider slider = healthBar.GetComponent<Slider>();
         slider.maxValue = health;
@@ -71,6 +75,8 @@ public class LeagueOfLegendController : Enemy
 
         render = GetComponent<SpriteRenderer>();
         collide = GetComponent<Collider2D>();
+
+        potions = new List<GameObject>();
 
         enemyPrefabs = new List<GameObject>()
         {
@@ -135,6 +141,11 @@ public class LeagueOfLegendController : Enemy
         {
             currentWaypoint = PlayerController.singleton.transform.position;
         }
+    }
+
+    internal void SpawnEnemyPotion(Vector3 pos)
+    {
+        potions.Add(Utils.Instantiate(potion, pos, Quaternion.identity));
     }
 
     internal void Attack()
@@ -241,6 +252,13 @@ public class LeagueOfLegendController : Enemy
         }
     }
 
+    internal void FinishSpawn()
+    {
+        Timing.RunCoroutine(FadeBoss(false).CancelWith(gameObject));
+        foreach (GameObject potion in potions) Destroy(potion);
+        potions.Clear();
+    }
+
     private IEnumerator<float> Slam()
     {
         // visually show prep now
@@ -268,8 +286,8 @@ public class LeagueOfLegendController : Enemy
             isUsingLaser = true;
             Debug.Log("BOSS ATTACK: LASER");
             Instantiate(laser, transform.position, Quaternion.identity);
-            Timing.CallDelayed(1.3f, () => Attack());
         }
+        Timing.CallDelayed(1.3f, () => Attack());
     }
 
     public override void Damage(float damage)

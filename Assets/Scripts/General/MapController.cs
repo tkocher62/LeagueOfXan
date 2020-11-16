@@ -26,7 +26,6 @@ public class MapController : MonoBehaviour
         }
         set
         {
-            Debug.Log("ENEMIES: " + value);
             _enemies = value;
 
             if (_enemies == 0)
@@ -34,7 +33,7 @@ public class MapController : MonoBehaviour
                 // If on boss stage
                 if (SceneManager.GetActiveScene().buildIndex == 12 && LeagueOfLegendController.singleton.health > 0f)
                 {
-                    Timing.RunCoroutine(LeagueOfLegendController.singleton.FadeBoss(false).CancelWith(LeagueOfLegendController.singleton.gameObject));
+                    LeagueOfLegendController.singleton.FinishSpawn();
                 }
                 else
                 {

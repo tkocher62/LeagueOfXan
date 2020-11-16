@@ -19,8 +19,6 @@ namespace Assets.Scripts.Enemies
         private AIDestinationSetter ai;
         private bool isInit = false;
 
-        private GameObject potion;
-
         protected void Init(SpriteRenderer render, Rigidbody2D rb, AIDestinationSetter ai = null)
         {
             this.render = render;
@@ -34,8 +32,6 @@ namespace Assets.Scripts.Enemies
             {
                 this.ai.target = PlayerController.singleton.transform;
             }
-
-            potion = Resources.Load<GameObject>("Prefabs/Items/HealthPotion");
 
             isInit = true;
         }
@@ -59,9 +55,9 @@ namespace Assets.Scripts.Enemies
             }
 
             // Boss stage
-            if (SceneManager.GetActiveScene().buildIndex == 12)
+            if (SceneManager.GetActiveScene().buildIndex == 12 && MapController.singleton.enemies != 0)
             {
-                General.Utils.Instantiate(potion, gameObject.transform.position, Quaternion.identity);
+                LeagueOfLegendController.singleton.SpawnEnemyPotion(gameObject.transform.position);
             }
         }
 

@@ -93,13 +93,33 @@ public class PlayerController : Entity
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            curCharacterScript.Attack();
-        }
+        if (Input.GetKeyDown(KeyCode.F)) curCharacterScript.Attack();
 
         if (health > 0f && !PauseController.isPaused)
         {
+            if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor)
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeCharacter(0);
+                else if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeCharacter(1);
+                else if (Input.GetKeyDown(KeyCode.Alpha3)) ChangeCharacter(2);
+                else if (Input.GetKeyDown(KeyCode.Alpha4)) ChangeCharacter(3);
+                else if (Input.GetKeyDown(KeyCode.Alpha5)) ChangeCharacter(4);
+
+               /* movement.y = Input.GetKey(KeyCode.W) ? 1f : Input.GetKey(KeyCode.S) ? -1f : 0f;
+                movement.x = Input.GetKey(KeyCode.A) ? -1f : Input.GetKey(KeyCode.D) ? 1f : 0f;
+
+                if (Mathf.Abs(movement.x) == 1f && Mathf.Abs(movement.y) == 1f)
+                {
+                    movement.x *= 0.75f;
+                    movement.y *= 0.75f;
+                }*/
+            }
+            else
+            {
+                /*movement.x = joystick.Horizontal;
+                movement.y = joystick.Vertical;*/
+            }
+
             movement.x = joystick.Horizontal;
             movement.y = joystick.Vertical;
 
