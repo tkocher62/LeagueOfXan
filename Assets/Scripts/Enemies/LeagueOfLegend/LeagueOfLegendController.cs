@@ -301,7 +301,10 @@ public class LeagueOfLegendController : Enemy
             render.sprite = s_Laser;
             isUsingLaser = true;
             Debug.Log("BOSS ATTACK: LASER");
-            Instantiate(laser, transform.position, Quaternion.identity);
+            Vector3 pos = transform.position;
+            pos.x += 0.241f;
+            pos.y += 1.345f;
+            Instantiate(laser, pos, Quaternion.identity);
         }
         Timing.CallDelayed(1.3f, () => Attack());
     }
