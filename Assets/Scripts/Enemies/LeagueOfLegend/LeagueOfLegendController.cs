@@ -88,7 +88,7 @@ public class LeagueOfLegendController : Enemy
 
         startingHealth = health;
 
-        Attack();
+        //Attack();
     }
 
     private void Update()
@@ -110,7 +110,7 @@ public class LeagueOfLegendController : Enemy
         while (health > 0f)
         {
             yield return Timing.WaitForSeconds(Random.Range(movementIntervalStart, movementIntervalEnd));
-            if (!isUsingLaser) SetRandomWaypoint();
+            //if (!isUsingLaser) SetRandomWaypoint();
         }
     }
 
