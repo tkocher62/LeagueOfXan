@@ -21,7 +21,8 @@ public class LeagueOfLegendController : Enemy
     private Transform[] _waypoints;
 
     // Privates
-    private GameObject prefab;
+    private GameObject fireball;
+    private GameObject laser;
 
     private Vector3 currentWaypoint;
 
@@ -56,7 +57,8 @@ public class LeagueOfLegendController : Enemy
 
         singleton = this;
 
-        prefab = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball");
+        fireball = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball");
+        laser = Resources.Load<GameObject>("Prefabs/Effects/Laser");
 
         Slider slider = healthBar.GetComponent<Slider>();
         slider.maxValue = health;
@@ -82,7 +84,7 @@ public class LeagueOfLegendController : Enemy
 
         startingHealth = health;
 
-        Attack();
+        //Attack();
     }
 
     private void Update()
@@ -94,7 +96,8 @@ public class LeagueOfLegendController : Enemy
         }
 
         if (Input.GetKeyDown(KeyCode.H)) Timing.RunCoroutine(Spawn().CancelWith(gameObject));
-        else if (Input.GetKeyDown(KeyCode.J)) Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+        else if (Input.GetKeyDown(KeyCode.J)) Instantiate(fireball, gameObject.transform.position, Quaternion.identity);
+        else if (Input.GetKeyDown(KeyCode.K)) Instantiate(laser, gameObject.transform.position, Quaternion.identity);
     }
 
     private IEnumerator<float> MovementTimer()
@@ -102,7 +105,7 @@ public class LeagueOfLegendController : Enemy
         while (health > 0f)
         {
             yield return Timing.WaitForSeconds(Random.Range(movementIntervalStart, movementIntervalEnd));
-            SetRandomWaypoint();
+            //SetRandomWaypoint();
         }
     }
 
@@ -254,7 +257,7 @@ public class LeagueOfLegendController : Enemy
     private void Fireball()
     {
         Debug.Log("BOSS ATTACK: FIREBALL");
-        Instantiate(prefab, transform.position, Quaternion.identity);
+        Instantiate(fireball, transform.position, Quaternion.identity);
     }
 
     private void Laser()
