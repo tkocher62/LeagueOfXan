@@ -169,7 +169,6 @@ public class LeagueOfLegendController : Enemy
 
     internal void Attack()
     {
-        Debug.Log("CHOOSING BOSS ATTACK");
         ChooseAttack();
     }
 
@@ -196,7 +195,6 @@ public class LeagueOfLegendController : Enemy
             int val = Random.Range(min, 9);
 
             if (val != 0) attacksSinceLastSpawn++;
-            Debug.Log(attacksSinceLastSpawn);
             if (attacksSinceLastSpawn == maxAttacksBeforeSpawn)
             {
                 attacksSinceLastSpawn = 0;
@@ -261,7 +259,6 @@ public class LeagueOfLegendController : Enemy
 
     private IEnumerator<float> Spawn()
     {
-        Debug.Log("BOSS ATTACK: SPAWN");
         Timing.RunCoroutine(FadeBoss(true).CancelWith(gameObject));
 
         MapController.singleton.enemies = enemySpawnAmount;
@@ -284,7 +281,6 @@ public class LeagueOfLegendController : Enemy
     private IEnumerator<float> Slam()
     {
         render.sprite = s_SlamCharge;
-        Debug.Log("BOSS ATTACK: SLAM");
         yield return Timing.WaitForSeconds(0.75f);
 
         if (Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position) < slamDistance && health > 0f)
@@ -300,7 +296,6 @@ public class LeagueOfLegendController : Enemy
     private void Fireball()
     {
         render.sprite = s_Fireball;
-        Debug.Log("BOSS ATTACK: FIREBALL");
         projectiles.Add(Instantiate(fireball, transform.position, Quaternion.identity));
     }
 
