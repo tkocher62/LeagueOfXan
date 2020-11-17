@@ -121,7 +121,7 @@ public class LeagueOfLegendController : Enemy
         if (currentWaypoint != null)
         {
             lastPos = transform.position;
-            float step = movementSpeed * Time.deltaTime;
+            float step = movementSpeed * Time.deltaTime * (health > 0f ? 1f : 0f);
             transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, step);
         }
 
@@ -323,16 +323,16 @@ public class LeagueOfLegendController : Enemy
     public override void Damage(float damage)
     {
         health -= damage;
-        FlashRed();
         if (health <= 0f)
         {
+            Kill();
             GameObject explosion = Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
             explosion.transform.localScale *= 6f;
-            base.Kill();
         }
+        else FlashRed();
 
         healthLostSinceLastMove += damage;
-        if (healthLostSinceLastMove > startingHealth * 0.2)
+        if (healthLostSinceLastMove > startingHealth * 0.2f)
         {
             SetRandomWaypoint();
             healthLostSinceLastMove = 0f;
