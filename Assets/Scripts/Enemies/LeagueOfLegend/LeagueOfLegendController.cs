@@ -22,6 +22,9 @@ public class LeagueOfLegendController : Enemy
     private GameObject fireball;
     private GameObject laser;
     private GameObject potion;
+    private GameObject explosionPrefab;
+    private GameObject body_1;
+    private GameObject body_2;
 
     private Vector3 currentWaypoint;
 
@@ -73,6 +76,9 @@ public class LeagueOfLegendController : Enemy
         fireball = Resources.Load<GameObject>("Prefabs/Projectiles/Fireball");
         laser = Resources.Load<GameObject>("Prefabs/Effects/Laser");
         potion = Resources.Load<GameObject>("Prefabs/Items/HealthPotion");
+        explosionPrefab = Resources.Load<GameObject>("Prefabs/Effects/Explosion_LoL");
+        body_1 = Resources.Load<GameObject>("Prefabs/Decorations/body_1");
+        body_2 = Resources.Load<GameObject>("Prefabs/Decorations/body_2");
 
         Slider slider = healthBar.GetComponent<Slider>();
         slider.maxValue = health;
@@ -316,7 +322,15 @@ public class LeagueOfLegendController : Enemy
 
     public override void Damage(float damage)
     {
-        base.Damage(damage);
+        health -= damage;
+        FlashRed();
+        if (health <= 0f)
+        {
+            GameObject explosion = Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
+            explosion.transform.localScale *= 6f;
+            base.Kill();
+        }
+
         healthLostSinceLastMove += damage;
         if (healthLostSinceLastMove > startingHealth * 0.2)
         {
@@ -324,6 +338,21 @@ public class LeagueOfLegendController : Enemy
             healthLostSinceLastMove = 0f;
         }
         healthBar.SetHealthBar(base.health);
+    }
+
+    internal void BreakBoss()
+    {
+        Vector3 body1Pos = gameObject.transform.position;
+        body1Pos.x -= 0.001f;
+        body1Pos.y -= 0.436f;
+        Instantiate(body_1, body1Pos, Quaternion.Euler(0, 0, -90.173f));
+
+        Vector3 body2Pos = gameObject.transform.position;
+        body2Pos.x -= 1.191f;
+        body2Pos.y -= 0.396f;
+        Instantiate(body_2, body2Pos, Quaternion.Euler(0, 0, 29.773f));
+
+        Destroy(gameObject);
     }
 
     protected override void Kill()
