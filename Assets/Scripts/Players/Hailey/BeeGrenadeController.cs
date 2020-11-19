@@ -46,6 +46,11 @@ public class BeeGrenadeController : MonoBehaviour
         Assets.Scripts.General.Utils.Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
+            LeagueOfLegendController boss = obj.GetComponent<LeagueOfLegendController>();
+            if (boss != null)
+            {
+                if (boss.render.color.a == 0f) return;
+            }
             float dist = Vector2.Distance(gameObject.transform.position, obj.transform.position);
             if (dist < 3.5f)
             {
