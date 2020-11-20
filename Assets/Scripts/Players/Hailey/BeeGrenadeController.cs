@@ -46,19 +46,12 @@ public class BeeGrenadeController : MonoBehaviour
         Assets.Scripts.General.Utils.Instantiate(explosionPrefab, gameObject.transform.position, Quaternion.identity);
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            LeagueOfLegendController boss = obj.GetComponent<LeagueOfLegendController>();
-            if (boss != null)
-            {
-                if (boss.render.color.a == 0f) return;
-            }
             float dist = Vector2.Distance(gameObject.transform.position, obj.transform.position);
             if (dist < 3.5f)
             {
                 Enemy controller = obj.GetComponent<Enemy>();
                 if (controller != null)
                 {
-                    Debug.Log("distance: " + dist);
-                    Debug.Log("damage: " + (1 / (transform.position - obj.transform.position).sqrMagnitude * damageScale));
                     float damage = 1 / (transform.position - obj.transform.position).sqrMagnitude * damageScale;
                     controller.Damage(Mathf.Clamp(damage, 0f, maxDamage));
                 }

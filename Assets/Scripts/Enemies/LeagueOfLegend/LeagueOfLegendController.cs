@@ -317,6 +317,8 @@ public class LeagueOfLegendController : Enemy
 
     public override void Damage(float damage)
     {
+        if (render.color.a == 0f) return;
+
         health -= damage;
         if (health <= 0f)
         {
