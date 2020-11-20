@@ -62,7 +62,7 @@ public class MapController : MonoBehaviour
             // Load next scene
             int id = SceneManager.GetActiveScene().buildIndex + 1;
             SceneManager.LoadScene(id);
-            if (id != SceneManager.sceneCountInBuildSettings - 1)
+            if (id != SceneManager.sceneCountInBuildSettings - 2)
             {
                 PlayerController.singleton.Spawn();
             }
