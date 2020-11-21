@@ -1,4 +1,5 @@
-﻿using MEC;
+﻿using Assets.Scripts.General;
+using MEC;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,6 +70,7 @@ public class MapController : MonoBehaviour
             else
             {
                 Destroy(PlayerController.singleton.gameObject);
+                TimerController.StopTimer();
             }
         }
     }

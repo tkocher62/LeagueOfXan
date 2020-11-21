@@ -67,8 +67,8 @@ public class LeagueOfLegendController : Enemy
 
     private void Start()
     {
-        // DELETE THIS WHEN DONE TESTING
-        //SaveManager.LoadData();
+        // todo: DELETE THIS WHEN DONE TESTING
+        SaveManager.LoadData();
         // --
 
         singleton = this;
