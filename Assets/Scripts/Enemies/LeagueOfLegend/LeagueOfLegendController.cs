@@ -305,7 +305,6 @@ public class LeagueOfLegendController : Enemy
         {
             render.sprite = s_Laser;
             isUsingLaser = true;
-            Debug.Log("BOSS ATTACK: LASER");
             Vector3 pos = transform.position;
             // Set coordinates to move laser to the boss's head
             pos.x += 0.241f;
