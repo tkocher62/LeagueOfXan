@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.UI;
+﻿using Assets.Scripts.General;
+using Assets.Scripts.UI;
 using MEC;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class CutSceneManager : MonoBehaviour
     public Button button;
 
     private Text btnText;
+    private SfxController sfx;
 
     private const float fadeDelay = 0.5f;
     private const float period = 2f;
@@ -20,11 +22,18 @@ public class CutSceneManager : MonoBehaviour
     private void Start()
     {
         vid.loopPointReached += CheckOver;
+        vid.SetDirectAudioVolume(0, SaveManager.saveData.musicVolume);
 
         btnText = button.GetComponentInChildren<Text>();
 
         button.image.SetInvisible();
         btnText.SetInvisible();
+
+        sfx = FindObjectOfType<SfxController>();
+        foreach (Button button in GetComponentsInChildren<Button>(true))
+        {
+            button.onClick.AddListener(delegate { sfx.ButtonClickSound(); });
+        }
 
         Timing.RunCoroutine(Fade().CancelWith(gameObject));
     }
@@ -32,8 +41,8 @@ public class CutSceneManager : MonoBehaviour
     private IEnumerator<float> Fade()
     {
         yield return Timing.WaitForSeconds(fadeDelay);
-        Utils.CrossFadeAlphaFixed(button.image, 1, period, false);
-        Utils.CrossFadeAlphaFixed(btnText, 1, period, false);
+        Assets.Scripts.UI.Utils.CrossFadeAlphaFixed(button.image, 1, period, false);
+        Assets.Scripts.UI.Utils.CrossFadeAlphaFixed(btnText, 1, period, false);
     }
 
     private void CheckOver(VideoPlayer vp)
