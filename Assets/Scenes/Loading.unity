@@ -1379,6 +1379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 1881796044}
   deathScreen: {fileID: 685367381}
+  attackButton: {fileID: 1359995616}
 --- !u!114 &645148135
 MonoBehaviour:
   m_ObjectHideFlags: 0

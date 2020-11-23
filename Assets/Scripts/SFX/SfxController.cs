@@ -22,6 +22,8 @@ public class SfxController : MonoBehaviour
     public void ButtonClickSound()
     {
         source.clip = buttonClick;
+        source.pitch = 0.8f;
         source.Play();
+        source.pitch = 1f;
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Assets.Scripts.General;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CentralUIController : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class CentralUIController : MonoBehaviour
 
     public GameObject eventSystem;
     public GameObject deathScreen;
+    public GameObject attackButton;
+
+    private SfxController sfx;
 
     private void Start()
     {
@@ -17,6 +22,12 @@ public class CentralUIController : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(eventSystem);
+
+        sfx = FindObjectOfType<SfxController>();
+        foreach (Button button in GetComponentsInChildren<Button>(true).Where(x => x.gameObject != attackButton))
+        {
+            button.onClick.AddListener(delegate { sfx.ButtonClickSound(); });
+        }
     }
 
     private void OnLevelWasLoaded(int level)
