@@ -14,8 +14,6 @@ public class CentralUIController : MonoBehaviour
     public GameObject deathScreen;
     public GameObject attackButton;
 
-    private SfxController sfx;
-
     private void Start()
     {
         singleton = this;
@@ -23,10 +21,9 @@ public class CentralUIController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(eventSystem);
 
-        sfx = FindObjectOfType<SfxController>();
         foreach (Button button in GetComponentsInChildren<Button>(true).Where(x => x.gameObject != attackButton))
         {
-            button.onClick.AddListener(delegate { sfx.ButtonClickSound(); });
+            button.onClick.AddListener(delegate { SfxController.singleton.ButtonClickSound(); });
         }
     }
 

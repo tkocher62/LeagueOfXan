@@ -16,7 +16,6 @@ public class OptionsController : MonoBehaviour
     private Slider sfxSlider;
     private AudioSource musicController;
     private Toggle easyModeToggle;
-    private SfxController sfx;
 
     private void Start()
     {
@@ -27,10 +26,9 @@ public class OptionsController : MonoBehaviour
 
         easyModeToggle = easyModeCheckbox.GetComponent<Toggle>();
 
-        sfx = FindObjectOfType<SfxController>();
         foreach (Button button in GetComponentsInChildren<Button>(true))
         {
-            button.onClick.AddListener(delegate { sfx.ButtonClickSound(); });
+            button.onClick.AddListener(delegate { SfxController.singleton.ButtonClickSound(); });
         }
 
         musicSlider.value = SaveManager.saveData.musicVolume;
@@ -41,7 +39,7 @@ public class OptionsController : MonoBehaviour
 
     public void ChangeMusicVolume() => musicController.volume = musicSlider.value;
 
-    public void ChangeSfxVolume() => sfx.ChangeVolume(sfxSlider.value);
+    public void ChangeSfxVolume() => SfxController.singleton.ChangeVolume(sfxSlider.value);
 
     public void BackButton()
     {

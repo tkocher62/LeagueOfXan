@@ -25,8 +25,6 @@ namespace Assets.Scripts.UI
 
 		private Color32 gray = new Color32(40, 40, 40, 100);
 
-		private SfxController sfx;
-
 		private void Start()
 		{
 			foreach (AchievementButton ach in achievements)
@@ -59,10 +57,9 @@ namespace Assets.Scripts.UI
 				fastestTimeText.text = $"Fastest Time: {formatted}";
 			}
 
-			sfx = FindObjectOfType<SfxController>();
 			foreach (Button button in GetComponentsInChildren<Button>(true))
 			{
-				button.onClick.AddListener(delegate { sfx.ButtonClickSound(); });
+				button.onClick.AddListener(delegate { SfxController.singleton.ButtonClickSound(); });
 			}
 		}
 

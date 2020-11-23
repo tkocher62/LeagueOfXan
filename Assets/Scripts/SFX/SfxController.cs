@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class SfxController : MonoBehaviour
 {
+    internal static SfxController singleton;
+
     public AudioClip buttonClick;
 
     private AudioSource source;
 
     private void Start()
     {
+        singleton = this;
+
         DontDestroyOnLoad(gameObject);
 
         source = GetComponent<AudioSource>();
