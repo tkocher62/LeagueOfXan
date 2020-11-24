@@ -338,17 +338,20 @@ public class LeagueOfLegendController : Enemy
 
     internal void BreakBoss()
     {
-        Vector3 body1Pos = gameObject.transform.position;
-        body1Pos.x -= 0.001f;
-        body1Pos.y -= 0.436f;
-        Instantiate(body_1, body1Pos, Quaternion.Euler(0, 0, -90.173f));
+        if (health > 0f)
+        {
+            Vector3 body1Pos = gameObject.transform.position;
+            body1Pos.x -= 0.001f;
+            body1Pos.y -= 0.436f;
+            Instantiate(body_1, body1Pos, Quaternion.Euler(0, 0, -90.173f));
 
-        Vector3 body2Pos = gameObject.transform.position;
-        body2Pos.x -= 1.191f;
-        body2Pos.y -= 0.396f;
-        Instantiate(body_2, body2Pos, Quaternion.Euler(0, 0, 29.773f));
+            Vector3 body2Pos = gameObject.transform.position;
+            body2Pos.x -= 1.191f;
+            body2Pos.y -= 0.396f;
+            Instantiate(body_2, body2Pos, Quaternion.Euler(0, 0, 29.773f));
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 
     protected override void Kill()
