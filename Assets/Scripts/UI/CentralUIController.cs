@@ -23,7 +23,7 @@ public class CentralUIController : MonoBehaviour
 
         foreach (Button button in GetComponentsInChildren<Button>(true).Where(x => x.gameObject != attackButton))
         {
-            button.onClick.AddListener(delegate { SfxController.singleton.ButtonClickSound(); });
+            button.onClick.AddListener(delegate { SfxController.singleton.PlayButtonClick(); });
         }
     }
 

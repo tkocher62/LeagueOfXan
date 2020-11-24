@@ -57,6 +57,7 @@ public class BeeGrenadeController : MonoBehaviour
                 }
             }
         }
+        SfxController.singleton.PlayExplosion();
         Destroy(gameObject);
     }
 }

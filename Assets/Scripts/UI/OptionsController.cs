@@ -28,7 +28,7 @@ public class OptionsController : MonoBehaviour
 
         foreach (Button button in GetComponentsInChildren<Button>(true))
         {
-            button.onClick.AddListener(delegate { SfxController.singleton.ButtonClickSound(); });
+            button.onClick.AddListener(delegate { SfxController.singleton.PlayButtonClick(); });
         }
 
         musicSlider.value = SaveManager.saveData.musicVolume;

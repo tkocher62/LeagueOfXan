@@ -31,6 +31,7 @@ public class WinstonPlayerScript : PlayerScript
                 ninjastar.transform.up = PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : (PlayerController.singleton.render.flipX ? Vector2.left : Vector2.right);
                 rb.AddForce((PlayerController.singleton.movement + (Utils.Vector2FromAngle(45 * i) * (PlayerController.singleton.render.flipX ? -1 : 1))).normalized * 800f);
             }
+            SfxController.singleton.PlayThrowItem();
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
         }

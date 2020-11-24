@@ -8,6 +8,13 @@ public class SfxController : MonoBehaviour
     internal static SfxController singleton;
 
     public AudioClip buttonClick;
+    public AudioClip sprayPaint;
+    public AudioClip throwItem;
+    public AudioClip laserShoot;
+    public AudioClip damageEntity;
+    public AudioClip explosion;
+    public AudioClip bigExplosion;
+    public AudioClip sniperShot;
 
     private AudioSource source;
 
@@ -23,11 +30,51 @@ public class SfxController : MonoBehaviour
 
     internal void ChangeVolume(float volume) => source.volume = volume;
 
-    public void ButtonClickSound()
+    public void PlayButtonClick()
     {
         source.clip = buttonClick;
-        source.pitch = 0.8f;
         source.Play();
-        source.pitch = 1f;
+    }
+
+    public void PlaySprayPaint()
+    {
+        source.clip = sprayPaint;
+        source.Play();
+    }
+
+    public void PlayThrowItem()
+    {
+        source.clip = throwItem;
+        source.Play();
+    }
+
+    public void PlayLaserShoot()
+    {
+        source.clip = laserShoot;
+        source.Play();
+    }
+
+    public void PlaySniperShoot()
+    {
+        source.clip = sniperShot;
+        source.Play();
+    }
+
+    public void PlayDamageEntity()
+    {
+        source.clip = damageEntity;
+        source.Play();
+    }
+
+    public void PlayExplosion()
+    {
+        source.clip = explosion;
+        source.Play();
+    }
+
+    public void PlayBigExplosion()
+    {
+        source.clip = bigExplosion;
+        source.Play();
     }
 }

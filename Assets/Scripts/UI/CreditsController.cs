@@ -48,6 +48,7 @@ public class CreditsController : MonoBehaviour
             }
         }
         continueButton.image.SetInvisible();
+        continueButton.onClick.AddListener(delegate { SfxController.singleton.PlayButtonClick(); });
 
         Timing.RunCoroutine(Fade().CancelWith(gameObject));
     }

@@ -37,6 +37,8 @@ public class ToddPlayerScript : PlayerScript
                 rb.AddForce(velocity * 2000f);
             }
 
+            SfxController.singleton.PlaySniperShoot();
+
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
         }

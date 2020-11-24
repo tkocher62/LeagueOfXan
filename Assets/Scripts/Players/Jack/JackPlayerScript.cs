@@ -43,6 +43,8 @@ public class JackPlayerScript : PlayerScript
                 rb.AddForce(velocity * 1000f);
             }
 
+            SfxController.singleton.PlayLaserShoot();
+
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
         }

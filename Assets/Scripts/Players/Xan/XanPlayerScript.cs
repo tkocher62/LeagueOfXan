@@ -25,6 +25,8 @@ public class XanPlayerScript : PlayerScript
 
             isOnCooldown = true;
             Timing.CallDelayed(shootDelay, () => isOnCooldown = false);
+
+            SfxController.singleton.PlaySprayPaint();
         }
     }
 }

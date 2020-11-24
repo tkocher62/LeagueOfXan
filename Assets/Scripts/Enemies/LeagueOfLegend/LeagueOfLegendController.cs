@@ -358,6 +358,7 @@ public class LeagueOfLegendController : Enemy
         {
             Destroy(obj);
         }
+        SfxController.singleton.PlayBigExplosion();
         projectiles.Clear();
     }
 }
