@@ -801,6 +801,8 @@ MonoBehaviour:
   explosion: {fileID: 8300000, guid: 9fec40475c98b344bb0d355adfaac313, type: 3}
   bigExplosion: {fileID: 8300000, guid: abcbf2c90f3f07d44a26189cdda9e767, type: 3}
   sniperShot: {fileID: 8300000, guid: 3bcadcaeb665bd3429a72fc8514325b8, type: 3}
+  beeBuzz: {fileID: 8300000, guid: cce5351ff22dd024b817422a038d2103, type: 3}
+  potionPickup: {fileID: 8300000, guid: d64336fc5e6beda4eb93040d68233146, type: 3}
 --- !u!82 &715163107
 AudioSource:
   m_ObjectHideFlags: 0

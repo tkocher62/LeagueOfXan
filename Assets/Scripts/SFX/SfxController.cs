@@ -16,6 +16,7 @@ public class SfxController : MonoBehaviour
     public AudioClip bigExplosion;
     public AudioClip sniperShot;
     public AudioClip beeBuzz;
+    public AudioClip potionPickup;
 
     private AudioSource source;
 
@@ -82,6 +83,12 @@ public class SfxController : MonoBehaviour
     public void PlayBeeBuzz()
     {
         source.clip = beeBuzz;
+        source.Play();
+    }
+
+    public void PlayPotionPickup()
+    {
+        source.clip = potionPickup;
         source.Play();
     }
 }
