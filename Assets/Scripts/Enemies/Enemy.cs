@@ -55,7 +55,7 @@ namespace Assets.Scripts.Enemies
             }
 
             // Boss stage
-            if (SceneManager.GetActiveScene().buildIndex == 12 && MapController.singleton.enemies != 0)
+            if (SceneManager.GetActiveScene().buildIndex == 13 && MapController.singleton.enemies != 0)
             {
                 LeagueOfLegendController.singleton.SpawnEnemyPotion(gameObject.transform.position);
             }

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Players.Hailey
 
 		public void BreakBoss()
 		{
-			if (LeagueOfLegendController.singleton != null)
+			if (LeagueOfLegendController.singleton.health <= 0f)
 			{
 				LeagueOfLegendController.singleton.BreakBoss();
 			}

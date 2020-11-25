@@ -14,7 +14,6 @@ public class CutSceneManager : MonoBehaviour
     public Button button;
 
     private Text btnText;
-    private SfxController sfx;
 
     private const float fadeDelay = 0.5f;
     private const float period = 2f;
@@ -24,15 +23,17 @@ public class CutSceneManager : MonoBehaviour
         vid.loopPointReached += CheckOver;
         vid.SetDirectAudioVolume(0, SaveManager.saveData.musicVolume);
 
-        btnText = button.GetComponentInChildren<Text>();
+        if (button != null)
+        {
+            btnText = button.GetComponentInChildren<Text>();
 
-        button.image.SetInvisible();
-        btnText.SetInvisible();
+            button.image.SetInvisible();
+            btnText.SetInvisible();
+        }
 
-        sfx = FindObjectOfType<SfxController>();
         foreach (Button button in GetComponentsInChildren<Button>(true))
         {
-            button.onClick.AddListener(delegate { sfx.PlayButtonClick(); });
+            button.onClick.AddListener(delegate { SfxController.singleton.PlayButtonClick(); });
         }
 
         Timing.RunCoroutine(Fade().CancelWith(gameObject));
@@ -47,10 +48,10 @@ public class CutSceneManager : MonoBehaviour
 
     private void CheckOver(VideoPlayer vp)
     {
-        LoadGame();
+        LoadNextScene();
     }
 
-    public void LoadGame()
+    public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

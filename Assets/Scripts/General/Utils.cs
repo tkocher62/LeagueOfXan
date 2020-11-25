@@ -15,7 +15,7 @@ namespace Assets.Scripts.General
 			GameObject obj = GameObject.Instantiate(original, position, rotation);
 			
 			// If on boss stage
-			if (SceneManager.GetActiveScene().buildIndex == 12)
+			if (SceneManager.GetActiveScene().buildIndex == 13)
 			{
 				obj.transform.localScale *= scale;
 			}

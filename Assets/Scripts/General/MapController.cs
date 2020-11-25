@@ -32,7 +32,7 @@ public class MapController : MonoBehaviour
             if (_enemies == 0)
             {
                 // If on boss stage
-                if (SceneManager.GetActiveScene().buildIndex == 12 && LeagueOfLegendController.singleton.health > 0f)
+                if (SceneManager.GetActiveScene().buildIndex == 13 && LeagueOfLegendController.singleton.health > 0f)
                 {
                     LeagueOfLegendController.singleton.FinishSpawn();
                 }
