@@ -797,7 +797,7 @@ MonoBehaviour:
   sprayPaint: {fileID: 8300000, guid: d461725d1e122a74da379e05259731a0, type: 3}
   throwItem: {fileID: 8300000, guid: c316b4f5029ef144fb875032c8a365b5, type: 3}
   laserShoot: {fileID: 8300000, guid: 05d7b85a4fd6557439402c9230ee1d47, type: 3}
-  damageEntity: {fileID: 8300000, guid: 9dc5f65269ce2714588e45b41b6e8af7, type: 3}
+  damageEntity: {fileID: 8300000, guid: f813a94201e0b78428a92c7995ff894e, type: 3}
   explosion: {fileID: 8300000, guid: 9fec40475c98b344bb0d355adfaac313, type: 3}
   bigExplosion: {fileID: 8300000, guid: abcbf2c90f3f07d44a26189cdda9e767, type: 3}
   sniperShot: {fileID: 8300000, guid: 3bcadcaeb665bd3429a72fc8514325b8, type: 3}
