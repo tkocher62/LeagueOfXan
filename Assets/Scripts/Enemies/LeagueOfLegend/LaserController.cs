@@ -14,6 +14,11 @@ public class LaserController : MonoBehaviour
 
     private CoroutineHandle coroutine;
 
+    private void Start()
+    {
+        SfxController.singleton.PlayLaserCharge();
+    }
+
     private void Update()
     {
         if (isTracking)
@@ -54,7 +59,11 @@ public class LaserController : MonoBehaviour
 
     public void StopTracking() => isTracking = false;
 
-    public void SetActive() => isActive = true;
+    public void SetActive()
+    {
+        isActive = true;
+        SfxController.singleton.PlayBigLaser();
+    }
 
     public void SetDeactive()
     {

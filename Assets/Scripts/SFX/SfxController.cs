@@ -18,6 +18,10 @@ public class SfxController : MonoBehaviour
     public AudioClip beeBuzz;
     public AudioClip potionPickup;
     public AudioClip fireballExplosion;
+    public AudioClip fireball;
+    public AudioClip bigLaser;
+    public AudioClip fadeOut;
+    public AudioClip laserCharge;
 
     private AudioSource source;
 
@@ -96,6 +100,30 @@ public class SfxController : MonoBehaviour
     public void PlayFireballExplosion()
     {
         source.clip = fireballExplosion;
+        source.Play();
+    }
+
+    public void PlayFireball()
+    {
+        source.clip = fireball;
+        source.Play();
+    }
+
+    public void PlayBigLaser()
+    {
+        source.clip = bigLaser;
+        source.Play();
+    }
+
+    public void PlayFadeOut()
+    {
+        source.clip = fadeOut;
+        source.Play();
+    }
+
+    public void PlayLaserCharge()
+    {
+        source.clip = laserCharge;
         source.Play();
     }
 }

@@ -804,6 +804,10 @@ MonoBehaviour:
   beeBuzz: {fileID: 8300000, guid: cce5351ff22dd024b817422a038d2103, type: 3}
   potionPickup: {fileID: 8300000, guid: d64336fc5e6beda4eb93040d68233146, type: 3}
   fireballExplosion: {fileID: 8300000, guid: 3cc8fb3f037ed4f45aae88e53695cca1, type: 3}
+  fireball: {fileID: 8300000, guid: c8b63cf12916df74ea726924ce48f110, type: 3}
+  bigLaser: {fileID: 8300000, guid: 13ad1c6fe67d06649b48f2d0626db8d3, type: 3}
+  fadeOut: {fileID: 8300000, guid: ab56d64b9cb5c0d4cbe6422a1220f615, type: 3}
+  laserCharge: {fileID: 8300000, guid: 0e8e65361049b154995d4a76763a9f4f, type: 3}
 --- !u!82 &715163107
 AudioSource:
   m_ObjectHideFlags: 0

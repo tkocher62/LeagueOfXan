@@ -49,6 +49,8 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             explodeDist = Random.Range(2f, distFromPlayer * triggerDistance);
             lastDist = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position);
             distanceToTravel = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position) - explodeDist;
+
+            SfxController.singleton.PlayFireball();
         }
 
         private void Update()

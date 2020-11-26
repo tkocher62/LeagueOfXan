@@ -259,6 +259,7 @@ public class LeagueOfLegendController : Enemy
 
     private IEnumerator<float> Spawn()
     {
+        SfxController.singleton.PlayFadeOut();
         Timing.RunCoroutine(FadeBoss(true).CancelWith(gameObject));
 
         MapController.singleton.enemies = enemySpawnAmount;
