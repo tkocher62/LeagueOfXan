@@ -102,6 +102,7 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
                 rb.AddForce(angle.normalized * 300f);
             }
             LeagueOfLegendController.singleton.render.sprite = LeagueOfLegendController.singleton.s_Neutral;
+            SfxController.singleton.PlayFireballExplosion();
             Timing.RunCoroutine(Utils.CallDelayed(1.3f, () => LeagueOfLegendController.singleton.Attack()).CancelWith(LeagueOfLegendController.singleton.gameObject));
         }
     }
