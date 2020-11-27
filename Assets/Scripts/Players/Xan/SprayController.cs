@@ -30,8 +30,8 @@ public class SprayController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // todo: prevent this from hurting enemies through walls - linecast maybe?
-        if (collision.gameObject.tag == "Enemy")
+        RaycastHit2D raycast = Physics2D.Raycast(gameObject.transform.position, PlayerController.singleton.movement.normalized, 1f, 1 << 11);
+        if (raycast.collider == null || raycast.collider.tag != "Screen Border" && collision.gameObject.tag == "Enemy")
         {
             Enemy controller = collision.gameObject.GetComponent<Enemy>();
             if (controller != null)

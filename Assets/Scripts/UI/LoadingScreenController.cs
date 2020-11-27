@@ -14,10 +14,6 @@ public class LoadingScreenController : MonoBehaviour
     private void Start()
     {
         timer = loadTime;
-
-        // todo: DELETE THIS WHEN DONE TESTING
-        SaveManager.LoadData();
-        // --
     }
 
     private void FixedUpdate()
@@ -26,8 +22,8 @@ public class LoadingScreenController : MonoBehaviour
         if (timer == 0f)
         {
             foreach (GameObject obj in objToLoad) obj.SetActive(true);
-            SceneManager.LoadScene(11);
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //SceneManager.LoadScene(11);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             TimerController.ResetTimer();
             TimerController.StartTimer();
         }

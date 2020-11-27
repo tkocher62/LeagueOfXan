@@ -3,6 +3,7 @@ using Assets.Scripts.UI;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class MainMenu : MonoBehaviour
             SaveManager.SaveData();
         }
         SaveManager.LoadData();
+    }
+
+    private void Start()
+    {
+        foreach (Button button in GetComponentsInChildren<Button>(true))
+        {
+            button.onClick.AddListener(delegate { SfxController.singleton.buttonClick.Play(); });
+        }
     }
 
     public void PlayGame()

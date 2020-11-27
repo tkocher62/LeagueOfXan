@@ -63,12 +63,15 @@ namespace Assets.Scripts.Enemies
 
         public virtual void Damage(float damage)
         {
-            health -= damage;
-            FlashRed();
-            if (health <= 0f)
+            if (health > 0f)
             {
-                Destroy(gameObject);
-                Kill();
+                health -= damage;
+                FlashRed();
+                if (health <= 0f)
+                {
+                    Destroy(gameObject);
+                    Kill();
+                }
             }
         }
 
