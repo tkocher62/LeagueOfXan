@@ -181,6 +181,8 @@ public class PlayerController : Entity
                 SaveManager.SaveData();
             }
 
+            SfxController.singleton.damageEntity.Play();
+
             TimerController.StopTimer();
 
             Destroy(this);

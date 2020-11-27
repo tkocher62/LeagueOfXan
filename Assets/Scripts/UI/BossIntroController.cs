@@ -9,6 +9,7 @@ public class BossIntroController : MonoBehaviour
 
     private void Start()
     {
+        Destroy(GameObject.Find("MusicController"));
         PlayerController.singleton.gameObject.SetActive(false);
         PlayerController.singleton.joystick.HandleRange = 0f;
         PlayerController.singleton.movement = Vector2.zero;
