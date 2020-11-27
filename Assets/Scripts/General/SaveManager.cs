@@ -27,6 +27,7 @@ namespace Assets.Scripts.General
 		{
 			if (File.Exists(path))
 			{
+				Debug.Log("Loading data...");
 				BinaryFormatter formatter = new BinaryFormatter();
 				FileStream stream = new FileStream(path, FileMode.Open);
 				saveData = (SaveData)formatter.Deserialize(stream);

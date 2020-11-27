@@ -30,7 +30,7 @@ public class BeeGrenadeController : MonoBehaviour
             body.AddForce((PlayerController.singleton.movement.normalized != Vector2.zero ? PlayerController.singleton.movement.normalized : defaultPower * (PlayerController.singleton.render.flipX ? -1 : 1)) * 2200f);
         }
 
-        SfxController.singleton.PlayBeeBuzz();
+        SfxController.singleton.beeBuzz.Play();
 
         Timing.CallDelayed(1f, () => Explode());
     }
@@ -59,7 +59,7 @@ public class BeeGrenadeController : MonoBehaviour
                 }
             }
         }
-        SfxController.singleton.PlayExplosion();
+        SfxController.singleton.explosion.Play();
         Destroy(gameObject);
     }
 }

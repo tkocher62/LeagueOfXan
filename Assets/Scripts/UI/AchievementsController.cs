@@ -59,7 +59,7 @@ namespace Assets.Scripts.UI
 
 			foreach (Button button in GetComponentsInChildren<Button>(true))
 			{
-				button.onClick.AddListener(delegate { SfxController.singleton.PlayButtonClick(); });
+				button.onClick.AddListener(delegate { SfxController.singleton.buttonClick.Play(); });
 			}
 		}
 

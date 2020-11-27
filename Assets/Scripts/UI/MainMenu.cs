@@ -14,11 +14,6 @@ public class MainMenu : MonoBehaviour
             SaveManager.InitData();
             SaveManager.SaveData();
         }
-    }
-
-    private void Start()
-    {
-        // Load save data
         SaveManager.LoadData();
     }
 

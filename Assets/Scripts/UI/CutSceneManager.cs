@@ -33,7 +33,7 @@ public class CutSceneManager : MonoBehaviour
 
         foreach (Button button in GetComponentsInChildren<Button>(true))
         {
-            button.onClick.AddListener(delegate { SfxController.singleton.PlayButtonClick(); });
+            button.onClick.AddListener(delegate { SfxController.singleton.buttonClick.Play(); });
         }
 
         Timing.RunCoroutine(Fade().CancelWith(gameObject));

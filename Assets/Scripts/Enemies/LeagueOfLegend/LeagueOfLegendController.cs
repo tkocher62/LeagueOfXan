@@ -259,7 +259,7 @@ public class LeagueOfLegendController : Enemy
 
     private IEnumerator<float> Spawn()
     {
-        SfxController.singleton.PlayFadeOut();
+        SfxController.singleton.fadeOut.Play();
         Timing.RunCoroutine(FadeBoss(true).CancelWith(gameObject));
 
         MapController.singleton.enemies = enemySpawnAmount;
@@ -283,6 +283,8 @@ public class LeagueOfLegendController : Enemy
     {
         render.sprite = s_SlamCharge;
         yield return Timing.WaitForSeconds(0.75f);
+
+        SfxController.singleton.slam.Play();
 
         if (Vector3.Distance(transform.position, PlayerController.singleton.gameObject.transform.position) < slamDistance && health > 0f)
         {
@@ -359,7 +361,7 @@ public class LeagueOfLegendController : Enemy
         {
             Destroy(obj);
         }
-        SfxController.singleton.PlayBigExplosion();
+        SfxController.singleton.bigExplosion.Play();
         projectiles.Clear();
     }
 }

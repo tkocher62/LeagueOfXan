@@ -50,7 +50,7 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
             lastDist = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position);
             distanceToTravel = Vector2.Distance(gameObject.transform.position, playerLoggedPos.position) - explodeDist;
 
-            SfxController.singleton.PlayFireball();
+            SfxController.singleton.fireball.Play();
         }
 
         private void Update()
@@ -104,7 +104,7 @@ namespace Assets.Scripts.Enemies.LeagueOfLegend
                 rb.AddForce(angle.normalized * 300f);
             }
             LeagueOfLegendController.singleton.render.sprite = LeagueOfLegendController.singleton.s_Neutral;
-            SfxController.singleton.PlayFireballExplosion();
+            SfxController.singleton.fireballExplosion.Play();
             Timing.RunCoroutine(Utils.CallDelayed(1.3f, () => LeagueOfLegendController.singleton.Attack()).CancelWith(LeagueOfLegendController.singleton.gameObject));
         }
     }

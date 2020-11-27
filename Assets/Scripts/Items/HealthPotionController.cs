@@ -10,7 +10,7 @@ public class HealthPotionController : MonoBehaviour
     {
         if (PlayerController.singleton.health < 100f && collision.gameObject.tag == "Player")
         {
-            SfxController.singleton.PlayPotionPickup();
+            SfxController.singleton.potionPickup.Play();
             PlayerController.singleton.Heal(amount);
             Destroy(gameObject);
         }

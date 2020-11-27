@@ -28,7 +28,7 @@ public class OptionsController : MonoBehaviour
 
         foreach (Button button in GetComponentsInChildren<Button>(true))
         {
-            button.onClick.AddListener(delegate { SfxController.singleton.PlayButtonClick(); });
+            button.onClick.AddListener(delegate { SfxController.singleton.buttonClick.Play(); });
         }
 
         musicSlider.value = SaveManager.saveData.musicVolume;
@@ -39,7 +39,13 @@ public class OptionsController : MonoBehaviour
 
     public void ChangeMusicVolume() => musicController.volume = musicSlider.value;
 
-    public void ChangeSfxVolume() => SfxController.singleton.ChangeVolume(sfxSlider.value);
+    public void ChangeSfxVolume()
+    {
+        foreach (Sfx sfx in SfxController.singleton.sfx)
+        {
+            sfx.ChangeVolume(sfxSlider.value);
+        }
+    }
 
     public void BackButton()
     {

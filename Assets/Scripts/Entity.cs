@@ -10,7 +10,7 @@ namespace Assets.Scripts
 		protected void FlashRed()
 		{
 			Timing.RunCoroutine(FlashRedCoroutine(GetComponent<SpriteRenderer>()).CancelWith(gameObject));
-			SfxController.singleton.PlayDamageEntity();
+			SfxController.singleton.damageEntity.Play();
 		}
 
 		protected void Move(Rigidbody2D rb, Vector2 direction, float playerWidth, float playerHeight, float movementSpeed)
