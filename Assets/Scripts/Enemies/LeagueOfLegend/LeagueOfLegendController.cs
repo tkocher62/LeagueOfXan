@@ -45,6 +45,7 @@ public class LeagueOfLegendController : Enemy
     private const float slamDistance = 3.6f;
     private const float movementIntervalStart = 3f;
     private const float movementIntervalEnd = 7f;
+    private bool isFirstAttack = true;
 
     // Values
     private const int enemySpawnAmount = 4;
@@ -195,6 +196,12 @@ public class LeagueOfLegendController : Enemy
             {
                 attacksSinceLastSpawn = 0;
                 val = 0;
+            }
+
+            if (isFirstAttack)
+            {
+                val = 1;
+                isFirstAttack = false;
             }
 
             switch (val)
