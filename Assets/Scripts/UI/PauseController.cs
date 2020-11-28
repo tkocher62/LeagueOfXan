@@ -36,6 +36,7 @@ public class PauseController : MonoBehaviour
 			Destroy(CentralUIController.singleton.gameObject);
 			Destroy(CentralUIController.singleton.eventSystem);
 			Destroy(PlayerController.singleton.gameObject);
+			Destroy(GameObject.FindObjectOfType<GameMusicController>().gameObject);
 			UnPause();
 			SceneManager.LoadScene(0);
 		}

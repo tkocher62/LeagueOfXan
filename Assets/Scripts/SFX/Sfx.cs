@@ -19,7 +19,10 @@ public class Sfx : MonoBehaviour
 
     public void Play()
     {
-        source.clip = clip;
-        source.Play();
+        if (source != null)
+        {
+            source.clip = clip;
+            source.Play();
+        }
     }
 }
