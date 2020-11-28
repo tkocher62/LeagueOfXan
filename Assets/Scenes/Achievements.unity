@@ -1737,7 +1737,7 @@ MonoBehaviour:
   achievements:
   - id: play_the_game
     image: {fileID: 193775428}
-  - id: win_the_game
+  - id: beat_the_game
     image: {fileID: 781101402}
   - id: die_100_times
     image: {fileID: 166164328}
