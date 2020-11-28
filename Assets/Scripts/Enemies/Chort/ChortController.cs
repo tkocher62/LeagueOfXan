@@ -14,7 +14,6 @@ public class ChortController : Enemy
     private Animator animator;
     private AIDestinationSetter ai;
     private bool isCooldown;
-    private int wallMask;
     private bool _isAgro;
     private bool isAgro
     {
