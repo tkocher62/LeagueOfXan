@@ -16,7 +16,7 @@ namespace Assets.Scripts.General
 
 		internal static void SaveData()
 		{
-			Debug.Log("Saving data...");
+			//Debug.Log("Saving data...");
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Create);
 			formatter.Serialize(stream, saveData);
@@ -27,7 +27,7 @@ namespace Assets.Scripts.General
 		{
 			if (File.Exists(path))
 			{
-				Debug.Log("Loading data...");
+				//Debug.Log("Loading data...");
 				BinaryFormatter formatter = new BinaryFormatter();
 				FileStream stream = new FileStream(path, FileMode.Open);
 				saveData = (SaveData)formatter.Deserialize(stream);

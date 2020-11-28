@@ -21,7 +21,7 @@ namespace Assets.Scripts.UI
                 if (!SaveManager.saveData.achievements.Contains(id))
                 {
                     SaveManager.saveData.achievements.Add(id);
-                    Debug.Log("Achievement unlocked! " + id);
+                    //Debug.Log("Achievement unlocked! " + id);
                     SaveManager.SaveData();
                 }
             }
