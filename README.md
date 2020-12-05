@@ -23,7 +23,7 @@ The game contains a total of 8 levels, all of which were hand painted. I found a
 ![](https://github.com/tkocher62/LeagueOfXan/blob/master/Images/leveldesign.gif)
 
 ### Art
-Most of the art in this game was handmade specifically for this game. This required creation of art and then implementation into the game through programming.
+Most of the art in this game was handmade specifically for this game. This required creation of art and then implementation into the game through programming. For instance, the following videos show the creation and implementation of a laser beam.
 
 ![](https://github.com/tkocher62/LeagueOfXan/blob/master/Images/art.gif)
 
