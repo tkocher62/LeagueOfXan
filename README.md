@@ -1,5 +1,5 @@
 # League Of Xan
-This is my first game. I created this game in the game engine Unity as a surprise birthday present for my girlfriend. The idea for the game was based around a prank that a few of my friends had played on me. It's meant to be a dungeon crawler game in which you fight through many stages to find and defeat the boss. This game was made over the source of about two months. It's designed to be a mobile game.
+This is my first game. I created this game in the game engine [Unity](https://unity.com/) as a surprise birthday present for my girlfriend. The idea for the game was based around a prank that a few of my friends had played on me. It's meant to be a dungeon crawler game in which you fight through many stages to find and defeat the boss. This game was made over the source of about two months. It's designed to be a mobile game.
 
 # Game Creation
 The entire process of this game's creation was recorded and timelapsed.
