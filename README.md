@@ -5,7 +5,7 @@ This is my first game. I created this game in the game engine [Unity](https://un
 The entire process of this game's creation was recorded and timelapsed.
 Any sped up video clips are at 60x speed.
 
-### Lure / Story
+### Lore / Story
 The story for this game was based on a prank pulled on me in real life. I wrote a script to simulate a similar event to the real one on the popular platform [Discord](https://discord.com), recorded it, and edited it into a small cutscene to indirectly explain the story of the game to the player.
 
 ![](https://github.com/tkocher62/LeagueOfXan/blob/master/Images/editing.gif)
